@@ -1,8 +1,8 @@
-# Domain adaptation - MR acquisiton-invariance
+# Domain adaptation: MR acquisition-invariance
 
 This repository contains experiments and code accompanying the paper:
 
-"MRI-scanner acquisition-invariant representation learning"
+"MRI Acquisition-invariant representation learning"
 
 which is currently under review.
 
