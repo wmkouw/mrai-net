@@ -1,0 +1,7 @@
+*.rb linguist-language=Python
+
+simulator/* linguist-vendored
+jquery.js linguist-vendored=false
+
+simulator/doc/* linguist-documentation
+docs/formatter.rb linguist-documentation=false
