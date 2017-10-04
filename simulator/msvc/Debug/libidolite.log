@@ -1,0 +1,340 @@
+﻿Build started 16/08/19 21:34:46.
+     1>Project "C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\libidolite.vcxproj" on node 2 (Rebuild target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (simri3d.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt "..\src\libido-lite\acrread.c" "..\src\libido-lite\acrutil.c" "..\src\libido-lite\acrwrite.c" "..\src\libido-lite\arg.c" "..\src\libido-lite\argexit.c" "..\src\libido-lite\cntallo.c" "..\src\libido-lite\cntcdg.c" "..\src\libido-lite\cntfill.c" "..\src\libido-lite\cntutil.c" "..\src\libido-lite\dcmjpeg.c" "..\src\libido-lite\dcmread.c" "..\src\libido-lite\dcmutil.c" "..\src\libido-lite\dicom.c" "..\src\libido-lite\dyima.c" "..\src\libido-lite\dyimawin32.c" "..\src\libido-lite\dyimaxold.c" "..\src\libido-lite\gdcmJpeg.c" "..\src\libido-lite\imaallo.c" "..\src\libido-lite\imabasic.c" "..\src\libido-lite\imachekal.c" "..\src\libido-lite\imaclear.c" "..\src\libido-lite\imadrawline.c" "..\src\libido-lite\imafill.c" "..\src\libido-lite\imagette.c" "..\src\libido-lite\imalabel.c" "..\src\libido-lite\imamax.c" "..\src\libido-lite\imapart.c" "..\src\libido-lite\imawrf.c" "..\src\libido-lite\imazoom.c" "..\src\libido-lite\kererr.c" "..\src\libido-lite\kerextern.c" "..\src\libido-lite\kernomfic.c" "..\src\libido-lite\kerprint.c" "..\src\libido-lite\lstallo.c" "..\src\libido-lite\lstbasic.c" "..\src\libido-lite\seqallo.c" "..\src\libido-lite\sigallo.c" "..\src\libido-lite\sigfft.c" "..\src\libido-lite\sigmm.c" "..\src\libido-lite\sigpalet.c" "..\src\libido-lite\sigtoima.c" "..\src\libido-lite\sigwrf.c" "..\src\libido-lite\str.c" "..\src\libido-lite\strcomp.c" "..\src\libido-lite\utilcalc.c" "..\src\libido-lite\volallo.c" "..\src\libido-lite\volfft.c" "..\src\libido-lite\volmax.c" "..\src\libido-lite\volmin.c" "..\src\libido-lite\volrdf.c" "..\src\libido-lite\volwrf.c"
+         volwrf.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\volwrf.c(57): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+         volrdf.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\volrdf.c(86): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\volrdf.c(101): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\volrdf.c(147): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\volrdf.c(158): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\volrdf.c(223): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\volrdf.c(236): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+         volmin.c
+         volmax.c
+         volfft.c
+         volallo.c
+         utilcalc.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\utilcalc.c(43): warning C4005: 'sqr' : macro redefinition
+                 c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\idicont.h(106) : see previous definition of 'sqr'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\utilcalc.c(103): warning C4244: 'function' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\utilcalc.c(481): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\utilcalc.c(513): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\utilcalc.c(567): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\utilcalc.c(568): warning C4305: 'return' : truncation from 'double' to 'float'
+         strcomp.c
+         str.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\str.c(590): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\str.c(595): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\str.c(990): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\str.c(994): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(204) : see declaration of 'strtok'
+         sigwrf.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\sigwrf.c(63): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+         sigtoima.c
+         sigpalet.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\sigpalet.c(1540): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\sigpalet.c(1554): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(230) : see declaration of 'fscanf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\sigpalet.c(1618): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+         sigmm.c
+         sigfft.c
+         sigallo.c
+         seqallo.c
+         lstbasic.c
+         lstallo.c
+         kerprint.c
+         kernomfic.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(137): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(147): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(157): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(167): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(177): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(187): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(282): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(291): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(300): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(309): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(318): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\kernomfic.c(327): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+         Generating Code...
+         Compiling...
+         kerextern.c
+         kererr.c
+         imazoom.c
+         imawrf.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imawrf.c(92): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+         imapart.c
+         imamax.c
+         imalabel.c
+         imagette.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imagette.c(561): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imagette.c(665): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imagette.c(771): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         imafill.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imafill.c(183): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imafill.c(184): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imafill.c(186): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imafill.c(191): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+         imadrawline.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imadrawline.c(614): warning C4244: 'function' : conversion from 'double' to 'int', possible loss of data
+         imaclear.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imaclear.c(149): warning C4244: 'function' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imaclear.c(157): warning C4244: '=' : conversion from 'double' to 'unsigned char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imaclear.c(158): warning C4244: '=' : conversion from 'double' to 'char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imaclear.c(159): warning C4244: '=' : conversion from 'double' to 'unsigned short', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imaclear.c(160): warning C4244: '=' : conversion from 'double' to 'short', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imaclear.c(161): warning C4244: '=' : conversion from 'double' to 'long', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imaclear.c(162): warning C4244: '=' : conversion from 'double' to 'unsigned long', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\imaclear.c(163): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         imachekal.c
+         imabasic.c
+         imaallo.c
+         gdcmJpeg.c
+         dyimaxold.c
+         dyimawin32.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dyimawin32.c(203): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dyimawin32.c(205): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dyimawin32.c(208): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dyimawin32.c(222): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dyimawin32.c(223): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dyimawin32.c(225): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+         dyima.c
+         dicom.c
+         dcmutil.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmutil.c(183): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmutil.c(189): warning C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strdup. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(245) : see declaration of 'strdup'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmutil.c(993): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmutil.c(999): warning C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strdup. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(245) : see declaration of 'strdup'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmutil.c(1342): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmutil.c(1370): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmutil.c(1373): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmutil.c(1376): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmutil.c(1444): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmutil.c(1451): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmutil.c(1462): warning C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strdup. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(245) : see declaration of 'strdup'
+         Generating Code...
+         Compiling...
+         dcmread.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(512): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(649): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(652): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(656): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(694): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(695): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(698): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(821): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(822): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(825): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(895): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(896): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(902): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(962): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(963): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(966): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(1697): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(1714): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(1725): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmread.c(1736): warning C4018: '<' : signed/unsigned mismatch
+         dcmjpeg.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\dcmjpeg.c(378): warning C4018: '<' : signed/unsigned mismatch
+         cntutil.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(798): warning C4244: '=' : conversion from 'short' to 'char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(798): warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(799): warning C4244: '=' : conversion from 'unsigned short' to 'char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(799): warning C4244: '=' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(800): warning C4244: '=' : conversion from 'long' to 'char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(800): warning C4244: '=' : conversion from 'long' to 'unsigned char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(800): warning C4244: '=' : conversion from 'long' to 'short', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(800): warning C4244: '=' : conversion from 'long' to 'unsigned short', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(800): warning C4244: '=' : conversion from 'long' to 'float', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(801): warning C4244: '=' : conversion from 'unsigned long' to 'char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(801): warning C4244: '=' : conversion from 'unsigned long' to 'unsigned char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(801): warning C4244: '=' : conversion from 'unsigned long' to 'short', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(801): warning C4244: '=' : conversion from 'unsigned long' to 'unsigned short', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(801): warning C4244: '=' : conversion from 'unsigned long' to 'float', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(802): warning C4244: '=' : conversion from 'float' to 'char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(802): warning C4244: '=' : conversion from 'float' to 'unsigned char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(802): warning C4244: '=' : conversion from 'float' to 'short', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(802): warning C4244: '=' : conversion from 'float' to 'unsigned short', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(802): warning C4244: '=' : conversion from 'float' to 'long', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(802): warning C4244: '=' : conversion from 'float' to 'unsigned long', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(803): warning C4244: '=' : conversion from 'double' to 'char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(803): warning C4244: '=' : conversion from 'double' to 'unsigned char', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(803): warning C4244: '=' : conversion from 'double' to 'short', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(803): warning C4244: '=' : conversion from 'double' to 'unsigned short', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(803): warning C4244: '=' : conversion from 'double' to 'long', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(803): warning C4244: '=' : conversion from 'double' to 'unsigned long', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\cntutil.c(803): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         cntfill.c
+         cntcdg.c
+         cntallo.c
+         argexit.c
+         arg.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\arg.c(187): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\arg.c(193): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\arg.c(220): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\arg.c(296): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\arg.c(314): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\arg.c(315): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\arg.c(644): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\arg.c(647): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+         acrwrite.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrwrite.c(235): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrwrite.c(513): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrwrite.c(692): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+         acrutil.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrutil.c(421): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrutil.c(424): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrutil.c(427): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrutil.c(462): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrutil.c(469): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrutil.c(1899): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+         acrread.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrread.c(509): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrread.c(813): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\libido-lite\acrread.c(1034): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"../bin\libidolite.lib" /NOLOGO Debug\acrread.obj
+         Debug\acrutil.obj
+         Debug\acrwrite.obj
+         Debug\arg.obj
+         Debug\argexit.obj
+         Debug\cntallo.obj
+         Debug\cntcdg.obj
+         Debug\cntfill.obj
+         Debug\cntutil.obj
+         Debug\dcmjpeg.obj
+         Debug\dcmread.obj
+         Debug\dcmutil.obj
+         Debug\dicom.obj
+         Debug\dyima.obj
+         Debug\dyimawin32.obj
+         Debug\dyimaxold.obj
+         Debug\gdcmJpeg.obj
+         Debug\imaallo.obj
+         Debug\imabasic.obj
+         Debug\imachekal.obj
+         Debug\imaclear.obj
+         Debug\imadrawline.obj
+         Debug\imafill.obj
+         Debug\imagette.obj
+         Debug\imalabel.obj
+         Debug\imamax.obj
+         Debug\imapart.obj
+         Debug\imawrf.obj
+         Debug\imazoom.obj
+         Debug\kererr.obj
+         Debug\kerextern.obj
+         Debug\kernomfic.obj
+         Debug\kerprint.obj
+         Debug\lstallo.obj
+         Debug\lstbasic.obj
+         Debug\seqallo.obj
+         Debug\sigallo.obj
+         Debug\sigfft.obj
+         Debug\sigmm.obj
+         Debug\sigpalet.obj
+         Debug\sigtoima.obj
+         Debug\sigwrf.obj
+         Debug\str.obj
+         Debug\strcomp.obj
+         Debug\utilcalc.obj
+         Debug\volallo.obj
+         Debug\volfft.obj
+         Debug\volmax.obj
+         Debug\volmin.obj
+         Debug\volrdf.obj
+         Debug\volwrf.obj
+         libidolite.vcxproj -> C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\../bin\libidolite.lib
+     1>Done Building Project "C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\libidolite.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.78

@@ -1,0 +1,1853 @@
+﻿Build started 16/08/19 21:34:50.
+     1>Project "C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\simri3d.vcxproj" on node 2 (Rebuild target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (.\Debug\) contains files shared from another project (libidolite.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\src /I"..\src\libido-lite" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D VERBOSE /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug/" /Fd".\Debug/vc120.pdb" /FR".\Debug\\" /Gd /TC /analyze- /errorReport:prompt ..\src\display.c "..\src\event-acquisition.c" "..\src\event-precession.c" "..\src\event-rfpulse.c" ..\src\event.c ..\src\experience.c "..\src\kernel-frequency-acq.c" "..\src\kernel-phase-acq.c" "..\src\kernel-precession.c" "..\src\kernel-rfpulse.c" ..\src\kernel.c ..\src\noise.c "..\src\object-brain.c" "..\src\object-compound.c" "..\src\object-ki.c" "..\src\object-simple.c" ..\src\object.c ..\src\output.c ..\src\reconstruction.c "..\src\seq-fid.c" "..\src\seq-ge.c" "..\src\seq-ir.c" "..\src\seq-mpi.c" "..\src\seq-se.c" "..\src\seq-special.c" "..\src\seq-tf.c" "..\src\seq-tse.c" ..\src\sequence.c ..\src\simri.c "..\src\test-rmn.c" "..\src\test-sequence.c"
+         display.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(84): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(85): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(90): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(91): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(96): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(97): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(105): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(106): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(111): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(112): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(117): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(118): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(179): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(180): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(197): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(198): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(215): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(216): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(237): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(238): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(255): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(256): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(273): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(274): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(317): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(318): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(325): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(326): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(333): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(334): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(345): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(346): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(353): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(354): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(361): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(362): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(601): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(602): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(643): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\display.c(644): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : see declaration of 'strcat'
+         event-acquisition.c
+         event-precession.c
+         event-rfpulse.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\event-rfpulse.c(100): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\event-rfpulse.c(139): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\event-rfpulse.c(146): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(230) : see declaration of 'fscanf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\event-rfpulse.c(148): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(230) : see declaration of 'fscanf'
+         event.c
+         experience.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\experience.c(492): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\experience.c(501): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\experience.c(557): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\experience.c(562): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\experience.c(583): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(230) : see declaration of 'fscanf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\experience.c(598): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(230) : see declaration of 'fscanf'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\experience.c(726): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+         kernel-frequency-acq.c
+         kernel-phase-acq.c
+         kernel-precession.c
+         kernel-rfpulse.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\kernel-rfpulse.c(47): warning C4101: 'sphi' : unreferenced local variable
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\kernel-rfpulse.c(47): warning C4101: 'cphi' : unreferenced local variable
+         kernel.c
+         noise.c
+         object-brain.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(166): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(168): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(171): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(176): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(181): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(186): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(191): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(196): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(201): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(206): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(226): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(228): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(231): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(236): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(241): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(246): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(251): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(256): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(261): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(266): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(286): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(288): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(291): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(296): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(301): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(306): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(311): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(316): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(321): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-brain.c(326): warning C4305: '=' : truncation from 'double' to 'float'
+         object-compound.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-compound.c(121): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-compound.c(122): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-compound.c(126): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-compound.c(127): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-compound.c(141): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-compound.c(143): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+         object-ki.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-ki.c(229): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-ki.c(230): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-ki.c(253): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-ki.c(305): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-ki.c(306): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-ki.c(333): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-ki.c(385): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-ki.c(386): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object-ki.c(412): warning C4305: '=' : truncation from 'double' to 'float'
+         object-simple.c
+         object.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object.c(169): warning C4028: formal parameter 6 different from declaration
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object.c(169): warning C4028: formal parameter 7 different from declaration
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object.c(280): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object.c(285): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object.c(290): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object.c(297): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object.c(303): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\object.c(308): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(112) : see declaration of 'strcpy'
+         output.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\output.c(179): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+         reconstruction.c
+         seq-fid.c
+         Generating Code...
+         Compiling...
+         seq-ge.c
+         seq-ir.c
+         seq-mpi.c
+         seq-se.c
+         seq-special.c
+         seq-tf.c
+         seq-tse.c
+         sequence.c
+         simri.c
+         test-rmn.c
+         test-sequence.c
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\test-sequence.c(88): warning C4101: 'i' : unreferenced local variable
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\test-sequence.c(88): warning C4101: 'k' : unreferenced local variable
+     1>c:\users\wouter\dropbox\code\simri_2.0\src\test-sequence.c(88): warning C4101: 'j' : unreferenced local variable
+         Generating Code...
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1193,5): warning MSB8012: TargetPath(C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\.\Debug\simri3d.exe) does not match the Linker's OutputFile property value (C:\Users\Wouter\Dropbox\Code\simri_2.0\bin\simri3d.exe). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../bin/simri3d.exe" /VERBOSE /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:".\Debug/simri3d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\simri3d.lib" /MACHINE:X86 /SAFESEH .\Debug/display.obj
+         ".\Debug/event-acquisition.obj"
+         ".\Debug/event-precession.obj"
+         ".\Debug/event-rfpulse.obj"
+         .\Debug/event.obj
+         .\Debug/experience.obj
+         ".\Debug/kernel-frequency-acq.obj"
+         ".\Debug/kernel-phase-acq.obj"
+         ".\Debug/kernel-precession.obj"
+         ".\Debug/kernel-rfpulse.obj"
+         .\Debug/kernel.obj
+         .\Debug/noise.obj
+         ".\Debug/object-brain.obj"
+         ".\Debug/object-compound.obj"
+         ".\Debug/object-ki.obj"
+         ".\Debug/object-simple.obj"
+         .\Debug/object.obj
+         .\Debug/output.obj
+         .\Debug/reconstruction.obj
+         ".\Debug/seq-fid.obj"
+         ".\Debug/seq-ge.obj"
+         ".\Debug/seq-ir.obj"
+         ".\Debug/seq-mpi.obj"
+         ".\Debug/seq-se.obj"
+         ".\Debug/seq-special.obj"
+         ".\Debug/seq-tf.obj"
+         ".\Debug/seq-tse.obj"
+         .\Debug/sequence.obj
+         .\Debug/simri.obj
+         ".\Debug/test-rmn.obj"
+         ".\Debug/test-sequence.obj"
+         ..\bin\libidolite.lib
+         C:\Users\Wouter\Dropbox\Code\simri_2.0\bin\libidolite.lib
+         
+         Starting pass 1
+         Processed /DEFAULTLIB:MSVCRTD
+         Processed /DEFAULTLIB:OLDNAMES
+     1>display.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+         
+         Searching libraries
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+             Searching ..\bin\libidolite.lib:
+               Found _IdSetFileName
+                 Referenced in display.obj
+                 Loaded libidolite.lib(kernomfic.obj)
+               Found _IdImaDimY
+                 Referenced in display.obj
+                 Loaded libidolite.lib(imabasic.obj)
+               Found __IdImaFree
+                 Referenced in output.obj
+                 Referenced in display.obj
+                 Referenced in experience.obj
+                 Referenced in object-ki.obj
+                 Referenced in object.obj
+                 Loaded libidolite.lib(imaallo.obj)
+               Found __IdSigFree
+                 Referenced in display.obj
+                 Referenced in experience.obj
+                 Referenced in object-ki.obj
+                 Referenced in object.obj
+                 Loaded libidolite.lib(sigallo.obj)
+               Found _IdSigWriteRawFile
+                 Referenced in display.obj
+                 Loaded libidolite.lib(sigwrf.obj)
+               Found _IdImaDisplay
+                 Referenced in display.obj
+                 Loaded libidolite.lib(dyima.obj)
+               Found _IdImaMinima
+                 Referenced in display.obj
+                 Loaded libidolite.lib(imamax.obj)
+               Found _IdImaSignalToImage
+                 Referenced in display.obj
+                 Referenced in experience.obj
+                 Loaded libidolite.lib(sigtoima.obj)
+               Found __IdVolFree
+                 Referenced in test-sequence.obj
+                 Referenced in output.obj
+                 Referenced in reconstruction.obj
+                 Referenced in sequence.obj
+                 Referenced in test-rmn.obj
+                 Referenced in display.obj
+                 Referenced in experience.obj
+                 Referenced in object-ki.obj
+                 Referenced in object.obj
+                 Loaded libidolite.lib(volallo.obj)
+               Found _IdVolMaxima
+                 Referenced in display.obj
+                 Referenced in test-sequence.obj
+                 Loaded libidolite.lib(volmax.obj)
+               Found _IdVolMinima
+                 Referenced in display.obj
+                 Referenced in test-sequence.obj
+                 Loaded libidolite.lib(volmin.obj)
+               Found _IdAcrWriteFile
+                 Referenced in display.obj
+                 Referenced in object.obj
+                 Loaded libidolite.lib(acrwrite.obj)
+               Found _IdModule
+                 Referenced in kernel-rfpulse.obj
+                 Loaded libidolite.lib(utilcalc.obj)
+               Found _IdVolReadRawFile
+                 Referenced in object-brain.obj
+                 Loaded libidolite.lib(volrdf.obj)
+               Found _IdImaRecadTo8
+                 Referenced in object-ki.obj
+                 Loaded libidolite.lib(imagette.obj)
+               Found _IdAcrReadFile
+                 Referenced in object-ki.obj
+                 Referenced in object.obj
+                 Loaded libidolite.lib(acrread.obj)
+               Found __IdSeqFree
+                 Referenced in object.obj
+                 Loaded libidolite.lib(seqallo.obj)
+               Found _IdImaWriteRawFile
+                 Referenced in output.obj
+                 Loaded libidolite.lib(imawrf.obj)
+               Found _IdVolWriteRawFile
+                 Referenced in output.obj
+                 Loaded libidolite.lib(volwrf.obj)
+               Found _IdVolIFFT
+                 Referenced in reconstruction.obj
+                 Loaded libidolite.lib(volfft.obj)
+               Found _IdArgInit
+                 Referenced in simri.obj
+                 Loaded libidolite.lib(arg.obj)
+               Found __IdSizeOfType
+                 Referenced in libidolite.lib(imawrf.obj)
+                 Referenced in libidolite.lib(volwrf.obj)
+                 Referenced in libidolite.lib(acrwrite.obj)
+                 Referenced in libidolite.lib(volrdf.obj)
+                 Referenced in libidolite.lib(imagette.obj)
+                 Referenced in libidolite.lib(seqallo.obj)
+                 Referenced in libidolite.lib(imaallo.obj)
+                 Referenced in libidolite.lib(sigallo.obj)
+                 Referenced in libidolite.lib(sigwrf.obj)
+                 Referenced in libidolite.lib(volallo.obj)
+                 Loaded libidolite.lib(kerextern.obj)
+               Found _IdErrPrintf
+                 Referenced in libidolite.lib(volfft.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(acrwrite.obj)
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(imagette.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(imaallo.obj)
+                 Referenced in libidolite.lib(sigallo.obj)
+                 Referenced in libidolite.lib(sigtoima.obj)
+                 Referenced in libidolite.lib(volmax.obj)
+                 Loaded libidolite.lib(kerprint.obj)
+               Found _IdErrno
+                 Referenced in libidolite.lib(imawrf.obj)
+                 Referenced in libidolite.lib(volfft.obj)
+                 Referenced in libidolite.lib(volmax.obj)
+                 Referenced in libidolite.lib(acrwrite.obj)
+                 Referenced in libidolite.lib(imagette.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(imaallo.obj)
+                 Referenced in libidolite.lib(sigallo.obj)
+                 Referenced in libidolite.lib(sigwrf.obj)
+                 Referenced in libidolite.lib(imamax.obj)
+                 Loaded libidolite.lib(kererr.obj)
+               Found __IdImaDisplayColor
+                 Referenced in libidolite.lib(dyima.obj)
+                 Loaded libidolite.lib(dyimawin32.obj)
+         Processed /DEFAULTLIB:uuid.lib
+               Found _IdExit
+                 Referenced in libidolite.lib(imamax.obj)
+                 Referenced in libidolite.lib(volmin.obj)
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Loaded libidolite.lib(argexit.obj)
+               Found _IdSigMinMaxInterv
+                 Referenced in libidolite.lib(sigtoima.obj)
+                 Loaded libidolite.lib(sigmm.obj)
+               Found _IdImaDrawLine
+                 Referenced in libidolite.lib(sigtoima.obj)
+                 Loaded libidolite.lib(imadrawline.obj)
+               Found _IdImaSetValue
+                 Referenced in libidolite.lib(sigtoima.obj)
+                 Loaded libidolite.lib(imaclear.obj)
+               Found __IdAcrMakeElement
+                 Referenced in libidolite.lib(acrwrite.obj)
+                 Loaded libidolite.lib(acrutil.obj)
+               Found __IdImaFreeSubImage
+                 Referenced in libidolite.lib(imagette.obj)
+                 Loaded libidolite.lib(imapart.obj)
+               Found _IdImaCheckSizeAllocType
+                 Referenced in libidolite.lib(imagette.obj)
+                 Loaded libidolite.lib(imachekal.obj)
+               Found _IdImaZoom
+                 Referenced in libidolite.lib(imagette.obj)
+                 Loaded libidolite.lib(imazoom.obj)
+               Found _IdDcmReadFileIntoVector
+                 Referenced in libidolite.lib(acrread.obj)
+                 Loaded libidolite.lib(dcmread.obj)
+               Found _IdSigFFT
+                 Referenced in libidolite.lib(volfft.obj)
+                 Loaded libidolite.lib(sigfft.obj)
+               Found _IdPalWriteAsciiFile
+                 Referenced in libidolite.lib(dyimawin32.obj)
+                 Loaded libidolite.lib(sigpalet.obj)
+               Found __IdCntAddPoint
+                 Referenced in libidolite.lib(imadrawline.obj)
+                 Loaded libidolite.lib(cntutil.obj)
+               Found _IdCntAlloc
+                 Referenced in libidolite.lib(imadrawline.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Loaded libidolite.lib(cntallo.obj)
+               Found __ID_dicom_vr
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Loaded libidolite.lib(dicom.obj)
+               Found _IdDcmHdrFree
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Loaded libidolite.lib(dcmutil.obj)
+               Found _IdCntRectEnglob
+                 Referenced in libidolite.lib(cntutil.obj)
+                 Loaded libidolite.lib(cntcdg.obj)
+               Found __IdLstFree
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Loaded libidolite.lib(lstallo.obj)
+               Found _IdLstAddElement
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(lstallo.obj)
+                 Loaded libidolite.lib(lstbasic.obj)
+               Found __IdStrShowTransfertSyntax
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Loaded libidolite.lib(str.obj)
+               Found _IdImaFill
+                 Referenced in libidolite.lib(cntcdg.obj)
+                 Loaded libidolite.lib(imafill.obj)
+               Found _IdCntDrawPolygon
+                 Referenced in libidolite.lib(cntcdg.obj)
+                 Loaded libidolite.lib(cntfill.obj)
+               Found _IdStrCmpNoCase
+                 Referenced in libidolite.lib(str.obj)
+                 Loaded libidolite.lib(strcomp.obj)
+               Found _IdImaLabel
+                 Referenced in libidolite.lib(imafill.obj)
+                 Loaded libidolite.lib(imalabel.obj)
+             Searching C:\Users\Wouter\Dropbox\Code\simri_2.0\bin\libidolite.lib:
+             Searching C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\MSVCRTD.lib:
+               Found ___report_rangecheckfailure
+                 Referenced in libidolite.lib(imalabel.obj)
+                 Referenced in test-sequence.obj
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in display.obj
+                 Referenced in object-ki.obj
+                 Referenced in object.obj
+                 Referenced in test-rmn.obj
+                 Loaded MSVCRTD.lib(gs_report.obj)
+               Found __imp__printf
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(str.obj)
+                 Referenced in libidolite.lib(volallo.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(seqallo.obj)
+                 Referenced in libidolite.lib(kerprint.obj)
+                 Referenced in seq-tse.obj
+                 Referenced in sequence.obj
+                 Referenced in test-rmn.obj
+                 Referenced in test-sequence.obj
+                 Referenced in seq-ir.obj
+                 Referenced in seq-se.obj
+                 Referenced in seq-special.obj
+                 Referenced in seq-tf.obj
+                 Referenced in object.obj
+                 Referenced in reconstruction.obj
+                 Referenced in seq-fid.obj
+                 Referenced in seq-ge.obj
+                 Referenced in object-brain.obj
+                 Referenced in object-compound.obj
+                 Referenced in object-ki.obj
+                 Referenced in object-simple.obj
+                 Referenced in display.obj
+                 Referenced in event-rfpulse.obj
+                 Referenced in experience.obj
+                 Referenced in noise.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__sprintf
+                 Referenced in libidolite.lib(str.obj)
+                 Referenced in display.obj
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__exit
+                 Referenced in libidolite.lib(argexit.obj)
+                 Referenced in seq-se.obj
+                 Referenced in seq-tf.obj
+                 Referenced in sequence.obj
+                 Referenced in test-sequence.obj
+                 Referenced in object.obj
+                 Referenced in reconstruction.obj
+                 Referenced in seq-ge.obj
+                 Referenced in seq-ir.obj
+                 Referenced in object-brain.obj
+                 Referenced in object-compound.obj
+                 Referenced in object-ki.obj
+                 Referenced in object-simple.obj
+                 Referenced in display.obj
+                 Referenced in event-rfpulse.obj
+                 Referenced in experience.obj
+                 Referenced in noise.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _fabs
+                 Referenced in display.obj
+                 Referenced in kernel-frequency-acq.obj
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(imagette.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _log
+                 Referenced in display.obj
+                 Referenced in noise.obj
+                 Referenced in libidolite.lib(imagette.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _sqrt
+                 Referenced in libidolite.lib(volfft.obj)
+                 Referenced in output.obj
+                 Referenced in reconstruction.obj
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(imagette.obj)
+                 Referenced in display.obj
+                 Referenced in experience.obj
+                 Referenced in kernel-rfpulse.obj
+                 Referenced in noise.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__floor
+                 Referenced in display.obj
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _strcpy
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(str.obj)
+                 Referenced in libidolite.lib(imafill.obj)
+                 Referenced in libidolite.lib(kernomfic.obj)
+                 Referenced in libidolite.lib(volrdf.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(dyimawin32.obj)
+                 Referenced in display.obj
+                 Referenced in experience.obj
+                 Referenced in object-ki.obj
+                 Referenced in object.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _strcat
+                 Referenced in display.obj
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(dyimawin32.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found @_RTC_CheckStackVars@8
+                 Referenced in libidolite.lib(imalabel.obj)
+                 Referenced in libidolite.lib(cntutil.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(cntcdg.obj)
+                 Referenced in libidolite.lib(imafill.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(imapart.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(sigpalet.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(volfft.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(imadrawline.obj)
+                 Referenced in libidolite.lib(sigtoima.obj)
+                 Referenced in libidolite.lib(acrwrite.obj)
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(imagette.obj)
+                 Referenced in sequence.obj
+                 Referenced in test-rmn.obj
+                 Referenced in test-sequence.obj
+                 Referenced in libidolite.lib(imaallo.obj)
+                 Referenced in seq-se.obj
+                 Referenced in seq-special.obj
+                 Referenced in seq-tf.obj
+                 Referenced in seq-tse.obj
+                 Referenced in reconstruction.obj
+                 Referenced in seq-fid.obj
+                 Referenced in seq-ge.obj
+                 Referenced in seq-ir.obj
+                 Referenced in kernel-phase-acq.obj
+                 Referenced in object-ki.obj
+                 Referenced in object.obj
+                 Referenced in output.obj
+                 Referenced in display.obj
+                 Referenced in event-rfpulse.obj
+                 Referenced in experience.obj
+                 Referenced in kernel-frequency-acq.obj
+                 Loaded MSVCRTD.lib(stack.obj)
+               Found @__security_check_cookie@4
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(imafill.obj)
+                 Referenced in libidolite.lib(imalabel.obj)
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in seq-tse.obj
+                 Referenced in sequence.obj
+                 Referenced in test-rmn.obj
+                 Referenced in test-sequence.obj
+                 Referenced in seq-ir.obj
+                 Referenced in seq-se.obj
+                 Referenced in seq-special.obj
+                 Referenced in seq-tf.obj
+                 Referenced in object-ki.obj
+                 Referenced in object.obj
+                 Referenced in seq-fid.obj
+                 Referenced in seq-ge.obj
+                 Referenced in display.obj
+                 Referenced in experience.obj
+                 Referenced in kernel-frequency-acq.obj
+                 Referenced in kernel-phase-acq.obj
+                 Loaded MSVCRTD.lib(secchk.obj)
+               Found __RTC_InitBase
+                 Referenced in libidolite.lib(cntfill.obj)
+                 Referenced in libidolite.lib(strcomp.obj)
+                 Referenced in libidolite.lib(imalabel.obj)
+                 Referenced in libidolite.lib(lstallo.obj)
+                 Referenced in libidolite.lib(lstbasic.obj)
+                 Referenced in libidolite.lib(str.obj)
+                 Referenced in libidolite.lib(imafill.obj)
+                 Referenced in libidolite.lib(cntallo.obj)
+                 Referenced in libidolite.lib(dicom.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(cntcdg.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(sigfft.obj)
+                 Referenced in libidolite.lib(sigpalet.obj)
+                 Referenced in libidolite.lib(cntutil.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(imapart.obj)
+                 Referenced in libidolite.lib(imachekal.obj)
+                 Referenced in libidolite.lib(imazoom.obj)
+                 Referenced in libidolite.lib(argexit.obj)
+                 Referenced in libidolite.lib(sigmm.obj)
+                 Referenced in libidolite.lib(imadrawline.obj)
+                 Referenced in libidolite.lib(imaclear.obj)
+                 Referenced in libidolite.lib(kerextern.obj)
+                 Referenced in libidolite.lib(kerprint.obj)
+                 Referenced in libidolite.lib(kererr.obj)
+                 Referenced in libidolite.lib(dyimawin32.obj)
+                 Referenced in libidolite.lib(imawrf.obj)
+                 Referenced in libidolite.lib(volwrf.obj)
+                 Referenced in libidolite.lib(volfft.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(volrdf.obj)
+                 Referenced in libidolite.lib(imagette.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(seqallo.obj)
+                 Referenced in libidolite.lib(volmax.obj)
+                 Referenced in libidolite.lib(volmin.obj)
+                 Referenced in libidolite.lib(acrwrite.obj)
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(dyima.obj)
+                 Referenced in libidolite.lib(imamax.obj)
+                 Referenced in libidolite.lib(sigtoima.obj)
+                 Referenced in libidolite.lib(volallo.obj)
+                 Referenced in libidolite.lib(imabasic.obj)
+                 Referenced in libidolite.lib(imaallo.obj)
+                 Referenced in libidolite.lib(sigallo.obj)
+                 Referenced in libidolite.lib(sigwrf.obj)
+                 Referenced in simri.obj
+                 Referenced in test-rmn.obj
+                 Referenced in test-sequence.obj
+                 Referenced in libidolite.lib(kernomfic.obj)
+                 Referenced in seq-special.obj
+                 Referenced in seq-tf.obj
+                 Referenced in seq-tse.obj
+                 Referenced in sequence.obj
+                 Referenced in seq-ge.obj
+                 Referenced in seq-ir.obj
+                 Referenced in seq-mpi.obj
+                 Referenced in seq-se.obj
+                 Referenced in object.obj
+                 Referenced in output.obj
+                 Referenced in reconstruction.obj
+                 Referenced in seq-fid.obj
+                 Referenced in object-brain.obj
+                 Referenced in object-compound.obj
+                 Referenced in object-ki.obj
+                 Referenced in object-simple.obj
+                 Referenced in kernel-precession.obj
+                 Referenced in kernel-rfpulse.obj
+                 Referenced in kernel.obj
+                 Referenced in noise.obj
+                 Referenced in event.obj
+                 Referenced in experience.obj
+                 Referenced in kernel-frequency-acq.obj
+                 Referenced in kernel-phase-acq.obj
+                 Referenced in display.obj
+                 Referenced in event-acquisition.obj
+                 Referenced in event-precession.obj
+                 Referenced in event-rfpulse.obj
+                 Loaded MSVCRTD.lib(init.obj)
+               Found __ftol2_sse
+                 Referenced in display.obj
+                 Referenced in libidolite.lib(imagette.obj)
+                 Loaded MSVCRTD.lib(ftol2.obj)
+               Found ___security_cookie
+                 Referenced in MSVCRTD.lib(gs_report.obj)
+                 Referenced in MSVCRTD.lib(secchk.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(imafill.obj)
+                 Referenced in libidolite.lib(imalabel.obj)
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in seq-tse.obj
+                 Referenced in sequence.obj
+                 Referenced in test-rmn.obj
+                 Referenced in test-sequence.obj
+                 Referenced in seq-ir.obj
+                 Referenced in seq-se.obj
+                 Referenced in seq-special.obj
+                 Referenced in seq-tf.obj
+                 Referenced in object-ki.obj
+                 Referenced in object.obj
+                 Referenced in seq-fid.obj
+                 Referenced in seq-ge.obj
+                 Referenced in display.obj
+                 Referenced in experience.obj
+                 Referenced in kernel-frequency-acq.obj
+                 Referenced in kernel-phase-acq.obj
+                 Loaded MSVCRTD.lib(gs_cookie.obj)
+               Found __fltused
+                 Referenced in libidolite.lib(str.obj)
+                 Referenced in libidolite.lib(sigfft.obj)
+                 Referenced in libidolite.lib(cntutil.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(cntcdg.obj)
+                 Referenced in libidolite.lib(sigmm.obj)
+                 Referenced in libidolite.lib(imadrawline.obj)
+                 Referenced in libidolite.lib(imaclear.obj)
+                 Referenced in libidolite.lib(imazoom.obj)
+                 Referenced in libidolite.lib(volmin.obj)
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(imagette.obj)
+                 Referenced in libidolite.lib(volfft.obj)
+                 Referenced in test-sequence.obj
+                 Referenced in libidolite.lib(imamax.obj)
+                 Referenced in libidolite.lib(sigtoima.obj)
+                 Referenced in libidolite.lib(volmax.obj)
+                 Referenced in seq-tse.obj
+                 Referenced in sequence.obj
+                 Referenced in simri.obj
+                 Referenced in test-rmn.obj
+                 Referenced in seq-ir.obj
+                 Referenced in seq-se.obj
+                 Referenced in seq-special.obj
+                 Referenced in seq-tf.obj
+                 Referenced in output.obj
+                 Referenced in reconstruction.obj
+                 Referenced in seq-fid.obj
+                 Referenced in seq-ge.obj
+                 Referenced in object-compound.obj
+                 Referenced in object-ki.obj
+                 Referenced in object-simple.obj
+                 Referenced in object.obj
+                 Referenced in kernel-precession.obj
+                 Referenced in kernel-rfpulse.obj
+                 Referenced in noise.obj
+                 Referenced in object-brain.obj
+                 Referenced in event.obj
+                 Referenced in experience.obj
+                 Referenced in kernel-frequency-acq.obj
+                 Referenced in kernel-phase-acq.obj
+                 Referenced in display.obj
+                 Referenced in event-acquisition.obj
+                 Referenced in event-precession.obj
+                 Referenced in event-rfpulse.obj
+                 Loaded MSVCRTD.lib(dllsupp.obj)
+               Found __imp__fclose
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(imafill.obj)
+                 Referenced in libidolite.lib(volwrf.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(acrwrite.obj)
+                 Referenced in libidolite.lib(volrdf.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(imawrf.obj)
+                 Referenced in event-rfpulse.obj
+                 Referenced in experience.obj
+                 Referenced in output.obj
+                 Referenced in libidolite.lib(sigwrf.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__fopen
+                 Referenced in libidolite.lib(sigpalet.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(imafill.obj)
+                 Referenced in libidolite.lib(volwrf.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(acrwrite.obj)
+                 Referenced in libidolite.lib(volrdf.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(imawrf.obj)
+                 Referenced in event-rfpulse.obj
+                 Referenced in experience.obj
+                 Referenced in output.obj
+                 Referenced in libidolite.lib(sigwrf.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__fprintf
+                 Referenced in sequence.obj
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(sigpalet.obj)
+                 Referenced in libidolite.lib(imalabel.obj)
+                 Referenced in seq-ge.obj
+                 Referenced in seq-ir.obj
+                 Referenced in seq-se.obj
+                 Referenced in seq-tf.obj
+                 Referenced in event-rfpulse.obj
+                 Referenced in experience.obj
+                 Referenced in kernel.obj
+                 Referenced in output.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__fscanf
+                 Referenced in event-rfpulse.obj
+                 Referenced in experience.obj
+                 Referenced in libidolite.lib(sigpalet.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _sin
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(sigfft.obj)
+                 Referenced in libidolite.lib(cntutil.obj)
+                 Referenced in event-rfpulse.obj
+                 Referenced in kernel-frequency-acq.obj
+                 Referenced in kernel-precession.obj
+                 Referenced in kernel-rfpulse.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__free
+                 Referenced in libidolite.lib(str.obj)
+                 Referenced in libidolite.lib(imalabel.obj)
+                 Referenced in libidolite.lib(cntallo.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(lstallo.obj)
+                 Referenced in libidolite.lib(lstbasic.obj)
+                 Referenced in libidolite.lib(seqallo.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(imapart.obj)
+                 Referenced in libidolite.lib(kernomfic.obj)
+                 Referenced in libidolite.lib(imaallo.obj)
+                 Referenced in libidolite.lib(sigallo.obj)
+                 Referenced in libidolite.lib(volallo.obj)
+                 Referenced in event-rfpulse.obj
+                 Referenced in experience.obj
+                 Referenced in kernel-frequency-acq.obj
+                 Referenced in object.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__malloc
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(str.obj)
+                 Referenced in libidolite.lib(imalabel.obj)
+                 Referenced in libidolite.lib(seqallo.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(imadrawline.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(kernomfic.obj)
+                 Referenced in libidolite.lib(volallo.obj)
+                 Referenced in libidolite.lib(volrdf.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in event-rfpulse.obj
+                 Referenced in experience.obj
+                 Referenced in kernel-frequency-acq.obj
+                 Referenced in object.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp____iob_func
+                 Referenced in seq-se.obj
+                 Referenced in seq-tf.obj
+                 Referenced in sequence.obj
+                 Referenced in libidolite.lib(kerprint.obj)
+                 Referenced in experience.obj
+                 Referenced in kernel.obj
+                 Referenced in seq-ge.obj
+                 Referenced in seq-ir.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _atan
+                 Referenced in experience.obj
+                 Referenced in reconstruction.obj
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _memset
+                 Referenced in experience.obj
+                 Referenced in sequence.obj
+                 Referenced in libidolite.lib(imaclear.obj)
+                 Referenced in libidolite.lib(cntutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _cos
+                 Referenced in reconstruction.obj
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(cntutil.obj)
+                 Referenced in kernel-frequency-acq.obj
+                 Referenced in kernel-precession.obj
+                 Referenced in kernel-rfpulse.obj
+                 Referenced in noise.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _exp
+                 Referenced in kernel-frequency-acq.obj
+                 Referenced in kernel-precession.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _atan2
+                 Referenced in kernel-rfpulse.obj
+                 Referenced in output.obj
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(cntutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__rand
+                 Referenced in noise.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__srand
+                 Referenced in noise.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp___time64
+                 Referenced in noise.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __allmul
+                 Referenced in noise.obj
+                 Loaded MSVCRTD.lib(llmul.obj)
+               Found _strcmp
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(str.obj)
+                 Referenced in object-ki.obj
+                 Referenced in sequence.obj
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__atof
+                 Referenced in simri.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__atoi
+                 Referenced in simri.obj
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__getchar
+                 Referenced in test-rmn.obj
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _mainCRTStartup
+                 Loaded MSVCRTD.lib(crtexe.obj)
+               Found _strlen
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(str.obj)
+                 Referenced in libidolite.lib(kernomfic.obj)
+                 Referenced in libidolite.lib(acrwrite.obj)
+                 Referenced in libidolite.lib(volrdf.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__calloc
+                 Referenced in libidolite.lib(lstbasic.obj)
+                 Referenced in libidolite.lib(str.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(cntallo.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(lstallo.obj)
+                 Referenced in libidolite.lib(seqallo.obj)
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(imapart.obj)
+                 Referenced in libidolite.lib(imaallo.obj)
+                 Referenced in libidolite.lib(sigallo.obj)
+                 Referenced in libidolite.lib(volallo.obj)
+                 Referenced in libidolite.lib(imagette.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _memcpy
+                 Referenced in libidolite.lib(imapart.obj)
+                 Referenced in libidolite.lib(cntutil.obj)
+                 Referenced in libidolite.lib(cntallo.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(sigallo.obj)
+                 Referenced in libidolite.lib(imadrawline.obj)
+                 Referenced in libidolite.lib(imaclear.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__realloc
+                 Referenced in libidolite.lib(sigallo.obj)
+                 Referenced in libidolite.lib(cntallo.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__fwrite
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(sigwrf.obj)
+                 Referenced in libidolite.lib(acrwrite.obj)
+                 Referenced in libidolite.lib(imawrf.obj)
+                 Referenced in libidolite.lib(volwrf.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _pow
+                 Referenced in libidolite.lib(imamax.obj)
+                 Referenced in libidolite.lib(volmax.obj)
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _abs
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(cntutil.obj)
+                 Referenced in libidolite.lib(cntcdg.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _acos
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__ceil
+                 Referenced in libidolite.lib(utilcalc.obj)
+                 Referenced in libidolite.lib(imagette.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__fread
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(volrdf.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__fseek
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Referenced in libidolite.lib(volrdf.obj)
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _memcmp
+                 Referenced in libidolite.lib(acrread.obj)
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__fgetc
+                 Referenced in libidolite.lib(arg.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__isspace
+                 Referenced in libidolite.lib(arg.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__toupper
+                 Referenced in libidolite.lib(arg.obj)
+                 Referenced in libidolite.lib(str.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__vfprintf
+                 Referenced in libidolite.lib(kerprint.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __dtoui3
+                 Referenced in libidolite.lib(imaclear.obj)
+                 Referenced in libidolite.lib(cntutil.obj)
+                 Loaded MSVCRTD.lib(ftol3.obj)
+               Found __imp__feof
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__ferror
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__fgetpos
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__fputc
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__fsetpos
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__putc
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__rewind
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp___errno
+                 Referenced in libidolite.lib(acrutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __RTC_UninitUse
+                 Referenced in libidolite.lib(dcmread.obj)
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Loaded MSVCRTD.lib(error.obj)
+               Found __imp__ftell
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__isprint
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__strstr
+                 Referenced in libidolite.lib(str.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__strtok
+                 Referenced in libidolite.lib(str.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__strtod
+                 Referenced in libidolite.lib(str.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp__strtol
+                 Referenced in libidolite.lib(str.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __crt_debugger_hook
+                 Referenced in MSVCRTD.lib(gs_report.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found ___crtUnhandledException
+                 Referenced in MSVCRTD.lib(gs_report.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found ___crtTerminateProcess
+                 Referenced in MSVCRTD.lib(gs_report.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __IMPORT_DESCRIPTOR_MSVCR120D
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __RTC_SetErrorFuncW
+                 Referenced in MSVCRTD.lib(init.obj)
+                 Loaded MSVCRTD.lib(userapi.obj)
+               Found __CRT_RTC_INITW
+                 Referenced in MSVCRTD.lib(init.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found ___isa_available
+                 Referenced in MSVCRTD.lib(ftol2.obj)
+                 Loaded MSVCRTD.lib(cpu_disp.obj)
+         Processed /DEFAULTLIB:kernel32.lib
+               Found ___CxxSetUnhandledExceptionFilter
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(unhandld.obj)
+               Found __XcptFilter
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __amsg_exit
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __setargv
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(dllargv.obj)
+               Found __imp____getmainargs
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp____set_app_type
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp___CrtDbgReportW
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp___CrtSetCheckCount
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __IsNonwritableInCurrentImage
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(pesect.obj)
+               Found __imp___exit
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp___cexit
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found ___security_init_cookie
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(gs_support.obj)
+               Found __matherr
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(merr.obj)
+               Found _atexit
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(atonexit.obj)
+               Found __RTC_Initialize
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(initsect.obj)
+               Found __imp___configthreadlocale
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __setdefaultprecision
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(fp8.obj)
+               Found __imp____setusermatherr
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __initterm_e
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __initterm
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __except_handler4
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Referenced in MSVCRTD.lib(error.obj)
+                 Referenced in MSVCRTD.lib(pesect.obj)
+                 Referenced in MSVCRTD.lib(atonexit.obj)
+                 Loaded MSVCRTD.lib(chandler4gs.obj)
+               Found ___globallocalestatus
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(xthdloc.obj)
+               Found __commode
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(xncommod.obj)
+               Found __dowildcard
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(wildcard.obj)
+               Found __newmode
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(_newmode.obj)
+               Found __imp____initenv
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found ___native_startup_state
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(natstart.obj)
+               Found __fmode
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(xtxtmode.obj)
+               Found __imp___fmode
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp___commode
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found ___xi_a
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Loaded MSVCRTD.lib(cinitexe.obj)
+          Processed /DISALLOWLIB:libcmt.lib
+          Processed /DISALLOWLIB:libcmtd.lib
+          Processed /DISALLOWLIB:msvcrt.lib
+               Found __except1
+                 Referenced in MSVCRTD.lib(ftol3.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found "int __cdecl _RTC_GetSrcLine(unsigned char *,wchar_t *,unsigned long,int *,wchar_t *,unsigned long)" (?_RTC_GetSrcLine@@YAHPAEPA_WKPAH1K@Z)
+                 Referenced in MSVCRTD.lib(error.obj)
+                 Loaded MSVCRTD.lib(pdblkup.obj)
+               Found __NULL_IMPORT_DESCRIPTOR
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found MSVCR120D_NULL_THUNK_DATA
+                 Referenced in MSVCRTD.lib(MSVCR120D.dll)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found "void __cdecl terminate(void)" (?terminate@@YAXXZ)
+                 Referenced in MSVCRTD.lib(unhandld.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found ___crtSetUnhandledExceptionFilter
+                 Referenced in MSVCRTD.lib(unhandld.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __lock
+                 Referenced in MSVCRTD.lib(atonexit.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __unlock
+                 Referenced in MSVCRTD.lib(atonexit.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp___calloc_dbg
+                 Referenced in MSVCRTD.lib(atonexit.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found ___dllonexit
+                 Referenced in MSVCRTD.lib(atonexit.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __imp___onexit
+                 Referenced in MSVCRTD.lib(atonexit.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __invoke_watson
+                 Referenced in MSVCRTD.lib(fp8.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __controlfp_s
+                 Referenced in MSVCRTD.lib(fp8.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __except_handler4_common
+                 Referenced in MSVCRTD.lib(chandler4gs.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found _wcscpy_s
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __wmakepath_s
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+               Found __wsplitpath_s
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+             Searching C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\OLDNAMES.lib:
+               Found __imp__strdup
+                 Referenced in libidolite.lib(dcmutil.obj)
+                 Loaded OLDNAMES.lib(strdup.obi)
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+               Found __imp__WinExec@8
+                 Referenced in libidolite.lib(dyimawin32.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__IsDebuggerPresent@0
+                 Referenced in MSVCRTD.lib(gs_report.obj)
+                 Referenced in MSVCRTD.lib(error.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found _IsProcessorFeaturePresent@4
+                 Referenced in MSVCRTD.lib(gs_report.obj)
+                 Referenced in MSVCRTD.lib(cpu_disp.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__EncodePointer@4
+                 Referenced in MSVCRTD.lib(crtexe.obj)
+                 Referenced in MSVCRTD.lib(atonexit.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__RaiseException@16
+                 Referenced in MSVCRTD.lib(error.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__GetLastError@0
+                 Referenced in MSVCRTD.lib(error.obj)
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__GetProcAddress@8
+                 Referenced in MSVCRTD.lib(error.obj)
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__LoadLibraryExW@12
+                 Referenced in MSVCRTD.lib(error.obj)
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__MultiByteToWideChar@24
+                 Referenced in MSVCRTD.lib(error.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__WideCharToMultiByte@32
+                 Referenced in MSVCRTD.lib(error.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__QueryPerformanceCounter@4
+                 Referenced in MSVCRTD.lib(gs_support.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__GetCurrentProcessId@0
+                 Referenced in MSVCRTD.lib(gs_support.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__GetCurrentThreadId@0
+                 Referenced in MSVCRTD.lib(gs_support.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__GetSystemTimeAsFileTime@4
+                 Referenced in MSVCRTD.lib(gs_support.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__DecodePointer@4
+                 Referenced in MSVCRTD.lib(atonexit.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__HeapAlloc@12
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__HeapFree@12
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__GetProcessHeap@0
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__VirtualQuery@12
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__FreeLibrary@4
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__GetModuleFileNameW@12
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __imp__GetModuleHandleW@4
+                 Referenced in MSVCRTD.lib(pdblkup.obj)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found __IMPORT_DESCRIPTOR_KERNEL32
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Loaded kernel32.lib(KERNEL32.dll)
+               Found KERNEL32_NULL_THUNK_DATA
+                 Referenced in kernel32.lib(KERNEL32.dll)
+                 Loaded kernel32.lib(KERNEL32.dll)
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+             Searching ..\bin\libidolite.lib:
+             Searching C:\Users\Wouter\Dropbox\Code\simri_2.0\bin\libidolite.lib:
+             Searching C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\MSVCRTD.lib:
+               Found __imp___strdup
+                 Referenced in OLDNAMES.lib(strdup.obi)
+                 Loaded MSVCRTD.lib(MSVCR120D.dll)
+             Searching C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\OLDNAMES.lib:
+         
+         Finished searching libraries
+         
+         Finished pass 1
+         
+         
+         Searching libraries
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+             Searching ..\bin\libidolite.lib:
+             Searching C:\Users\Wouter\Dropbox\Code\simri_2.0\bin\libidolite.lib:
+             Searching C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\MSVCRTD.lib:
+               Found __load_config_used
+                 Loaded MSVCRTD.lib(loadcfg.obj)
+             Searching C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\OLDNAMES.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+             Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+             Searching ..\bin\libidolite.lib:
+             Searching C:\Users\Wouter\Dropbox\Code\simri_2.0\bin\libidolite.lib:
+         
+         Finished searching libraries
+         
+         Invoking rc.exe:
+          /v
+          /x
+          /fo
+          "C:\Users\Wouter\AppData\Local\Temp\lnk{3591FC0B-4FFC-486B-B031-59DEF4D5A59C}.tmp"
+          "C:\Users\Wouter\AppData\Local\Temp\lnk{B5096F6F-1C29-4637-AD9A-9373BD8508BA}.tmp"
+         Microsoft (R) Windows (R) Resource Compiler Version 6.3.9600.17336
+         
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+         
+         Creating C:\Users\Wouter\AppData\Local\Temp\lnk{3591FC0B-4FFC-486B-B031-59DEF4D5A59C}.tmp
+         
+         Using codepage 1252 as default
+         
+         C:\Users\Wouter\AppData\Local\Temp\lnk{B5096F6F-1C29-4637-AD9A-9373BD8508BA}.tmp.
+         Writing 24:1,	lang:0x409,	size 381
+         
+         Invoking cvtres.exe:
+          /machine:x86
+          /verbose
+          /out:"C:\Users\Wouter\AppData\Local\Temp\lnk{8ED4F9C0-90F2-40D2-89C7-E72FD259E877}.tmp"
+          /readonly
+          "C:\Users\Wouter\AppData\Local\Temp\lnk{3591FC0B-4FFC-486B-B031-59DEF4D5A59C}.tmp"
+         Microsoft (R) Windows Resource To Object Converter Version 12.00.21005.1
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+         adding resource. type:MANIFEST, name:1, language:0x0409, flags:0x30, size:381
+         
+         Unused libraries:
+           C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib
+           C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib
+           C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib
+           C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib
+           C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib
+           C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib
+           C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib
+           C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib
+           C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib
+           C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib
+           C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib
+           C:\Users\Wouter\Dropbox\Code\simri_2.0\bin\libidolite.lib
+         
+         Starting pass 2
+              * linker generated manifest res *
+              test-sequence.obj
+              test-rmn.obj
+              simri.obj
+              sequence.obj
+              seq-tse.obj
+              seq-tf.obj
+              seq-special.obj
+              seq-se.obj
+              seq-mpi.obj
+              seq-ir.obj
+              seq-ge.obj
+              seq-fid.obj
+              reconstruction.obj
+              output.obj
+              object.obj
+              object-simple.obj
+              object-ki.obj
+              object-compound.obj
+              object-brain.obj
+              noise.obj
+              kernel.obj
+              kernel-rfpulse.obj
+              kernel-precession.obj
+              kernel-phase-acq.obj
+              kernel-frequency-acq.obj
+              experience.obj
+              event.obj
+              event-rfpulse.obj
+              event-precession.obj
+              event-acquisition.obj
+              display.obj
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              libidolite.lib(acrread.obj)
+              libidolite.lib(acrutil.obj)
+              libidolite.lib(acrwrite.obj)
+              libidolite.lib(arg.obj)
+              libidolite.lib(argexit.obj)
+              libidolite.lib(cntallo.obj)
+              libidolite.lib(cntcdg.obj)
+              libidolite.lib(cntfill.obj)
+              libidolite.lib(cntutil.obj)
+              libidolite.lib(dcmread.obj)
+              libidolite.lib(dcmutil.obj)
+              libidolite.lib(dicom.obj)
+              libidolite.lib(dyima.obj)
+              libidolite.lib(dyimawin32.obj)
+              libidolite.lib(imaallo.obj)
+              libidolite.lib(imabasic.obj)
+              libidolite.lib(imachekal.obj)
+              libidolite.lib(imaclear.obj)
+              libidolite.lib(imadrawline.obj)
+              libidolite.lib(imafill.obj)
+              libidolite.lib(imagette.obj)
+              libidolite.lib(imalabel.obj)
+              libidolite.lib(imamax.obj)
+              libidolite.lib(imapart.obj)
+              libidolite.lib(imawrf.obj)
+              libidolite.lib(imazoom.obj)
+              libidolite.lib(kererr.obj)
+              libidolite.lib(kerextern.obj)
+              libidolite.lib(kernomfic.obj)
+              libidolite.lib(kerprint.obj)
+              libidolite.lib(lstallo.obj)
+              libidolite.lib(lstbasic.obj)
+              libidolite.lib(seqallo.obj)
+              libidolite.lib(sigallo.obj)
+              libidolite.lib(sigfft.obj)
+              libidolite.lib(sigmm.obj)
+              libidolite.lib(sigpalet.obj)
+              libidolite.lib(sigtoima.obj)
+              libidolite.lib(sigwrf.obj)
+              libidolite.lib(str.obj)
+              libidolite.lib(strcomp.obj)
+              libidolite.lib(utilcalc.obj)
+              libidolite.lib(volallo.obj)
+              libidolite.lib(volfft.obj)
+              libidolite.lib(volmax.obj)
+              libidolite.lib(volmin.obj)
+              libidolite.lib(volrdf.obj)
+              libidolite.lib(volwrf.obj)
+              MSVCRTD.lib(unhandld.obj)
+              MSVCRTD.lib(atonexit.obj)
+              MSVCRTD.lib(cinitexe.obj)
+              MSVCRTD.lib(crtexe.obj)
+              MSVCRTD.lib(dllargv.obj)
+              MSVCRTD.lib(gs_cookie.obj)
+              MSVCRTD.lib(gs_report.obj)
+              MSVCRTD.lib(gs_support.obj)
+              MSVCRTD.lib(merr.obj)
+              MSVCRTD.lib(natstart.obj)
+              MSVCRTD.lib(pesect.obj)
+              MSVCRTD.lib(wildcard.obj)
+              MSVCRTD.lib(dllsupp.obj)
+              MSVCRTD.lib(llmul.obj)
+              MSVCRTD.lib(chandler4gs.obj)
+              MSVCRTD.lib(cpu_disp.obj)
+              MSVCRTD.lib(fp8.obj)
+              MSVCRTD.lib(ftol2.obj)
+              MSVCRTD.lib(ftol3.obj)
+              MSVCRTD.lib(loadcfg.obj)
+              MSVCRTD.lib(secchk.obj)
+              MSVCRTD.lib(_newmode.obj)
+              MSVCRTD.lib(xncommod.obj)
+              MSVCRTD.lib(xtxtmode.obj)
+              MSVCRTD.lib(xthdloc.obj)
+              MSVCRTD.lib(userapi.obj)
+              MSVCRTD.lib(stack.obj)
+              MSVCRTD.lib(pdblkup.obj)
+              MSVCRTD.lib(initsect.obj)
+              MSVCRTD.lib(init.obj)
+              MSVCRTD.lib(error.obj)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              MSVCRTD.lib(MSVCR120D.dll)
+              OLDNAMES.lib(strdup.obi)
+         Finished pass 2
+     1>libidolite.lib(acrread.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(acrutil.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(acrwrite.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(arg.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(argexit.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(cntallo.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(cntcdg.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(cntfill.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(cntutil.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(dcmread.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(dcmutil.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(dicom.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(dyima.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(dyimawin32.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imaallo.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imabasic.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imachekal.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imaclear.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imadrawline.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imafill.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imagette.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imalabel.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imamax.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imapart.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imawrf.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(imazoom.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(kererr.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(kerextern.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(kernomfic.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(kerprint.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(lstallo.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(lstbasic.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(seqallo.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(sigallo.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(sigfft.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(sigmm.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(sigpalet.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(sigtoima.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(sigwrf.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(str.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(strcomp.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(utilcalc.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(volallo.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(volfft.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(volmax.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(volmin.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(volrdf.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+     1>libidolite.lib(volwrf.obj) : warning LNK4204: 'C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\Debug\vc120.pdb' is missing debugging information for referencing module; linking object as if no debug info
+         simri3d.vcxproj -> C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\.\Debug\simri3d.exe
+       BscMake:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\bscmake.exe /nologo /o".\Debug\simri3d.bsc" .\Debug\display.sbr ".\Debug\event-acquisition.sbr" ".\Debug\event-precession.sbr" ".\Debug\event-rfpulse.sbr" .\Debug\event.sbr .\Debug\experience.sbr ".\Debug\kernel-frequency-acq.sbr" ".\Debug\kernel-phase-acq.sbr" ".\Debug\kernel-precession.sbr" ".\Debug\kernel-rfpulse.sbr" .\Debug\kernel.sbr .\Debug\noise.sbr ".\Debug\object-brain.sbr" ".\Debug\object-compound.sbr" ".\Debug\object-ki.sbr" ".\Debug\object-simple.sbr" .\Debug\object.sbr .\Debug\output.sbr .\Debug\reconstruction.sbr ".\Debug\seq-fid.sbr" ".\Debug\seq-ge.sbr" ".\Debug\seq-ir.sbr" ".\Debug\seq-mpi.sbr" ".\Debug\seq-se.sbr" ".\Debug\seq-special.sbr" ".\Debug\seq-tf.sbr" ".\Debug\seq-tse.sbr" .\Debug\sequence.sbr .\Debug\simri.sbr ".\Debug\test-rmn.sbr" ".\Debug\test-sequence.sbr"
+     1>Done Building Project "C:\Users\Wouter\Dropbox\Code\simri_2.0\msvc\simri3d.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.23

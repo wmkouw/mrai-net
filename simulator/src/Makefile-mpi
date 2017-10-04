@@ -1,0 +1,30 @@
+CC = mpicc
+CFLAGS = -I. -Ilibido-lite -DHAVE_MPI -O2 -g -pipe -fPIC -ffast-math
+PROG=../bin/simri_mpi
+LIBS = -Llibido-lite -lido -L/usr/X11R6/lib -lX11 -lm -lpthread -ldl
+
+OBJS = output.o event-acquisition.o event.o \
+	experience.o event-rfpulse.o kernel.o event-precession.o \
+	reconstruction.o kernel-frequency-acq.o kernel-rfpulse.o \
+	kernel-phase-acq.o kernel-precession.o display.o \
+	test-rmn.o \
+	seq-fid.o seq-se.o seq-ge.o seq-ir.o seq-tf.o seq-tse.o \
+	object.o object-simple.o object-ki.o object-compound.o \
+	object-brain.o test-sequence.o sequence.o seq-mpi.o noise.o \
+	simri.o
+
+
+all: libido-lite/libido.a $(PROG)
+
+libido-lite/libido.a:
+	make -C libido-lite all
+
+.c.o:
+	$(CC) $(CFLAGS) -c $<
+
+$(PROG) : $(OBJS)
+	$(CC) $(CFLAGS) -o $(PROG) $(OBJS) $(LIBS)
+
+clean:
+	-make -C libido-lite clean
+	-rm -f core $(PROG) $(OBJS) simri.o simri_test_defch.o *~ 2>/dev/null

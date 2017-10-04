@@ -1,0 +1,362 @@
+/*************************************************************************
+* $Id: simri.c,v 1.49 2006/12/20 13:25:23 yougz Exp $
+**************************************************************************
+ This software is governed by the CeCILL  license under French law and
+  abiding by the rules of distribution of free software.  You can  use,
+  modify and/ or redistribute the software under the terms of the CeCILL
+  license as circulated by CEA, CNRS and INRIA at the following URL
+  "http://www.cecill.info".
+
+  As a counterpart to the access to the source code and  rights to copy,
+  modify and redistribute granted by the license, users are provided only
+  with a limited warranty  and the software's author,  the holder of the
+  economic rights,  and the successive licensors  have only  limited
+  liability.
+
+  In this respect, the user's attention is drawn to the risks associated
+  with loading,  using,  modifying and/or developing or reproducing the
+  software by the user in light of its specific status of free software,
+  that may mean  that it is complicated to manipulate,  and  that  also
+  therefore means  that it is reserved for developers  and  experienced
+  professionals having in-depth computer knowledge. Users are therefore
+  encouraged to load and test the software's suitability as regards their
+  requirements in conditions enabling the security of their systems and/or
+  data to be ensured and,  more generally, to use and operate it in the
+  same conditions as regards security.
+
+  The fact that you are presently reading this means that you have had
+  knowledge of the CeCILL license and that you accept its terms.
+
+  Copyright (c) CREATIS (Centre de Recherche et d'Applications en Traitement de
+  l'Image). All rights reserved. See License.txt for details.
+
+  Version 2.0  20/12/2006
+ *************************************************************************/
+#include "test-rmn.h"
+#include "test-sequence.h"
+
+#include <kernel.h>
+#include <idarg.h>
+#include <stdio.h>
+
+
+#ifdef HAVE_MPI
+#include <mpi.h>
+#endif
+
+#if 0
+START_USAGE (usage)
+"Starts SIMRI MRI simulator with different test parameters ",
+"SIMRI   Version 2.0  20/12/2006 ",
+"",
+"Call :simri test= predefined test number, if 0 the object and size parameters are used",
+"             object= Number of the object to use",
+"		               1 : a circle, a square and an ellipse",
+"		               2 : a circle with a chemical shift",
+"		               3 : an aire bubble within water > susceptibility artifact",
+"		               4 : a brain slice",
+"                  5 : an homogeneous sphere",
+"             objname = name of the object to be loaded",
+"             size = Voxel number per dimension for the virtual object and the MRI image as well",
+"             tacq = Acquisition time in ms (default value : 10)",
+"             TE = Echo time in ms (default value : 20 )",
+"             TR = Repetition time in ms (default value : 400 )",
+"             teta = Flip angle for gradient echo sequences in degree (default value : 90�)",
+"             b0 = Main static field BO in Tesla (Default value : 3 T)",
+"             db0 = Intra-voxel inhomogenity >> weight of the T2* effect (default value : 0)",
+"             b0def = Max value of the parabolic main static field default in tesla (default value : 0)",
+"             flagres = 1 for RF pulse considered ON-resonance, 0 for OFF (1 par defaut)",
+"             flagdech = 0 No field default, 1 takes into account precomputed object static field default (susceptibility)",
+"                                           2 takes into account the B0 parabolic static field default",
+"                                           3 takes 1+2 (2 is the default value)",
+"             filter = 1 for an hamming filtering of the K-space, 0 sinon (default value :1)",
+"	            fileout = name of the MRI module image",
+"	            seqname = MRI sequence abbreviation (default value : SE2D)",
+"             display = 1 to display the reconstructed image (default value=1)",
+"             inhomogeneousB1 = 1 to allow precomputed B1 inhomogeneities by using file ../data/B1map/B1t.txt",
+"                                   (transmission field) and ../data/B1map/B1r.txt (reception field)",
+"                                   as complex normalized B1 maps (default value=0)",
+"",
+" test = 0 -> Full test 2D",
+" test = 1 -> Full test 3D",
+"",
+" test = 2 -> Test RMN : Free Induction Decay en T2*",
+" test = 3 -> Test RMN : Echo de Spin du au T2* ",
+" test = 5 -> Test Brain ",
+
+"",
+" test = 210 -> Spin Echo 2D, 1 component, object and image 32",
+" test = 211 -> Spin Echo 2D, 1 component, object and image 64",
+" test = 212 -> Spin Echo 2D, 1 component, object and image 128",
+" test = 213 -> Spin Echo 2D, 1 component, object and image 256",
+" test = 214 -> Spin Echo 2D, 1 component, object and image 512",
+" test = 215 -> Spin Echo 2D, 1 component, object and image 1024",
+" test = 216 -> Spin Echo 2D, 1 component, object 1024 and image 256",
+"",
+" test = 220 -> Spin Echo 2D, 2 components, object and image 32",
+" test = 221 -> Spin Echo 2D, 2 components, object and image 64",
+" test = 222 -> Spin Echo 2D, 2 components, object and image 128",
+" test = 223 -> Spin Echo 2D, 2 components, object and image 256",
+" test = 224 -> Spin Echo 2D, 2 components, object and image 512",
+" test = 225 -> Spin Echo 2D, 2 components, object and image 1024",
+" test = 226 -> Spin Echo 2D, 2 components, object 1024 and image 256",
+"",
+" test = 250 -> Gradient Echo 2D, 1 component, object and image 32",
+" test = 251 -> Gradient Echo 2D, 1 component, object and image 64",
+" test = 252 -> Gradient Echo 2D, 1 component, object and image 128",
+"",
+" test = 260 -> Spin Echo 2D on a brain 256x256 ",
+"",
+" test = 310 -> Spin Echo 3D, 1 component, object and image 16",
+" test = 311 -> Spin Echo 3D, 1 component, object and image 32",
+" test = 312 -> Spin Echo 3D, 1 component, object and image 64",
+" test = 313 -> Spin Echo 3D, 1 component, object and image 128",
+" test = 314 -> Spin Echo 3D, 1 component, object 128 and image 64",
+"",
+" test = 320 -> Spin Echo 3D, 2 components, object and image 16",
+" test = 321 -> Spin Echo 3D, 2 components, object and image 32",
+" test = 322 -> Spin Echo 3D, 2 components, object and image 64",
+" test = 323 -> Spin Echo 3D, 2 components, object and image 128",
+" test = 324 -> Spin Echo 3D, 2 components, object 128 and image 64",
+
+"",
+"Exemple: simri test=220",
+"",
+FINISH_USAGE
+#endif
+
+int
+main(int argc, char *argv[])
+{
+ int    test;
+ double tacq,TE,TR,teta,b0,db0,b0def;
+ int flagres,flagdech,filter,object,size,display;
+ int inhomogeneousB1;
+ char *fileout,*seqname,*objname;
+
+#ifdef HAVE_MPI
+ MPI_Init(&argc,&argv);
+ MPIL_Trace_on();
+#endif
+
+/* Gestion des parametres passes au main */
+ IdArgInit(argc,argv);
+ test    = IdArgGetInt("test",0);
+ tacq   =(double) IdArgGetFloat("tacq",10);
+ TE   = (double) IdArgGetFloat("TE",20);
+ TR   = (double) IdArgGetFloat("TR",400);
+ teta   = (double) IdArgGetFloat("teta",90.);
+ b0    = (double) IdArgGetFloat("b0",1.);
+ db0   = (double) IdArgGetFloat("db0",0.);
+ b0def   = (double) IdArgGetFloat("b0def",0.);
+ flagres   = IdArgGetInt("flagres",1);
+ flagdech  = IdArgGetInt("flagdech",2);
+ filter  = IdArgGetInt("filter",1);
+ object   = IdArgGetInt("object",1);
+ size  = IdArgGetInt("size",32);
+ fileout = IdArgGetString("fileout","../data/output/recimage.acr");
+ objname = IdArgGetString("objname","../data/input/brainlabelz126.raw");
+ seqname = IdArgGetString("seqname","SE2D");
+ display   = IdArgGetInt("display",1);
+ inhomogeneousB1 = IdArgGetInt("inhomogeneousB1", 0);
+
+switch(test)
+ {
+/* Test 2D sequence */
+  case 0:
+  {
+   TestSequence2D(object,size,size,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,seqname,display, inhomogeneousB1);
+   break;
+  }
+/* Test 2D sequence */
+  case 1:
+  {
+   TestSequence3D(object,size,size,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,seqname,display, inhomogeneousB1);
+   break;
+  }
+
+/* Test RMN */
+  case 2:
+  {
+   TestFID1D(2048,512);
+   break;
+  }
+  case 3:
+  {
+   TestEchoSpin1D(2048,512);
+   break;
+  }
+  case 4:
+  {
+   TestTrainEchoSpin1D(1024,512,8);
+   break;
+  }
+/* Test Brain */
+  case 5:
+  {
+   TestSequence2D(4,size,size,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,seqname,display, inhomogeneousB1);
+   break;
+  }
+
+/* Test Defaut de champ */
+  case 10:
+  {
+   TestSequence2D(3,64,64,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,seqname,display, inhomogeneousB1);
+   break;
+  }
+/* Test SE 2D */
+  case 210:
+  {
+   TestSequence2D(1,32,32,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 211:
+  {
+   TestSequence2D(1,64,64,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 212:
+  {
+   TestSequence2D(1,128,128,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 213:
+  {
+   TestSequence2D(1,256,256,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 214:
+  {
+   TestSequence2D(1,512,512,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 215:
+  {
+   TestSequence2D(1,1024,1024,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 216:
+  {
+   TestSequence2D(1,1024,256,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 220:
+  {
+   TestSequence2D(2,32,32,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 221:
+  {
+   TestSequence2D(2,64,64,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 222:
+  {
+   TestSequence2D(2,128,128,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 223:
+  {
+   TestSequence2D(2,256,256,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 224:
+  {
+   TestSequence2D(2,512,512,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 225:
+  {
+   TestSequence2D(2,1024,1024,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 226:
+  {
+   TestSequence2D(2,1024,256,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"SE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 260:
+  {
+   TestSequence2D(4,256,256,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,seqname,display, inhomogeneousB1);
+   break;
+  }
+
+/*Test Gradient Echo */
+  case 250:
+  {
+   TestSequence2D(2,32,32,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 251:
+  {
+   TestSequence2D(2,64,64,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE2D",display, inhomogeneousB1);
+   break;
+  }
+  case 252:
+  {
+   TestSequence2D(2,128,128,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE2D",display, inhomogeneousB1);
+   break;
+  }
+
+/* Test SE 3D */
+  case 310:
+  {
+   TestSequence3D(1,16,16,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE3D",display, inhomogeneousB1);
+   break;
+  }
+  case 311:
+  {
+   TestSequence3D(1,32,32,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE3D",display, inhomogeneousB1);
+   break;
+  }
+  case 312:
+  {
+   TestSequence3D(1,64,64,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE3D",display, inhomogeneousB1);
+   break;
+  }
+  case 313:
+  {
+   TestSequence3D(1,128,128,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE3D",display, inhomogeneousB1);
+   break;
+  }
+  case 314:
+  {
+   TestSequence3D(1,128,64,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE3D",display, inhomogeneousB1);
+   break;
+  }
+  case 320:
+  {
+   TestSequence3D(2,16,16,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE3D",display, inhomogeneousB1);
+   break;
+  }
+  case 321:
+  {
+   TestSequence3D(2,32,32,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE3D",display, inhomogeneousB1);
+   break;
+  }
+  case 322:
+  {
+   TestSequence3D(2,64,64,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE3D",display, inhomogeneousB1);
+   break;
+  }
+  case 323:
+  {
+   TestSequence3D(2,128,128,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE3D",display, inhomogeneousB1);
+   break;
+  }
+  case 324:
+  {
+   TestSequence3D(2,128,64,tacq,TE,TR,teta,b0,db0,b0def,flagres,flagdech,filter,fileout,objname,"GE3D",display, inhomogeneousB1);
+   break;
+  }
+  default:
+  {
+   break;
+  }
+ }
+
+#ifdef HAVE_MPI
+ MPI_Finalize();
+#endif
+ return 0;
+}

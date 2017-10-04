@@ -1,0 +1,139 @@
+/*! \mainpage SIMRI documentation
+ *  \section intro Introduction
+ * \b SIMRI is an open source C Software. SIMRI is 3D MRI simulator based on the Bloch equations.
+ * This simulator  proposes an efficient management of the T2* effect and integrates in a unique simulator
+ * most of the simulation features that are offered in different simulators. It takes into account the main
+ * static field value and enables realistic simulations of the chemical shift artifact including off-resonance
+ * phenomena. It also simulates the artifacts linked to the static field inhomogeneity like those induced by
+ * susceptibility variation within an object. It is implemented in the C language and the MRI sequence programming
+ * is done using high level C functions with a simple programming interface. To manage large simulations, the
+ * magnetization kernel is implemented in a parallelized way that enables simulation on PC grid architecture.
+ * It is a portable software running on Windows and Linux environnement.
+
+ *  \section publications Related publications
+ * [1] H. Benoit-Cattin, G. Collewet, B. Belaroussi, H. Saint-Jalmes, and C. Odet, “The SIMRI project:
+ * A versatile and interactive MRI simulator”, Journal of Magnetic Resonance, vol. 173, pp. 97-115, 2005.\n
+ * [2] H. Benoit-Cattin, F. Bellet, J. Montagnat, C. Odet, “Magnetic Resonance Imaging (MRI) simulation on
+ * a grid computing architecture”, In Proc. of IEEE CGIGRID'03- BIOGRID'03, Tokyo, 2003.
+
+ * \section Authors Authors and Institutions
+ * - Hugues BENOIT-CATTIN\n
+ *      CREATIS, UMR CNRS #5515, U 630 Inserm, Université Claude Bernard Lyon 1, INSA Lyon, Bât. B. Pascal, 69621 Villeurbanne, France \n
+ * - Guylaine COLLEWET\n
+ *      CEMAGREF / Food Processes Engineering Research Unit, 17 av de Cucillé, 35044 Rennes, France.\n
+ * - Boubakeur BELAROUSSI \n
+ *      CREATIS, UMR CNRS #5515, U 630 Inserm, Université Claude Bernard Lyon 1, INSA Lyon, Bât. B. Pascal, 69621 Villeurbanne, France \n
+ * - Christophe ODET \n
+ *      CREATIS, UMR CNRS #5515, U 630 Inserm, Université Claude Bernard Lyon 1, INSA Lyon, Bât. B. Pascal, 69621 Villeurbanne, France \n
+ * - Hervé SAINT-JALMES \n
+ *      Laboratoire de Résonance Magnétique Nucléaire - Méthodologie et Instrumentation en Biophysique, UMR CNRS 5012, Université Claude Bernard Lyon 1 - CPE Lyon, France \n
+ * - Fabrice BELLET \n
+ *      CREATIS, UMR CNRS #5515, U 630 Inserm, Université Claude Bernard Lyon 1, INSA Lyon, Bât. B. Pascal, 69621 Villeurbanne, France \n
+ * - Alexis AMADON \n
+        CEA, SHFJ-UNAF, 4 place du General Leclerc, 91400 Orsay, France \n
+
+
+ * \section Acknowledgements
+ * The SIMRI project started in June 2000 at CREATIS, Lyon France. \n
+ * The SIMRI project has been initiated thanks to the work done by G. Soufflet on the initial 1D MRI simulator of J. Bittoun. \n
+ * This work is partly supported by the IST European Data-Grid Project and the French ministry for research ACI-GRID project.
+ * This work has been also funded by the INSA Lyon. \n
+ * We want to thank S. Balac from the CNRS MAPLY lab for its contribution on the susceptibility artifact simulation.\n
+ * Many thanks to F. Bellet and J. Montagnat for their help in the SIMRI parallelisation and grid
+ * implementation.
+
+ * \section  License
+ * The SIMRI software is distributed under the CeCiLL license (http://www.cecill.info/index.en.html).
+ * The CeCiLL license is a free-software license, created under the supervision of the three biggest
+ * research institutions on computer sciences in France :
+ *  - CNRS  (http://www.cnrs.fr)
+ *  - CEA   (http://www.cea.fr)
+ *  - INRIA (http://www.inria.fr) \n\n
+ * The CeCiLL license is compatible with the GNU GPL : you can legally redistribute SIMRI based programs in GPL.
+ * You have to RESPECT this license. Particularly, all distributed programs using parts of the SIMRI sources MUST
+ * be open-source. Please carefully read the license terms.
+
+ *\section  mailing Mailing list
+ * Simri has its mailing list : simri@creatis.insa-lyon.fr \n
+ * If you are interested, subscribe to the simri mailing list:
+ * http://www.creatis.insa-lyon.fr/mailman/listinfo/simri
+
+ *  \warning Execution time can be \b really huge for 2D and 3D simulation. Use \b small objects.
+ *
+ *  \section modules SIMRI3D Structure
+ *
+ *  \ref Kernel "Kernel" functions implement the Bloch equations for 3D spin precession simulation and
+ *  teh effects of magnetic events (RF pulse, gradients).
+ *  Programming around those functions is not a simple task due to the inherent complex nature of RMN
+ *  and the parallelization of the code. You probably don't need to use them directly.
+ *
+ *  \ref Object "Object creation and manipulation" functions allow the creation of 1D, 2D or 3D voxelized
+ * objects with multiple isochromats and T1, T2, DP etc... defined independantly for each voxel.
+ *
+ * \ref Experience "Experience" functions which set the various conditions before acquisition.
+ *
+ *  \ref Sequence "MRI sequence" functions which implement the chronological steps necessary to
+ * obtain the RF datas sweeping the k-space as required for a specific T1, T2 or DP contrast
+ * used in medical imaging for example.
+ *
+ *  \ref Event "Electromagnetic events" functions which configure the electromagnetic events (pulse RF, gradient, precession, acquisition)
+ *
+ *  \ref Reconstruction "Reconstruction" functions which take RF k-space data and reconstruct (by FFT)
+ * the x-y-z object space.
+ *
+ *  \ref Test "Test" functions are all-in-one jobs for quick testing purpose. They can be used as entry
+ * points to learn how to use \b SIMRI3D and built new sequences.
+ *
+ *  \ref Display "Display" Display functions of 1D,2D,3D RF spaces and images
+ *
+ *  \ref Utility "Utilities" Useful general functions
+ *
+ */
+
+/*!
+ *   \defgroup Kernel SIMRI3D Kernel
+ *
+ *
+ */
+
+/*!  \defgroup Object Object creation and manipulation
+ *
+ */
+
+/*!  \defgroup Experience Experience creation and manipulation
+ *
+ */
+
+/*!  \defgroup Sequence MRI Sequences
+ *
+ */
+
+/*!  \defgroup Event Event
+ *
+ *
+ */
+
+/*!  \defgroup Reconstruction Reconstruction
+ *
+ *
+ */
+
+/*!  \defgroup Test Tests
+ *
+ *
+ */
+
+/*!  \defgroup Display Display
+ *
+ *
+ */
+
+/*!  \defgroup Utility Utilities
+ *
+ *
+ */
+
+/*!  \defgroup Output Output
+ *
+ *
+ */
