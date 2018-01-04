@@ -1,4 +1,4 @@
-# Domain adaptation: MR acquisition-invariance
+# MR acquisition-invariant network
 
 This repository contains experiments and code accompanying the paper:
 
@@ -6,7 +6,11 @@ This repository contains experiments and code accompanying the paper:
 
 which is currently under review.
 
-## Usage
+## Installation
+
+Installation instructions will follow soon.
+
+## Contains
 
 - __experiment-*__ contains scripts for running experiments reported in the paper.
 - __data__ contains a script for obtaining and processing data used in the paper.
