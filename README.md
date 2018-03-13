@@ -8,15 +8,29 @@ which is currently under review.
 
 ## Installation
 
-Installation instructions will follow soon.
+First clone this repository and change directory:
+```shell
+git clone https://github.com/wmkouw/mrai-net
+cd mrai-net
+```
 
-## Contains
+Then call the setup script:
+```shell
+python setup.py install
+```
+It takes care of installing all dependencies on your system.
 
-- __experiment-*__ contains scripts for running experiments reported in the paper.
-- __data__ contains a script for obtaining and processing data used in the paper.
-- __util__ contains utility functions and algorithms.
+`mrai` can now be imported:
+```python
+from mrai import mrai_cnn
+```
 
-## Dependencies:
+## Experiments
 
-- TensorFlow: https://www.tensorflow.org/
-- Keras: https://keras.io/
+- `experiment-brainweb` contains scripts performing experiments using the brainweb simulated data.
+- `experiment-mrbrains` contains scripts performing experiments using the [MRBrainS](http://mrbrains13.isi.uu.nl/) dataset.
+- `experiment-numparams` contains a script describing the behavior of the network as a function of the number of parameters in the network.
+
+
+## Contact
+Bugs, comments and questions can be submitted to the issues tracker.

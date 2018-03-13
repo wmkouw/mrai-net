@@ -2,35 +2,37 @@ import scipy as sp
 import numpy as np
 import nibabel as nib
 import scipy.ndimage as nd
-from scipy.ndimage.interpolation import zoom
+from keras import backend as bK
 import tensorflow as tf
-import keras as ks
 import sklearn as sk
 import sklearn.model_selection as skms
 import sklearn.linear_model as sklm
 import sklearn.svm as sksv
+
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
-from keras import backend as bK
 
 
-def strip_skull(I,M):
-        ''' Strip the skull from image I based on a mask M '''
-        
-        # Number of subjects
-        nS = I.shape[0]
+def strip_skull(im, mask):
+    """Strip the skull from image based on a mask."""
 
-        # Loop over subjects
-        for s in range(nS):
-                
-            # Map backgroud pixels to 0
-            I[s][M[s]] = 0
+    if mask.dtype is not np.dtype(bool):
+        raise ValueError('Mask should be a logical array.')
 
-        return I
+    # Number of subjects
+    num_subjects = im.shape[0]
+
+    # Loop over subjects
+    for s in range(num_subjects):
+
+        # Map backgroud pixels to 0
+        im[s][mask[s]] = 0
+
+    return im
 
 
-def vis_segmentation(S, savefn='', cmap='viridis'):
-    ''' Visualise segmentation of image '''
+def viz_segmentation(S, savefn='', cmap='viridis'):
+    """Visualise segmentation of image."""
 
     # Figure options
     fig = plt.figure()
@@ -46,124 +48,72 @@ def vis_segmentation(S, savefn='', cmap='viridis'):
     cax = divider.append_axes("right", size="5%", pad=0.05)
     plt.colorbar(im, cax=cax)
 
-    if not savefn=='':
+    if savefn:
         fig.savefig(savefn, bbox_inches='tight')
     else:
         plt.show()
 
 
-def vis_embedding(net, Ih,Lp,Jh,Up, savefn='', alpha=.3):
-    ''' Visualise embedded patches '''
+def viz_embedding(net, Ih, Lp, Jh, Up, savefn='', alpha=.3):
+    """Visualise embedded patches."""
 
     # Figure options
     fig = plt.figure()
-    color = ['r','b','c']
+    color = ['r', 'b', 'c']
 
     # Loop over classes
     for k in range(len(net.K)):
-        plt.plot(Ih[Lp==net.K[k],0],Ih[Lp==net.K[k],1], 's', color=color[k], alpha=alpha)
-        plt.plot(Jh[Up==net.K[k],0],Jh[Up==net.K[k],1], 'x', color=color[k], alpha=alpha)
+        plt.plot(Ih[Lp == net.K[k], 0], Ih[Lp == net.K[k], 1], 's',
+                 color=color[k], alpha=alpha)
+        plt.plot(Jh[Up == net.K[k], 0], Jh[Up == net.K[k], 1], 'x',
+                 color=color[k], alpha=alpha)
 
-    if not savefn=='':
+    if savefn:
         fig.savefig(savefn, bbox_inches='tight')
     else:
         plt.show()
 
 
-def subject2image(fn, w,h, slice_ix=0, slice_dim=2, seg=False, K=[0,1,2,3], flip=False, norm_pix=False):
-    ''' Load subject images '''
+def subject2image(fn, imwidth, imheight, slice_index=0, slice_dim=2,
+                  segmentation=False, K=[0, 1, 2, 3], flip=False,
+                  norm_pix=False):
+    """Load subject images."""
 
     # Find number of subjects
-    nS = len(fn)
-    
+    num_subjects = len(fn)
+
     # Preallocate images
-    I = np.empty((nS,w,h))
+    ims = np.empty((num_subjects, w, h))
 
     # Loop over subjects
     for s in range(nS):
 
-        # Recognize file format
-        file_fmt = fn[s][-3:]
-            
-        # Check for file format
-        if file_fmt=='raw':
+        # Read binary and reshape to image
+        im = np.fromfile(fn[s], count=w*h, dtype='uint8')
+        im = nd.rotate(im.reshape((imwidth, imheight)), 90)
 
-            # # Zoom dimensions for Brainweb simulations
-            # zd = [205./186, 171./205]           
+        if segmentation:
+            # Restrict classes of segmentations
+            labels = np.unique(im)
+            for lab in np.setdiff1d(labels, K):
+                im[im == lab] = 0
 
-            # Read binary and reshape to image
-            im = nd.rotate(np.fromfile(fn[s], count=w*h, dtype='uint8').reshape((w,h)),90)
-
-            if seg:
-
-                # Restrict classes of segmentations
-                labels = np.unique(im)
-                for lab in np.setdiff1d(labels,K):
-                    im[im==lab] = 0
-
-                I[s,:,:] = im
-
-            else:
-                # Cubic spline interpolation for zoom
-                # im = np.round(zoom(im[31:217,25:230].astype(np.float64), zd, order=3)).astype('int64')
-
-                # Normalize pixels
-                if norm_pix:
-                    im[im<0] = 0
-                    im[im>255] = 255
-                    im = im/255.
-
-                # Place zoom into image array
-                # I[s,22:227,42:213] = im
-                I[s,:,:] = im
-
-        elif file_fmt=='nii':
-
-            # Collect image and pixel dims
-            im = nib.load(fn[s]).get_data()
-            hd = nib.load(fn[s]).header
-            zd = hd.get_zooms()
-
-            if len(im.shape)==4:
-                im = im[:,:,:,0]
-                zd = zd[:-1]
-
-            if seg:
-                im = CMA23(im)
-
-            # Interpolate to normalized pixel dimension
-            im = zoom(im, zd, order=0)
-
-            # Pad image
-            pdl =  np.ceil((np.array((256,256,256)) - im.shape)/2.).astype('int64')
-            pdh = np.floor((np.array((256,256,256)) - im.shape)/2.).astype('int64')
-            im = np.pad(im, ((pdl[0],pdh[0]),(pdl[1],pdh[1]),(pdl[2],pdh[2])), 'constant')
-
-            # Normalize pixels
-            if norm_pix:
-                im[im<0] = 0
-                # im[im>hd.sizeof_hdr] = hd.sizeof_hdr
-                im = im/float(1023)
-
-            # Slice image
-            if slice_dim==2:
-                I[s,:,:] = im[:,:,slice_ix].T
-            elif slice_dim==1:
-                I[s,:,:] = im[:,slice_ix,:].T
-            else:
-                I[s,:,:] = im[slice_ix,:,:].T
-
-            if flip:
-                I[s,:,:] = np.flipud(I[s,:,:]) 
+            ims[s, :, :] = im
 
         else:
-            print('File format unknown')
+            # Normalize pixels
+            if norm_pix:
+                im[im < 0] = 0
+                im[im > 255] = 255
+                im = im / 255.
 
-    return I
+            ims[s, :, :] = im
+
+    return ims
 
 
-def indices2patches(I, patch_dim=(3,3), index=np.empty((0,))):
-    ''' Slice patches from an image at particular indices '''
+def indices2patches(I, patch_dim=(3, 3), index=np.empty((0,))):
+    """Slice patches from an image at particular indices."""
 
     # Shape
     H,W = I.shape
@@ -174,7 +124,7 @@ def indices2patches(I, patch_dim=(3,3), index=np.empty((0,))):
 
     # Number of patches to sample
     num_samples = index.shape[0]
-    
+
     # Find 2D index of linear index
     w = np.empty((num_samples,), dtype='int64')
     h = np.empty((num_samples,), dtype='int64')
@@ -187,12 +137,12 @@ def indices2patches(I, patch_dim=(3,3), index=np.empty((0,))):
         h = index[:,1]
     else:
         print('index has wrong shape')
-    
+
     # Slice out patch(es)
     patches = np.empty((num_samples, patch_dim[0], patch_dim[1]))
     for n in range(num_samples):
         patches[n,:,:] =  I[w[n]-pSW:w[n]+pSW+1, h[n]-pSH:h[n]+pSH+1]
-        
+
     return patches
 
 
@@ -386,7 +336,7 @@ def classify(X,y, val=(), complexity='loglin', opt='rmsprop', c_range=np.logspac
         model = classifier(X,y, complexity='cnn', opt=opt)
 
         if val:
-            # Validation 
+            # Validation
             valy = ks.utils.to_categorical(val[1] - np.min(val[1]),nK)
 
             # Fit model
@@ -403,7 +353,7 @@ def classify(X,y, val=(), complexity='loglin', opt='rmsprop', c_range=np.logspac
     else:
         print('Complexity unknown')
 
-    
+
 def CMA23(L):
     ''' Map the automatic segmentation to K = {BCK,CSF,GM,WM} '''
     ''' Sets Brainstem and Cerebellum to background (16=0, 6,7,8,45,46,47=0)'''
@@ -411,93 +361,93 @@ def CMA23(L):
     # Number of subjects
     nI = L.shape[0]
 
-    # Re-map to 
+    # Re-map to
     L = -L
     for i in range(nI):
-        L[i][L[i]== -0] = 0
-        L[i][L[i]== -1] = 0
-        L[i][L[i]== -2] = 3
-        L[i][L[i]== -3] = 2
-        L[i][L[i]== -4] = 1
-        L[i][L[i]== -5] = 1
-        L[i][L[i]== -6] = 0
-        L[i][L[i]== -7] = 0
-        L[i][L[i]== -8] = 0
-        L[i][L[i]== -9] = 2
-        L[i][L[i]==-10] = 2
-        L[i][L[i]==-11] = 2
-        L[i][L[i]==-12] = 2
-        L[i][L[i]==-13] = 2
-        L[i][L[i]==-14] = 1
-        L[i][L[i]==-15] = 1
-        L[i][L[i]==-16] = 0
-        L[i][L[i]==-17] = 2
-        L[i][L[i]==-18] = 2
-        L[i][L[i]==-19] = 2
-        L[i][L[i]==-20] = 2
-        L[i][L[i]==-21] = 0
-        L[i][L[i]==-22] = 0
-        L[i][L[i]==-23] = 2
-        L[i][L[i]==-24] = 1
-        L[i][L[i]==-25] = 0
-        L[i][L[i]==-26] = 2
-        L[i][L[i]==-27] = 2
-        L[i][L[i]==-28] = 2
-        L[i][L[i]==-29] = 0
-        L[i][L[i]==-30] = 0
-        L[i][L[i]==-31] = 0
-        L[i][L[i]==-32] = 0
-        L[i][L[i]==-33] = 0
-        L[i][L[i]==-34] = 0
-        L[i][L[i]==-35] = 0
-        L[i][L[i]==-36] = 0
-        L[i][L[i]==-37] = 0
-        L[i][L[i]==-38] = 0
-        L[i][L[i]==-39] = 0
-        L[i][L[i]==-40] = 0
-        L[i][L[i]==-41] = 3
-        L[i][L[i]==-42] = 2
-        L[i][L[i]==-43] = 1
-        L[i][L[i]==-44] = 1
-        L[i][L[i]==-45] = 0
-        L[i][L[i]==-46] = 0
-        L[i][L[i]==-47] = 0
-        L[i][L[i]==-48] = 2
-        L[i][L[i]==-49] = 2
-        L[i][L[i]==-50] = 2
-        L[i][L[i]==-51] = 2
-        L[i][L[i]==-52] = 2
-        L[i][L[i]==-53] = 2
-        L[i][L[i]==-54] = 2
-        L[i][L[i]==-55] = 2
-        L[i][L[i]==-56] = 2
-        L[i][L[i]==-57] = 0
-        L[i][L[i]==-58] = 2
-        L[i][L[i]==-59] = 2
-        L[i][L[i]==-60] = 2
-        L[i][L[i]==-61] = 0
-        L[i][L[i]==-62] = 0
-        L[i][L[i]==-63] = 0
-        L[i][L[i]==-64] = 0
-        L[i][L[i]==-65] = 0
-        L[i][L[i]==-66] = 0
-        L[i][L[i]==-67] = 0
-        L[i][L[i]==-68] = 0
-        L[i][L[i]==-69] = 0
-        L[i][L[i]==-70] = 0
-        L[i][L[i]==-71] = 0
-        L[i][L[i]==-72] = 0
-        L[i][L[i]==-73] = 0
-        L[i][L[i]==-74] = 0
-        L[i][L[i]==-75] = 0
-        L[i][L[i]==-76] = 0
-        L[i][L[i]==-77] = 0
-        L[i][L[i]==-78] = 0
-        L[i][L[i]==-79] = 0
-        L[i][L[i]==-80] = 0
-        L[i][L[i]==-81] = 0
-        L[i][L[i]==-82] = 0
-        L[i][L[i]==-83] = 0
-        L[i][L[i]==-84] = 3
+        L[i][L[i] == -0] = 0
+        L[i][L[i] == -1] = 0
+        L[i][L[i] == -2] = 3
+        L[i][L[i] == -3] = 2
+        L[i][L[i] == -4] = 1
+        L[i][L[i] == -5] = 1
+        L[i][L[i] == -6] = 0
+        L[i][L[i] == -7] = 0
+        L[i][L[i] == -8] = 0
+        L[i][L[i] == -9] = 2
+        L[i][L[i] == -10] = 2
+        L[i][L[i] == -11] = 2
+        L[i][L[i] == -12] = 2
+        L[i][L[i] == -13] = 2
+        L[i][L[i] == -14] = 1
+        L[i][L[i] == -15] = 1
+        L[i][L[i] == -16] = 0
+        L[i][L[i] == -17] = 2
+        L[i][L[i] == -18] = 2
+        L[i][L[i] == -19] = 2
+        L[i][L[i] == -20] = 2
+        L[i][L[i] == -21] = 0
+        L[i][L[i] == -22] = 0
+        L[i][L[i] == -23] = 2
+        L[i][L[i] == -24] = 1
+        L[i][L[i] == -25] = 0
+        L[i][L[i] == -26] = 2
+        L[i][L[i] == -27] = 2
+        L[i][L[i] == -28] = 2
+        L[i][L[i] == -29] = 0
+        L[i][L[i] == -30] = 0
+        L[i][L[i] == -31] = 0
+        L[i][L[i] == -32] = 0
+        L[i][L[i] == -33] = 0
+        L[i][L[i] == -34] = 0
+        L[i][L[i] == -35] = 0
+        L[i][L[i] == -36] = 0
+        L[i][L[i] == -37] = 0
+        L[i][L[i] == -38] = 0
+        L[i][L[i] == -39] = 0
+        L[i][L[i] == -40] = 0
+        L[i][L[i] == -41] = 3
+        L[i][L[i] == -42] = 2
+        L[i][L[i] == -43] = 1
+        L[i][L[i] == -44] = 1
+        L[i][L[i] == -45] = 0
+        L[i][L[i] == -46] = 0
+        L[i][L[i] == -47] = 0
+        L[i][L[i] == -48] = 2
+        L[i][L[i] == -49] = 2
+        L[i][L[i] == -50] = 2
+        L[i][L[i] == -51] = 2
+        L[i][L[i] == -52] = 2
+        L[i][L[i] == -53] = 2
+        L[i][L[i] == -54] = 2
+        L[i][L[i] == -55] = 2
+        L[i][L[i] == -56] = 2
+        L[i][L[i] == -57] = 0
+        L[i][L[i] == -58] = 2
+        L[i][L[i] == -59] = 2
+        L[i][L[i] == -60] = 2
+        L[i][L[i] == -61] = 0
+        L[i][L[i] == -62] = 0
+        L[i][L[i] == -63] = 0
+        L[i][L[i] == -64] = 0
+        L[i][L[i] == -65] = 0
+        L[i][L[i] == -66] = 0
+        L[i][L[i] == -67] = 0
+        L[i][L[i] == -68] = 0
+        L[i][L[i] == -69] = 0
+        L[i][L[i] == -70] = 0
+        L[i][L[i] == -71] = 0
+        L[i][L[i] == -72] = 0
+        L[i][L[i] == -73] = 0
+        L[i][L[i] == -74] = 0
+        L[i][L[i] == -75] = 0
+        L[i][L[i] == -76] = 0
+        L[i][L[i] == -77] = 0
+        L[i][L[i] == -78] = 0
+        L[i][L[i] == -79] = 0
+        L[i][L[i] == -80] = 0
+        L[i][L[i] == -81] = 0
+        L[i][L[i] == -82] = 0
+        L[i][L[i] == -83] = 0
+        L[i][L[i] == -84] = 3
 
     return L

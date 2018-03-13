@@ -1,63 +1,61 @@
+#!/usr/bin/env python2
+
 import numpy as np
 import nibabel as nib
 import tensorflow as tf
-import keras as ks
+from keras import backend as bK
 import sklearn as sk
 import sklearn.model_selection as skms
 import sklearn.linear_model as sklm
-from keras import backend as bK
-from scipy.ndimage.interpolation import zoom
-import acqinv_util as aiu
-import matplotlib.pyplot as plt
+from sklearn.feature_extraction.image import extract_patches_2d
 
-class acqinv_net:
 
-    def __init__(self,m=1,w=256,h=256,K=np.array([1,2,3]),pD=3,nE=2,sS=10,l2=0.001,nT=1):
-        ''' Constructor'''
-        
-        self.m = m
-        self.w = w
-        self.h = h
-        self.K = K
-        self.pD = pD
-        self.nE = nE
-        self.sS = sS
-        self.l2 = l2
+class mrai_fcn:
+    """
+    Class of neural networks to learn MRI-scanner acquisition-invariant
+    representations.
+    """
+    def __init__(self, margin=1, imwidth=256, imheight=256,
+                 classes=np.array([1, 2, 3]), patch_size=(3, 3), num=2,
+                 sS=10, l2=0.001, nT=1):
+        """
+        Initialize the network with data shape, architecture and
+        optimization parameters.
+        """
+        # Data shape parameters
+        self.imwwidth = imwidth
+        self.imheight = imheight
+        self.patch_size = patch_size
+        self.patch_step = ((patch_dim[0]-1)/2, (patch_dim[1]-1)/2)
+        self.patch_unraveled = (2*pD + 1)**2
         self.nT = nT
 
-        # Patch widths
-        self.pW=2*pD+1
-        self.pU=(2*pD+1)**2
+        # Classes
+        self.classes = classes
+
+        self.nE = nE
+        self.sS = sS
+
+        # Network hyperparameters
+        self.margin = margin
+        self.l2 = l2
+
+        # Optimization parameters
+        self.max_iter = max_iter
 
         # Initialize net architecture
         self.net = []
 
-
-    def strip_skull(self, I,M):
-        ''' Strip the skull from image I based on a mask M '''
-        
-        # Number of subjects
-        nS = I.shape[0]
-
-        # Loop over subjects
-        for s in range(nS):
-                
-            # Map backgroud pixels to 0
-            I[s][M[s]==0] = 0
-
-        return I
-
-
-    def image2patch(self, I,L, scan_ID=0):
-        ''' Sample set of patches from image '''
+    def extract_random_patches(self, im, segm):
+        """Extract a random set of patches from image."""
 
         # Shapes
-        nI = I.shape[0]
-        nK = len(self.K)
+        num_ims = im.shape[0]
+        num_classes = len(self.classes)
 
         # Preallocate input and output patches
-        Ip = np.zeros((nI,nK,self.sS,self.pU+1))
-        Il = np.zeros((nI,nK,self.sS), dtype='int64')
+        Ip = np.zeros((nI, nK, self.sS, self.pU+1))
+        Il = np.zeros((nI, nK, self.sS), dtype='int64')
 
         for i in range(nI):
             for k in range(nK):
@@ -70,44 +68,30 @@ class acqinv_net:
 
                 # Sample patch from class k
                 pIk = self.index2patch(I[i], index=ixk).reshape((self.sS,-1))
-                        
+
                 # Augment patches with scanner ID and store
                 Ip[i,k,:,:] = np.append(pIk,scan_ID*np.ones((self.sS,1)),axis=1)
-                
+
                 # Store class labels
                 Il[i,k,:] = self.K[k]*np.ones((self.sS,))
-        
+
         return Ip,Il
 
-
-    def image2allpatch(self, I, scan_ID=0, patch_dim=(3,3)):
-        ''' Get all patches from image '''
+    def extract_all_patches(self, im, scan_ID=0, patch_size=(3, 3),
+                            edge=(0, 0)):
+        """Extract all patches from image, and append a scanner ID var."""
 
         # Shapes
-        W,H = I.shape
+        imheight, imwidth = im.shape
 
-        # Patch deviations
-        pW = (patch_dim[0]-1)/2
-        pH = (patch_dim[1]-1)/2
-
-        # Grid coordinates
-        wc = range(pW,W-pW)
-        hc = range(pH,H-pH)
-
-        # Number of patches to extract
-        nP = len(wc)*len(hc)
-
-        # Generate grid
-        tw,th = np.meshgrid(wc,hc)
-        indices = np.concatenate((th.reshape((-1,1)),tw.reshape((-1,1))),axis=1)
+        # Cut edges of image
+        im = im[edge[0]:-edge[0], edge[1]:-edge[1]]
 
         # Sample patches at grid
-        Ip = self.index2patch(I, index=indices).reshape((nP,np.prod(patch_dim)))
+        im_p = extract_patches_2d(im, patch_size=self.patch_size)
 
         # Augment patches with scanner ID and store
-        Ip = np.append(Ip, scan_ID*np.ones((nP,1)),axis=1)
-
-        return Ip
+        return np.append(im_p, scan_ID*np.ones((num_patches, 1)), axis=1)
 
 
     def index2patch(self, I, index=np.empty((0,))):
@@ -115,7 +99,7 @@ class acqinv_net:
 
         # Number of patches to sample
         num_samples = index.shape[0]
-        
+
         # Find 2D index of linear index
         w = np.empty((num_samples,), dtype='int64')
         h = np.empty((num_samples,), dtype='int64')
@@ -128,48 +112,35 @@ class acqinv_net:
             h = index[:,1]
         else:
             print('index has wrong shape')
-        
+
         # Slice out patch(es)
         patches = np.empty((num_samples, self.pW, self.pW))
         for n in range(num_samples):
-            patches[n,:,:] =  I[w[n]-self.pD:w[n]+self.pD+1, h[n]-self.pD:h[n]+self.pD+1]
-            
+            patches[n, :, :] =  I[w[n]-self.pD:w[n]+self.pD+1, h[n]-self.pD:h[n]+self.pD+1]
+
         return patches
 
-
     def contrastive_loss(self, y_true, y_pred):
-        ''' Contrastive loss from Hadsell-et-al.'06 '''
+        """Contrastive loss; squared for similar, """
+        return bK.sum(y_true * bK.square(y_pred) +
+                      (1-y_true) * bK.abs(bK.maximum(self.m - y_pred, 0)))
 
-        return bK.sum(y_true * bK.square(y_pred) + (1 - y_true) * bK.abs(bK.maximum(self.m - y_pred, 0)))
-
-    
-    def norm_shape(shape1,shape2):
-        ''' Find shape for norm '''
-
-        return (shape1[0], 1)
-
-        
     def l1_norm(self, vects):
-        ''' Compute Manhattan distance '''
-
+        """l1-norm for loss layer."""
         return bK.sum(bK.abs(vects[0]-vects[1]), axis=1, keepdims=True)
 
+    def l2_norm(self, x):
+        """l2-norm for loss layer."""
+        return bK.sqrt(bK.maximum(bK.sum(bK.square(x[0]-x[1]), axis=1,
+                                         keepdims=True), bK.epsilon()))
 
-    def l2_norm(self, vects):
-        ''' Compute Euclidean distance '''
-
-        return bK.sqrt(bK.maximum(bK.sum(bK.square(vects[0]-vects[1]), axis=1, keepdims=True), bK.epsilon()))
-
-
-    def index_comb(self, arrays, out=None):
-        ''' Generate combinations of two index arrays '''
-
-        return np.array(np.meshgrid(arrays[0], arrays[1])).T.reshape(-1,2)
-
+    def index_comb(self, A):
+        """Generate combinations of two index arrays."""
+        return np.array(np.meshgrid(A[0], A[1])).T.reshape(-1, 2)
 
     def set_net(self, hidden_nodes=[64,16,2], act='relu', opt='rmsprop'):
         ''' Define network architecture '''
-        
+
         # Setup input layers
         A = ks.layers.Input(shape=(self.pU+1,))
         B = ks.layers.Input(shape=(self.pU+1,))
@@ -213,7 +184,7 @@ class acqinv_net:
         # Loop over source subjects
         for i in range(nI):
             print('At source subject '+str(i+1)+'/'+str(nI))
-            
+
             for j in range(nJ):
                 print('At target subject '+str(j+1)+'/'+str(nJ))
 
@@ -221,7 +192,7 @@ class acqinv_net:
                 train_I = np.empty((2*nK**2*self.sS*minTS,self.pU+1))
                 train_J = np.empty((2*nK**2*self.sS*minTS,self.pU+1))
                 train_Y = np.empty((2*nK**2*self.sS*minTS,1))
-                
+
                 # Find random other source subject
                 if nI==1:
                     o = i
@@ -249,7 +220,7 @@ class acqinv_net:
                     pIkk = self.index2patch(I[i], index=ixkk[:,0]).reshape(ixkk.shape[0],-1)
                     pJkk = self.index2patch(J[j], index=ixkk[:,1]).reshape(ixkk.shape[0],-1)
                     pIok = self.index2patch(I[o], index=ixko[:,1]).reshape(ixkk.shape[0],-1)
-                    
+
                     # Augment patch with scanner ID
                     pIkk = np.append(pIkk,np.zeros((pIkk.shape[0],1)),axis=1)
                     pJkk = np.append(pJkk, np.ones((pJkk.shape[0],1)),axis=1)
@@ -260,7 +231,7 @@ class acqinv_net:
                     train_J[c*self.sS*minTS:(c+1)*self.sS*minTS,:] = pJkk
                     train_Y[c*self.sS*minTS:(c+1)*self.sS*minTS,:] = np.ones((self.sS*minTS,1))
                     c += 1
-                    
+
                     # Store patches source-source kk
                     train_I[c*self.sS*minTS:(c+1)*self.sS*minTS,:] = pIkk
                     train_J[c*self.sS*minTS:(c+1)*self.sS*minTS,:] = pIok
@@ -275,7 +246,7 @@ class acqinv_net:
                         # Subsample indices of other tissues
                         ixo = np.random.choice(np.ravel_multi_index(Lol.T, (self.w,self.h)), size=minTS, replace=False)
                         ixt = np.random.choice(tix[j,l,:].reshape((-1,)), size=minTS, replace=False)
-                        
+
                         # Generate pairwise index combinations
                         ixkl = self.index_comb((ixk,ixt))
                         ixol = self.index_comb((ixk,ixo))
@@ -284,7 +255,7 @@ class acqinv_net:
                         pIkl = self.index2patch(I[i], index=ixkl[:,0]).reshape(ixkl.shape[0],-1)
                         pJkl = self.index2patch(J[j], index=ixkl[:,1]).reshape(ixkl.shape[0],-1)
                         pIol = self.index2patch(I[o], index=ixol[:,1]).reshape(ixol.shape[0],-1)
-                        
+
                         # Augment patch with scanner ID
                         pIkl = np.append(pIkl,np.zeros((pIkl.shape[0],1)),axis=1)
                         pJkl = np.append(pJkl, np.ones((pJkl.shape[0],1)),axis=1)
@@ -295,7 +266,7 @@ class acqinv_net:
                         train_J[c*self.sS*minTS:(c+1)*self.sS*minTS,:] = pJkl
                         train_Y[c*self.sS*minTS:(c+1)*self.sS*minTS,:] = np.zeros((self.sS*minTS,1))
                         c += 1
-                        
+
                         # Store sampled patches
                         train_I[c*self.sS*minTS:(c+1)*self.sS*minTS,:] = pIkl
                         train_J[c*self.sS*minTS:(c+1)*self.sS*minTS,:] = pIol
@@ -308,7 +279,7 @@ class acqinv_net:
 
     def propagate(self, Ip):
         ''' Propagate a set of patches through acqinv-net '''
-        
+
         # Define intermediate-output model
         inter_model = ks.models.Model(inputs=self.net.input, outputs=self.net.get_layer(index=2).get_output_at(1))
 
@@ -343,7 +314,7 @@ class acqinv_net:
         elif clfr=='flat':
             # Take out patches
             Ip = self.image2allpatch(I,scan_ID=scan_ID,patch_dim=patch_dim)[:,:-1]
-            
+
             # Classify embedded patches
             Pp = model.predict(Ip)
 
@@ -355,4 +326,3 @@ class acqinv_net:
 
         # Return re-assembled prediction
         return Pr
-
