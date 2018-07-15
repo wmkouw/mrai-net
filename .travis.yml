@@ -7,7 +7,6 @@ os:
 
 env:
   matrix:
-    - PYTHON_VERSION=3.4
     - PYTHON_VERSION=3.5
     - PYTHON_VERSION=3.6
 

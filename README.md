@@ -1,6 +1,6 @@
 [![Coverage](https://scrutinizer-ci.com/g/wmkouw/mrai-net/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wmkouw/mrai-net/statistics/)
 [![BuildStatus](https://travis-ci.org/wmkouw/mrai-net.svg?branch=master)](https://travis-ci.org/wmkouw/mrai-net)
-![Python version](https://img.shields.io/badge/python-3.4%2C%203.5%2C%203.6-blue.svg)
+![Python version](https://img.shields.io/badge/python-3.5%2C%203.6-blue.svg)
 
 # MR Acquisition-Invariant Neural Network
 
