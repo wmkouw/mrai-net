@@ -16,7 +16,7 @@ with open('requirements.txt') as reqsfile:
 setup(
     name='mrai',
     version=__version__,
-    description=("MR acquisition-invariant representation learning."),
+    description=("MR acquisition-invariant network."),
     long_description=open('README.md').read(),
     packages=find_packages(),
     install_requires=required,
@@ -26,5 +26,8 @@ setup(
     author_email='wmkouw@gmail.com',
     classifiers=['Topic :: Machine Learning :: classifiers',
                  'License :: OSI Approved :: MIT License',
-                 'Programming Language :: Python']
+                 'Operating System :: POSIX :: Linux',
+                 'Programming Language :: Python :: 3.4',
+                 'Programming Language :: Python :: 3.5',
+                 'Programming Language :: Python :: 3.6']
 )
