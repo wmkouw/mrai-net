@@ -41,16 +41,22 @@ For more information on individual classes, methods and functions, visit the [do
 
 ## Data
 
-- [MRBrainS](http://mrbrains13.isi.uu.nl/)
+In order to isolate MRI-scanner acquisition-based variation in medical images, we simulated datasets of varying scan protocol parameters using [SIMRI](https://www.ncbi.nlm.nih.gov/pubmed/15705518). High-quality human brain phantoms were used, which can be found here:
 - [Brainweb](http://brainweb.bic.mni.mcgill.ca/)
 
-We included the modified version of SIMRI that includes the additional NMR relaxation times, as described in the paper's appendix. In the folder named `simulator` is an example shell script named `run_simulation.sh` to run a simulation using a few default parameters.
+
+The original code for SIMRI can be downloaded from [here](https://sourceforge.net/projects/simri/). Our repo contains a modified version of SIMRI that includes the additional NMR relaxation times, as described in the paper's appendix. For more information on how to run your own simulations, see the example shell script named `run_simulation.sh` in the folder `data/brainweb/simulator`.
+
+Real data consisted of the MRBrainS data set, known from the brain tissue segmentation challenge at MICCAI 2013.
+- [MRBrainS](http://mrbrains13.isi.uu.nl/)
+
+We used only the 5 training scans provided, as the labels for the remaining 15 scans have not been released.
 
 ## Experiments
 
-- `exp-mrai-cnn_b1b3` contains an experiment using Brainweb1.5T (b1) as source data and Brainweb3.0T (b3) as target data.
-- `exp_mrai-cnn_b1mb` contains an experiment using Brainweb1.5T (b1) as source data and MRBrainS (mb) as target data.
-- `exp_mrai-cnn_b3mb` contains an experiment using Brainweb3.0T (b3) as source data and MRBrainS (mb) as target data.
+- `exp-mrai-cnn_b1b3`: experiment using Brainweb1.5T (b1) as source and Brainweb3.0T (b3) as target data.
+- `exp_mrai-cnn_b1mb`: experiment using Brainweb1.5T (b1) as source and MRBrainS (mb) as target data.
+- `exp_mrai-cnn_b3mb`: experiment using Brainweb3.0T (b3) as source and MRBrainS (mb) as target data.
 
 ## Contact
 Bugs, comments and questions can be submitted to the [issues tracker](https://github.com/wmkouw/mrai-net/issues).

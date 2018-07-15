@@ -13,6 +13,7 @@ def test_init():
     N = MRAIConvolutionalNeuralNetwork()
     assert len(N.net) == 0
 
+
 def test_matrix2sparse():
     """Assert matrix2sparse is correct shape."""
     # Generate random matrix
