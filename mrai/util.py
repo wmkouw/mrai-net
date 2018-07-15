@@ -3,37 +3,53 @@ import numpy as np
 import nibabel as nib
 import scipy.ndimage as nd
 from keras import backend as bK
+from keras.models import Model, Sequential
+from keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Lambda, \
+    Dropout, concatenate, Reshape
+from keras.regularizers import l2
+from keras.utils import to_categorical
+from keras.losses import categorical_crossentropy
 import tensorflow as tf
 import sklearn as sk
-import sklearn.model_selection as skms
-import sklearn.linear_model as sklm
-import sklearn.svm as sksv
+from sklearn.model_selection import GridSearchCV, cross_val_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import LinearSVC, SVC
+from sklearn.feature_extraction.image import extract_patches_2d
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
-def strip_skull(im, mask):
-    """Strip the skull from image based on a mask."""
+def strip_skull(I, M):
+    """
+    Strip the skull from image I based on mask M.
 
-    if mask.dtype is not np.dtype(bool):
+    INPUT   (1) array 'I': number of subjects by height by width
+            (2) array 'M': number of subjects by height by width (boolean)
+    OUTPUT  (1) array 'I': number of subjects by height by width
+    """
+    # Check whether mask is a boolean array
+    if M.dtype is not np.dtype(bool):
         raise ValueError('Mask should be a logical array.')
 
-    # Number of subjects
-    num_subjects = im.shape[0]
-
     # Loop over subjects
-    for s in range(num_subjects):
+    for subject in range(I.shape[0]):
 
         # Map backgroud pixels to 0
-        im[s][mask[s]] = 0
+        I[subject][M[subject]] = 0
 
-    return im
+    return I
 
 
 def viz_segmentation(S, savefn='', cmap='viridis'):
-    """Visualise segmentation of image."""
+    """
+    Visualise segmentation of image.
 
+    INPUT   (1) array 'S': number of subjects by height by width
+            (2) str 'savefn': filename for saving figure (def:'')
+            (3) str 'cmap': colormap (def: 'viridis')
+    OUTPUT  None
+    """
     # Figure options
     fig = plt.figure()
     ax = fig.add_subplot(111)
@@ -56,7 +72,6 @@ def viz_segmentation(S, savefn='', cmap='viridis'):
 
 def viz_embedding(net, Ih, Lp, Jh, Up, savefn='', alpha=.3):
     """Visualise embedded patches."""
-
     # Figure options
     fig = plt.figure()
     color = ['r', 'b', 'c']
@@ -74,290 +89,201 @@ def viz_embedding(net, Ih, Lp, Jh, Up, savefn='', alpha=.3):
         plt.show()
 
 
-def subject2image(fn, imwidth, imheight, slice_index=0, slice_dim=2,
-                  segmentation=False, K=[0, 1, 2, 3], flip=False,
-                  norm_pix=False):
+def subject2image(fn, imsize=(256, 256), slice_index=0, slice_dim=2,
+                  segmentation=False, classes=[0, 1, 2, 3], flip=False,
+                  normalization=False):
     """Load subject images."""
-
     # Find number of subjects
     num_subjects = len(fn)
 
     # Preallocate images
-    ims = np.empty((num_subjects, w, h))
+    ims = np.empty((num_subjects, imsize[0], imsize[1]))
 
     # Loop over subjects
-    for s in range(nS):
+    for s in range(num_subjects):
 
         # Read binary and reshape to image
-        im = np.fromfile(fn[s], count=w*h, dtype='uint8')
-        im = nd.rotate(im.reshape((imwidth, imheight)), 90)
+        im = np.fromfile(fn[s], count=np.prod(imsize), dtype='uint8')
+        im = nd.rotate(im.reshape(imsize), 90)
 
         if segmentation:
             # Restrict classes of segmentations
-            labels = np.unique(im)
-            for lab in np.setdiff1d(labels, K):
+            for lab in np.setdiff1d(np.unique(im), classes):
                 im[im == lab] = 0
-
-            ims[s, :, :] = im
 
         else:
             # Normalize pixels
-            if norm_pix:
+            if normalization:
                 im[im < 0] = 0
                 im[im > 255] = 255
                 im = im / 255.
 
-            ims[s, :, :] = im
+        # Add image to image array
+        ims[s, :, :] = im
 
     return ims
 
 
-def indices2patches(I, patch_dim=(3, 3), index=np.empty((0,))):
-    """Slice patches from an image at particular indices."""
+def extract_all_patches(I, patch_size=(3, 3), edge=(0, 0)):
+    """Extract all patches from image."""
+    # Remove edges
+    I = I[edges[0]:-edges[0], edges[1]:-edges[1]]
 
-    # Shape
-    H,W = I.shape
+    # Step length from center in patch
+    vstep = (patch_size[0] - 1) / 2
+    hstep = (patch_size[1] - 1) / 2
 
-    # Patch step
-    pSH = (patch_dim[0]-1)/2
-    pSW = (patch_dim[1]-1)/2
+    # Pad image before patch extraction
+    Ip = np.pad(I, pad_width=((vstep, vstep), (hstep, hstep)))
 
-    # Number of patches to sample
-    num_samples = index.shape[0]
-
-    # Find 2D index of linear index
-    w = np.empty((num_samples,), dtype='int64')
-    h = np.empty((num_samples,), dtype='int64')
-    if len(index.shape)==1:
-        ix = np.empty((num_samples,2), dtype='int64')
-        for n in range(num_samples):
-            w[n],h[n] = np.unravel_index(index[n], (H,W))
-    elif len(index.shape)==2:
-        w = index[:,0]
-        h = index[:,1]
-    else:
-        print('index has wrong shape')
-
-    # Slice out patch(es)
-    patches = np.empty((num_samples, patch_dim[0], patch_dim[1]))
-    for n in range(num_samples):
-        patches[n,:,:] =  I[w[n]-pSW:w[n]+pSW+1, h[n]-pSH:h[n]+pSH+1]
-
-    return patches
+    # Sample patches at grid
+    return extract_patches_2d(Ip, patch_size=patch_size)
 
 
-def images2patches(I, patch_dim=(3,3), edges=(1,1), stride=1):
-    ''' Extract all patches of dim size from imageset '''
-
-    # Shapes
-    nS,W,H = I.shape
-
-    # Grid coordinates
-    wc = range(edges[0],W-edges[0],stride)
-    hc = range(edges[1],H-edges[1],stride)
-
-    # Number of patches per image
-    nP = len(wc)*len(hc)
-
-    c = 0
-    Ip = np.empty((nS*nP,patch_dim[0],patch_dim[1],1))
-    for s in range(nS):
-
-        # Form 2D-index array
-        tw,th = np.meshgrid(wc,hc)
-        indices = np.concatenate((th.reshape((-1,1)),tw.reshape((-1,1))),axis=1)
-
-        # Extract patches at indices
-        Ip[c*nP:(c+1)*nP,:,:,0] = indices2patches(I[s,:,:], patch_dim=patch_dim, index=indices)
-        c += 1
-
-    return Ip
-
-
-def cnn(I,L, patch_dim=(31,31), edges=(15,15), batch_size=32, num_epochs=8, stride=1):
-    ''' Run a convolutional neural network on the images '''
-
-    # Shapes
-    nS,H,W = I.shape
-    nK = len(np.unique(L))
-
-    # Extract large patches for images
-    Ip = images2patches(I, patch_dim=patch_dim, edges=edges, stride=stride)
-    Lp = images2patches(L, patch_dim=(1,1), edges=edges, stride=stride)
-
-    # Switch labels to categorical array
-    Lp = ks.utils.to_categorical(Lp - np.min(Lp),nK)
-
-    # Initialize cnn
-    model = ks.models.Sequential()
-    model.add(ks.layers.Conv2D(32, kernel_size=(3,3),
-                     activation='relu',
-                     input_shape=(patch_dim[0],patch_dim[1],1)))
-    model.add(ks.layers.Conv2D(64, (3, 3), activation='relu'))
-    model.add(ks.layers.MaxPooling2D(pool_size=(2, 2)))
-    model.add(ks.layers.Dropout(0.25))
-    model.add(ks.layers.Flatten())
-    model.add(ks.layers.Dense(128, activation='relu'))
-    model.add(ks.layers.Dropout(0.5))
-    model.add(ks.layers.Dense(nK, activation='softmax'))
-
-    model.compile(loss=ks.losses.categorical_crossentropy,
-                  optimizer=ks.optimizers.Adadelta(),
-                  metrics=['accuracy'])
-
-    model.fit(Ip, Lp,
-              batch_size=batch_size,
-              epochs=num_epochs,
-              verbose=1)
-
-    return model
-
-
-def classifier(X,y, complexity='loglin', opt='rmsprop', c_range=np.logspace(-5,4,10), num_folds=2):
-    ''' Train classifier in embedding '''
+def set_classifier(X, y, classifier='logreg', c_range=np.logspace(-5, 4, 10),
+                   num_folds=2):
+    """Construct classifier with optimal regularization parameter."""
+    # Data shape
+    N = X.shape[0]
 
     # Number of classes
-    if len(y.shape)==2:
-        nK = y.shape[1]
+    if len(y.shape) == 2:
+        num_classes = y.shape[1]
     else:
-        nK = len(np.unique(y))
+        labels = np.unique(y)
+        num_classes = len(labels)
 
-    if complexity=='loglin':
-
+    if classifier == 'logreg':
         # Grid search over regularization parameters C
-        if X.shape[0] > nK:
-            modelgs = skms.GridSearchCV(estimator=sklm.LogisticRegression(multi_class='ovr',solver='lbfgs',class_weight='balanced'),cv=num_folds,param_grid=dict(C=c_range)).fit(X,y)
+        if N > num_classes:
+            modelgs = GridSearchCV(LogisticRegression(class_weight='balanced'),
+                                   cv=num_folds, param_grid=dict(C=c_range))
+            modelgs.fit(X, y)
             bestC = modelgs.best_estimator_.C
         else:
-            bestC = 1e6
+            bestC = 1
 
         # Set up model with optimal C
-        return sklm.LogisticRegression(C=bestC, multi_class='ovr', solver='lbfgs', class_weight='balanced')
+        return LogisticRegression(C=bestC, class_weight='balanced')
 
-    elif complexity=='linsvc':
-
+    elif classifier == 'linsvc':
         # Grid search over regularization parameters C
-        if X.shape[0] > nK:
-            modelgs = skms.GridSearchCV(estimator=sksv.LinearSVC(loss='hinge', class_weight='balanced'), cv=num_folds, param_grid=dict(C=c_range)).fit(X,y)
+        if N > num_classes:
+            modelgs = GridSearchCV(LinearSVC(class_weight='balanced'),
+                                   cv=num_folds, param_grid=dict(C=c_range))
+            modelgs.fit(X, y)
             bestC = modelgs.best_estimator_.C
         else:
             bestC = 1
 
         # Train model with optimal C
-        return sksv.LinearSVC(C=bestC, loss='hinge', class_weight='balanced')
+        return LinearSVC(C=bestC, class_weight='balanced')
 
-    elif complexity=='nonlin':
-
+    elif classifier == 'rbfsvc':
         # Grid search over regularization parameters C
-        if X.shape[0] > nK:
-            modelgs = skms.GridSearchCV(estimator=sksv.SVC(class_weight='balanced'), cv=num_folds, param_grid=dict(C=c_range)).fit(X,y)
+        if N > num_classes:
+            modelgs = GridSearchCV(SVC(class_weight='balanced'),
+                                   cv=num_folds, param_grid=dict(C=c_range))
+            modelgs.fit(X, y)
             bestC = modelgs.best_estimator_.C
         else:
             bestC = 1e6
 
         # Train model with optimal C
-        return sksv.SVC(C=bestC, class_weight='balanced')
+        return SVC(C=bestC, class_weight='balanced')
 
-    elif complexity=='cnn':
+    elif classifier == 'convnn':
+        # Sequentially add network layers
+        model = Sequential()
+        model.add(Conv2D(8, kernel_size=(3, 3),
+                         activation='relu',
+                         padding='valid',
+                         kernel_regularizer=l2(0.001),
+                         input_shape=(X.shape[1], X.shape[2], 1)))
+        model.add(MaxPooling2D(pool_size=(2, 2), padding='valid'))
+        model.add(Dropout(0.2))
+        model.add(Flatten())
+        model.add(Dense(16, activation='relu', kernel_regularizer=l2(0.001)))
+        model.add(Dropout(0.2))
+        model.add(Dense(8, activation='relu', kernel_regularizer=l2(0.001)))
+        model.add(Dense(num_classes, activation='softmax'))
 
-        # Initialize cnn
-        model = ks.models.Sequential()
-        model.add(ks.layers.Conv2D(8, kernel_size=(5,5), activation='relu', padding='valid', input_shape=(X.shape[1],X.shape[2],1)))
-        # model.add(ks.layers.Conv2D(16, (3, 3), activation='relu', padding='valid'))
-        model.add(ks.layers.MaxPooling2D(pool_size=(2,2), padding='valid'))
-        model.add(ks.layers.Dropout(0.2))
-        model.add(ks.layers.Flatten())
-        model.add(ks.layers.Dense(16, activation='relu'))
-        model.add(ks.layers.Dropout(0.2))
-        model.add(ks.layers.Dense(8, activation='relu'))
-        model.add(ks.layers.Dense(nK, activation='softmax'))
-
-        model.compile(loss=ks.losses.categorical_crossentropy, optimizer=opt, metrics=['accuracy'])
+        model.compile(loss=categorical_crossentropy, optimizer='rmsprop',
+                      metrics=['accuracy'])
 
         return model
-
     else:
-        print('Complexity unknown')
+        print('Classifier unknown')
 
 
-def classify(X,y, val=(), complexity='loglin', opt='rmsprop', c_range=np.logspace(-5,4,10), num_folds=2, num_epochs=2, batch_size=32):
-    ''' Classify samples in embedding '''
-
+def classify(X, y, val=[], classifier='logreg', c_range=np.logspace(-5, 4, 10),
+             num_folds=2, num_epochs=2, batch_size=32, verbose=True):
+    """Classify sets of patches."""
     # Number of classes
-    nK = len(np.unique(y))
+    num_classes = len(np.unique(y))
 
-    if complexity=='loglin':
-
-        # Train regularized classifier
-        model = classifier(X,y, complexity='loglin', c_range=c_range, num_folds=num_folds)
-
-        if val:
-
-            # Return error on validation data
-            return 1-model.fit(X,y).score(val[0],val[1])
-
-        else:
-
-            # Return error cross-validated over training data
-            return np.mean(1-skms.cross_val_score(model, X, y=y, cv=num_folds))
-
-    elif complexity=='linsvc':
-
-        # Train regularized classifier
-        model = classifier(X,y, complexity='linsvc', c_range=c_range, num_folds=num_folds)
-
-        if val:
-            # Fit and return error on validation data
-            return 1 - model.fit(X,y).score(val[0],val[1])
-
-        else:
-            # Return error cross-validated over training data
-            return np.mean(1 - skms.cross_val_score(model, X, y=y, cv=num_folds))
-
-    elif complexity=='nonlin':
-
-        # Set up regularized classifier
-        model = classifier(X,y, complexity='nonlin', c_range=c_range, num_folds=num_folds)
-
-        if val:
-            # Fit and return error on validation data
-            return 1 - model.fit(X,y).score(val[0],val[1])
-
-        else:
-            # Return error cross-validated over training data
-            return np.mean(1 - skms.cross_val_score(model, X, y=y, cv=num_folds))
-
-    elif complexity=='cnn':
-
+    if classifier == 'convnn':
         # Switch labels to categorical array
-        y = ks.utils.to_categorical(y - np.min(y),nK)
+        y = to_categorical(y - np.min(y), num_classes)
+    else:
+        # Check for feature vectors
+        if len(X.shape) > 2:
+            X = X.reshape((X.shape[0], -1))
 
-        # Set up convolutional network
-        model = classifier(X,y, complexity='cnn', opt=opt)
+    # Train regularized classifier
+    model = set_classifier(X, y, classifier=classifier, c_range=c_range,
+                           num_folds=num_folds)
 
+    if classifier.lower() in ['logreg', 'linsvc', 'rbfsvc']:
+        if val:
+            # Number of validation samples
+            N = val[0].shape[0]
+
+            # Error on validation data
+            err = 1 - model.fit(X, y).score(val[0].reshape((N, -1)), val[1])
+
+        else:
+            # Error cross-validated over training data
+            err = np.mean(1 - cross_val_score(model, X, y=y, cv=num_folds))
+
+    elif classifier == 'convnn':
         if val:
             # Validation
-            valy = ks.utils.to_categorical(val[1] - np.min(val[1]),nK)
+            valy = to_categorical(val[1] - np.min(val[1]), num_classes)
 
             # Fit model
-            model.fit(X,y, batch_size=batch_size, epochs=num_epochs, verbose=1)
+            model.fit(X, y,
+                      batch_size=batch_size,
+                      epochs=num_epochs,
+                      validation_split=0.2,
+                      shuffle=True)
 
-            # Fit and return error on validation data
-            return 1 - model.test_on_batch(val[0],valy)[1]
+            # Error on validation data
+            err = 1 - model.test_on_batch(val[0], valy)[1]
 
         else:
-            # Return error cross-validated over training data
-            print('X-val not ready')
-            return np.mean(1 - skms.cross_val_score(model, X, y=y, cv=num_folds))
-
+            # Error cross-validated over training data
+            err = np.mean(1 - cross_val_score(model, X, y=y, cv=num_folds))
     else:
-        print('Complexity unknown')
+        raise ValueError('Classifier unknown')
+
+    # Report
+    if verbose:
+        print('Classification error = ' + str(err))
+
+    return err
 
 
-def CMA23(L):
-    ''' Map the automatic segmentation to K = {BCK,CSF,GM,WM} '''
-    ''' Sets Brainstem and Cerebellum to background (16=0, 6,7,8,45,46,47=0)'''
+def CMA_to_4classes(L):
+    """
+    Map CMA's automatic segmentation to {BCK,CSF,GM,WM}.
 
+    CMA's automatic segmentation protocol lists over 80 different tissue 
+    classes. Here we map these back to the four we used in the paper: 
+    background (BCK), cerebrospinal fluid (CSF), gray matter (GM) and 
+    white matter (WM). Sets Brainstem and Cerebellum to background 
+    (16=0, 6,7,8,45,46,47=0).
+    """
     # Number of subjects
     nI = L.shape[0]
 

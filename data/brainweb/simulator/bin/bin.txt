@@ -1,0 +1,1 @@
+le repertoire bin est ici pour accueillir DLL et executable

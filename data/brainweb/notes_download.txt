@@ -1,2 +1,0 @@
-Brainweb phantom data as well as the simulated brain database can be found at: http://brainweb.bic.mni.mcgill.ca/
-
