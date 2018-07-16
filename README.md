@@ -54,9 +54,12 @@ We used only the 5 training scans provided, as the labels for the remaining 15 s
 
 ## Experiments
 
-- `exp-mrai-cnn_b1b3`: experiment using Brainweb1.5T (b1) as source and Brainweb3.0T (b3) as target data.
-- `exp_mrai-cnn_b1mb`: experiment using Brainweb1.5T (b1) as source and MRBrainS (mb) as target data.
-- `exp_mrai-cnn_b3mb`: experiment using Brainweb3.0T (b3) as source and MRBrainS (mb) as target data.
+Experimental scripts from the paper are included in this repository:
+- `exp-mrai-cnn_b1b3`: simulated data from MRI-scanners with different acquisition protocols.
+- `exp_mrai-cnn_b1mb`: simulated data as souce and real data as target, for different field strengths.
+- `exp_mrai-cnn_b3mb`: simulated data as souce and real data as target, for equivalent field strengths.
+
+For more information on experiment parameters and setup, see the [README](https://github.com/wmkouw/mrai-net/tree/master/experiments) in the experiments folder.
 
 ## Contact
 Bugs, comments and questions can be submitted to the [issues tracker](https://github.com/wmkouw/mrai-net/issues).
