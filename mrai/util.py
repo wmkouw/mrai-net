@@ -1,115 +1,102 @@
-import scipy as sp
 import numpy as np
-import nibabel as nib
+import scipy as sp
 import scipy.ndimage as nd
-from keras import backend as bK
-from keras.models import Model, Sequential
-from keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Lambda, \
-    Dropout, concatenate, Reshape
-from keras.regularizers import l2
-from keras.utils import to_categorical
-from keras.losses import categorical_crossentropy
-import tensorflow as tf
-import sklearn as sk
-from sklearn.model_selection import GridSearchCV, cross_val_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.svm import LinearSVC, SVC
-from sklearn.feature_extraction.image import extract_patches_2d
 
-import matplotlib.pyplot as plt
-from mpl_toolkits.axes_grid1 import make_axes_locatable
+import keras.models as km
+import keras.layers as kl
+import keras.regularizers as kr
+import keras.utils as ku
+
+import sklearn.model_selection as sm
+import sklearn.linear_model as sl
+import sklearn.svm as sv
+import sklearn.feature_extraction.image as sf
 
 
-def strip_skull(I, M):
+def strip_skull(X, M):
     """
-    Strip the skull from image I based on mask M.
+    Strip the skull from image X based on mask M.
 
-    INPUT   (1) array 'I': number of subjects by height by width
-            (2) array 'M': number of subjects by height by width (boolean)
-    OUTPUT  (1) array 'I': number of subjects by height by width
+    Parameters
+    ----------
+    X : array
+        MRI-scan that includes the skull of the subject.
+    M : array
+        Mask array indicating the skull with True.
+
+    Returns
+    -------
+    X : array
+        MRI-scan with 0's at the mask indices.
+
     """
     # Check whether mask is a boolean array
     if M.dtype is not np.dtype(bool):
         raise ValueError('Mask should be a logical array.')
 
-    # Loop over subjects
-    for subject in range(I.shape[0]):
+    # Check if X contains multiple subjects
+    if len(X.shape) > 2:
 
-        # Map backgroud pixels to 0
-        I[subject][M[subject]] = 0
+        # Check for same number of subjects in mask and data.
+        if not (X.shape[0] == M.shape[0]):
+            raise ValueError('Shape mismatch.')
+        
+        # Strip skull, for each subject
+        for i in range(X.shape[0]):
+            X[i][M[i]] = 0
 
-    return I
-
-
-def viz_segmentation(S, savefn='', cmap='viridis'):
-    """
-    Visualise segmentation of image.
-
-    INPUT   (1) array 'S': number of subjects by height by width
-            (2) str 'savefn': filename for saving figure (def:'')
-            (3) str 'cmap': colormap (def: 'viridis')
-    OUTPUT  None
-    """
-    # Figure options
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-
-    # Plot prediction
-    im = plt.imshow(S, cmap=cmap)
-
-    # Set axes properties
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
-    divider = make_axes_locatable(ax)
-    cax = divider.append_axes("right", size="5%", pad=0.05)
-    plt.colorbar(im, cax=cax)
-
-    if savefn:
-        fig.savefig(savefn, bbox_inches='tight')
     else:
-        plt.show()
+        # Strip skull
+        X[M] = 0
+
+    return X
 
 
-def viz_embedding(net, Ih, Lp, Jh, Up, savefn='', alpha=.3):
-    """Visualise embedded patches."""
-    # Figure options
-    fig = plt.figure()
-    color = ['r', 'b', 'c']
+def subject2image(fn, imsize=(256, 256), segmentation=False, 
+                  classes=[0, 1, 2, 3], normalization=False):
+    """
+    Load subject images.
 
-    # Loop over classes
-    for k in range(len(net.K)):
-        plt.plot(Ih[Lp == net.K[k], 0], Ih[Lp == net.K[k], 1], 's',
-                 color=color[k], alpha=alpha)
-        plt.plot(Jh[Up == net.K[k], 0], Jh[Up == net.K[k], 1], 'x',
-                 color=color[k], alpha=alpha)
+    Parameters
+    ----------
+    fn : str
+        Filename of image.
+    imsize : tuple(int, int)
+        Dimensions of the image to load.
+    segmentation : bool
+        Indicating whether this is a label matrix.
+    classes : list[int]
+        List of numerical values of tissue classes.
+    normalization : bool
+        Whether to normalize the image.
 
-    if savefn:
-        fig.savefig(savefn, bbox_inches='tight')
-    else:
-        plt.show()
+    Returns
+    -------
+    X : array
+        Loaded images, number of subjects by image height by image width
 
-
-def subject2image(fn, imsize=(256, 256), slice_index=0, slice_dim=2,
-                  segmentation=False, classes=[0, 1, 2, 3], flip=False,
-                  normalization=False):
-    """Load subject images."""
+    """
     # Find number of subjects
     num_subjects = len(fn)
 
     # Preallocate images
-    ims = np.empty((num_subjects, imsize[0], imsize[1]))
+    X = np.empty((num_subjects, imsize[0], imsize[1]))
 
     # Loop over subjects
-    for s in range(num_subjects):
+    for s, fn_s in enumerate(fn):
 
-        # Read binary and reshape to image
-        im = np.fromfile(fn[s], count=np.prod(imsize), dtype='uint8')
-        im = nd.rotate(im.reshape(imsize), 90)
+        # Read binary
+        X_s = np.fromfile(fn_s, count=np.prod(imsize), dtype='uint8')
 
+        # Reshape binary list to image
+        X_s = nd.rotate(X_s.reshape(imsize), 90)
+
+        # Check for label image
         if segmentation:
+
             # Restrict classes of segmentations
-            for lab in np.setdiff1d(np.unique(im), classes):
-                im[im == lab] = 0
+            for classk in np.setdiff1d(np.unique(X_s), classes):
+                X_s[X_s == classk] = 0
 
         else:
             # Normalize pixels
@@ -119,123 +106,246 @@ def subject2image(fn, imsize=(256, 256), slice_index=0, slice_dim=2,
                 im = im / 255.
 
         # Add image to image array
-        ims[s, :, :] = im
+        X[s, :, :] = X_s
 
-    return ims
+    return X
 
 
-def extract_all_patches(I, patch_size=(3, 3), edge=(0, 0)):
-    """Extract all patches from image."""
+def extract_all_patches(X, patch_size=(3, 3), edge=(0, 0)):
+    """
+    Extract all patches from image.
+
+    Parameters
+    ----------
+    X : array
+        Image to extract patches from.
+    patch_size : tuple(int, int)
+        Dimensions of patches to extract.
+    edge : tuple(int, int)
+        Dimensions of the outer edge to ignore during sampling.
+
+    Returns
+    -------
+    patches : array
+        Patches array with number of samples by patch height by patch width.
+
+    """
     # Remove edges
-    I = I[edges[0]:-edges[0], edges[1]:-edges[1]]
+    X = X[edge[0]:-edge[0], edge[1]:-edge[1]]
 
     # Step length from center in patch
     vstep = (patch_size[0] - 1) / 2
     hstep = (patch_size[1] - 1) / 2
 
     # Pad image before patch extraction
-    Ip = np.pad(I, pad_width=((vstep, vstep), (hstep, hstep)))
+    X = np.pad(X, pad_width=((vstep, vstep), (hstep, hstep)), mode='constant')
 
     # Sample patches at grid
-    return extract_patches_2d(Ip, patch_size=patch_size)
+    return sf.extract_patches_2d(X, patch_size=patch_size)
 
 
-def set_classifier(X, y, classifier='logreg', c_range=np.logspace(-5, 4, 10),
+def set_classifier(X, y, classifier='lr', c_range=np.logspace(-5, 4, 10),
                    num_folds=2):
-    """Construct classifier with optimal regularization parameter."""
+    """
+    Construct classifier with optimal regularization parameter.
+
+    Parameters
+    ----------
+    X : array
+        Data matrix, number of samples by number of features.
+    y : array
+        Label vector or matrix, number of samples by 1, or number of samples by
+        number of classes.
+    classifier : str
+        Type of classifier to use, options are: 'lr' (logistic regression),
+        'linsvc' (linear support vector classifier),
+        'rbfsvc' (radial basis function support vector classifier),
+        'cnn' (convolutional neural network), (def='lr').
+    c_range : array
+        Range of possible regularization parameters,
+        (def=np.logspace(-5, 4, 10)).
+    num_folds : int
+        Number of folds to use in cross-validation.
+
+    Returns
+    -------
+    sklearn classifier
+        A trained classifier with a predict function.
+
+    """
     # Data shape
     N = X.shape[0]
 
     # Number of classes
     if len(y.shape) == 2:
-        num_classes = y.shape[1]
-    else:
-        labels = np.unique(y)
-        num_classes = len(labels)
 
-    if classifier == 'logreg':
+        # Check number of classes by number of columns of label matrix
+        num_classes = y.shape[1]
+
+    else:
+        # Check number of classes by the number of unique entries
+        num_classes = len(np.unique(y))
+
+    if classifier == 'lr':
+
         # Grid search over regularization parameters C
         if N > num_classes:
-            modelgs = GridSearchCV(LogisticRegression(class_weight='balanced'),
-                                   cv=num_folds, param_grid=dict(C=c_range))
+
+            # Set up a grid search cross-validation procedure
+            modelgs = sm.GridSearchCV(sl.LogisticRegression(),
+                                      param_grid=dict(C=c_range),
+                                      cv=num_folds)
+
+            # Fit grid search model
             modelgs.fit(X, y)
+
+            # Extract best regularization parameter
             bestC = modelgs.best_estimator_.C
+
         else:
+            # Standard regularization parameter
             bestC = 1
 
         # Set up model with optimal C
-        return LogisticRegression(C=bestC, class_weight='balanced')
+        return sl.LogisticRegression(C=bestC)
 
     elif classifier == 'linsvc':
+
         # Grid search over regularization parameters C
         if N > num_classes:
-            modelgs = GridSearchCV(LinearSVC(class_weight='balanced'),
-                                   cv=num_folds, param_grid=dict(C=c_range))
+
+            # Set up a grid search cross-validation procedure
+            modelgs = sm.GridSearchCV(sv.LinearSVC(),
+                                      param_grid=dict(C=c_range),
+                                      cv=num_folds)
+
+            # Fit grid search model
             modelgs.fit(X, y)
+
+            # Extract best regularization parameter
             bestC = modelgs.best_estimator_.C
+
         else:
+            # Standard regularization parameter
             bestC = 1
 
         # Train model with optimal C
-        return LinearSVC(C=bestC, class_weight='balanced')
+        return sv.LinearSVC(C=bestC)
 
     elif classifier == 'rbfsvc':
+
         # Grid search over regularization parameters C
         if N > num_classes:
-            modelgs = GridSearchCV(SVC(class_weight='balanced'),
-                                   cv=num_folds, param_grid=dict(C=c_range))
+
+            # Set up a grid search cross-validation procedure
+            modelgs = sm.GridSearchCV(sv.SVC(), cv=num_folds,
+                                      param_grid=dict(C=c_range))
+
+            # Fit grid search model
             modelgs.fit(X, y)
+
+            # Extract best regularization parameter
             bestC = modelgs.best_estimator_.C
+
         else:
-            bestC = 1e6
+            # Standard regularization parameter
+            bestC = 1
 
         # Train model with optimal C
-        return SVC(C=bestC, class_weight='balanced')
+        return sv.SVC(C=bestC)
 
-    elif classifier == 'convnn':
-        # Sequentially add network layers
-        model = Sequential()
-        model.add(Conv2D(8, kernel_size=(3, 3),
-                         activation='relu',
-                         padding='valid',
-                         kernel_regularizer=l2(0.001),
-                         input_shape=(X.shape[1], X.shape[2], 1)))
-        model.add(MaxPooling2D(pool_size=(2, 2), padding='valid'))
-        model.add(Dropout(0.2))
-        model.add(Flatten())
-        model.add(Dense(16, activation='relu', kernel_regularizer=l2(0.001)))
-        model.add(Dropout(0.2))
-        model.add(Dense(8, activation='relu', kernel_regularizer=l2(0.001)))
-        model.add(Dense(num_classes, activation='softmax'))
+    elif classifier == 'cnn':
 
-        model.compile(loss=categorical_crossentropy, optimizer='rmsprop',
-                      metrics=['accuracy'])
+        # Start sequential model
+        net = km.Sequential()
 
-        return model
+        # Convolutional part
+        net.add(kl.Conv2D(8, kernel_size=(3, 3),
+                          activation='relu',
+                          padding='valid',
+                          kernel_regularizer=kr.l2(0.001),
+                          input_shape=(X.shape[1], X.shape[2], 1)))
+        net.add(kl.MaxPooling2D(pool_size=(2, 2), padding='valid'))
+        net.add(kl.Dropout(0.2))
+        net.add(kl.Flatten())
+
+        # Fully-connected part
+        net.add(kl.Dense(16, activation='relu',
+                         kernel_regularizer=kr.l2(0.001)))
+        net.add(kl.Dropout(0.2))
+        net.add(kl.Dense(8, activation='relu',
+                         kernel_regularizer=kr.l2(0.001)))
+        net.add(kl.Dense(num_classes, activation='softmax'))
+
+        # Compile network architecture
+        net.compile(loss='categorical_crossentropy',
+                    optimizer='rmsprop',
+                    metrics=['accuracy'])
+
+        return net
+
     else:
         print('Classifier unknown')
 
 
-def classify(X, y, val=[], classifier='logreg', c_range=np.logspace(-5, 4, 10),
+def classify(X, y, val=[], classifier='lr', c_range=np.logspace(-5, 4, 10),
              num_folds=2, num_epochs=2, batch_size=32, verbose=True):
-    """Classify sets of patches."""
+    """
+    Classify sets of patches.
+
+    Parameters
+    ----------
+    X : array
+        Data matrix, number of samples by number of features.
+    y : array
+        Label vector or matrix, number of samples by 1, or number of samples by
+        number of classes.
+    val : list[X, y]
+        Validation data and label set, (def = []).
+    classifier : str
+        Type of classifier to use, options are: 'lr' (logistic regression),
+        'linsvc' (linear support vector classifier),
+        'rbfsvc' (radial basis function support vector classifier),
+        'cnn' (convolutional neural network), (def='lr').
+    c_range : array
+        Range of possible regularization parameters,
+        (def=np.logspace(-5, 4, 10)).
+    num_folds : int
+        Number of folds to use in cross-validation.
+    num_epochs : int
+        Number of epochs in training a neural network.
+    batch_size : int
+        Size of the batches to cut the data set into.
+    verbose : bool
+        Verbosity during training.
+
+    Returns
+    -------
+    err : float
+        Classification error.
+
+    """
     # Number of classes
     num_classes = len(np.unique(y))
 
-    if classifier == 'convnn':
+    if classifier == 'cnn':
+
         # Switch labels to categorical array
-        y = to_categorical(y - np.min(y), num_classes)
+        y = ku.to_categorical(y - np.min(y), num_classes)
+
     else:
-        # Check for feature vectors
+        # If data has more than 2 dimensions, reshape it back to 2.
         if len(X.shape) > 2:
             X = X.reshape((X.shape[0], -1))
 
     # Train regularized classifier
-    model = set_classifier(X, y, classifier=classifier, c_range=c_range,
-                           num_folds=num_folds)
+    model = set_classifier(X, y, classifier=classifier, num_folds=num_folds,
+                           c_range=c_range)
 
-    if classifier.lower() in ['logreg', 'linsvc', 'rbfsvc']:
+    if classifier.lower() in ['lr', 'linsvc', 'rbfsvc']:
+
         if val:
+
             # Number of validation samples
             N = val[0].shape[0]
 
@@ -244,26 +354,24 @@ def classify(X, y, val=[], classifier='logreg', c_range=np.logspace(-5, 4, 10),
 
         else:
             # Error cross-validated over training data
-            err = np.mean(1 - cross_val_score(model, X, y=y, cv=num_folds))
+            err = np.mean(1 - sm.cross_val_score(model, X, y=y, cv=num_folds))
 
-    elif classifier == 'convnn':
+    elif classifier == 'cnn':
+
         if val:
             # Validation
-            valy = to_categorical(val[1] - np.min(val[1]), num_classes)
+            valy = ku.to_categorical(val[1] - np.min(val[1]), num_classes)
 
             # Fit model
-            model.fit(X, y,
-                      batch_size=batch_size,
-                      epochs=num_epochs,
-                      validation_split=0.2,
-                      shuffle=True)
+            model.fit(X, y, batch_size=batch_size, epochs=num_epochs,
+                      validation_split=0.2, shuffle=True)
 
             # Error on validation data
             err = 1 - model.test_on_batch(val[0], valy)[1]
 
         else:
             # Error cross-validated over training data
-            err = np.mean(1 - cross_val_score(model, X, y=y, cv=num_folds))
+            err = np.mean(1 - sm.cross_val_score(model, X, y=y, cv=num_folds))
     else:
         raise ValueError('Classifier unknown')
 
@@ -278,11 +386,22 @@ def CMA_to_4classes(L):
     """
     Map CMA's automatic segmentation to {BCK,CSF,GM,WM}.
 
-    CMA's automatic segmentation protocol lists over 80 different tissue 
-    classes. Here we map these back to the four we used in the paper: 
-    background (BCK), cerebrospinal fluid (CSF), gray matter (GM) and 
-    white matter (WM). Sets Brainstem and Cerebellum to background 
+    CMA's automatic segmentation protocol lists over 80 different tissue
+    classes. Here we map these back to the four we used in the paper:
+    background (BCK), cerebrospinal fluid (CSF), gray matter (GM) and
+    white matter (WM). Sets Brainstem and Cerebellum to background
     (16=0, 6,7,8,45,46,47=0).
+
+    Parameters
+    ----------
+    L : array
+        Label matrix
+
+    Returns
+    -------
+    L : array
+        Label matrix
+
     """
     # Number of subjects
     nI = L.shape[0]

@@ -10,18 +10,17 @@ import keras.regularizers as kr
 import sklearn.feature_extraction.image as sf
 
 
-class MRAIConvolutionalNeuralNetwork(object):
+class MRAIDenseNeuralNetwork(object):
     """
     Network for MRI-scanner acquisition-invariant representation learning.
 
-    Class of convolutional neural networks that aim to map patches of two
+    Class of fully-connected neural networks that aim to map patches of two
     datasets from different MRI-scanners Methods include image processing
     operations, pair sampling and Siamese loss minimization.
     """
 
     def __init__(self, patch_size=(31, 31), classes=[1, 2, 3], num_draw=10, 
-                 num_kernels=[8], kernel_size=[(3, 3)], dense_size=[16, 8],
-                 strides=(1, 1), dropout=0.1, l2=0.001, margin=1,
+                 dense_size=[16, 8], dropout=0.1, l2=0.001, margin=1,
                  optimizer='rmsprop', batch_size=32, num_epochs=2):
         """
         Initialize with shape, architecture and optimization parameters.
@@ -34,15 +33,8 @@ class MRAIConvolutionalNeuralNetwork(object):
             Numerical values of tissue classes
         num_draw : int
             Number of patches to draw from each pair of images
-        num_kernels : list[int]
-            Number of kernels in each layer, index corresponds to layer index
-        kernel_size : list[(int, int)]
-            Dimensions of convolution kernels in each layer
         dense_size : list[int]
             Width of the fully-connected layers
-        strides : (int, int)
-            The amount of pixels in each direction to skip while performing
-            convolutions
         dropout : float
             Parameter controlling chance of randomly setting weights to 0.
             Dropout encourages convolution kernels to be independent of each
@@ -101,43 +93,26 @@ class MRAIConvolutionalNeuralNetwork(object):
         sIDA = kl.Input(shape=(1,))
         sIDB = kl.Input(shape=(1,))
 
-        # Convolutional pipeline
-        pipeC = km.Sequential()
-        pipeC.add(kl.Conv2D(self.num_kernels[0],
-                            self.kernel_size[0],
-                            activation='relu',
-                            padding='valid',
-                            kernel_regularizer=kr.l2(self.l2),
-                            input_shape=(*self.patch_size, 1)))
-        pipeC.add(kl.MaxPooling2D(pool_size=(2, 2), padding='valid'))
-        pipeC.add(kl.Dropout(self.dropout))
-        for n in range(1, len(self.num_kernels)):
-            pipeC.add(kl.Conv2D(self.num_kernels[n],
-                                self.kernel_size[n],
-                                activation='relu',
-                                padding='valid',
-                                kernel_regularizer=kr.l2(self.l2)))
-            pipeC.add(kl.MaxPooling2D(pool_size=(2, 2), padding='valid'))
-            pipeC.add(kl.Dropout(self.dropout))
-        pipeC.add(kl.Flatten())
+        # Set up sequential pipeline
+        prep_net = km.Sequential()
+        prep_net.add(kl.Flatten())
 
-        # Dense pipeline
-        pipeD = km.Sequential()
-        pipeD.add(kl.Dense(self.dense_size[0],
-                           activation='relu',
-                           kernel_regularizer=kr.l2(self.l2),
-                           input_shape=(pipeC.output_shape[1] + 1,)))
+        # Full sequential net
+        main_net = km.Sequential()
+        main_net.add(kl.Dense(self.dense_size[0],
+                              activation='relu',
+                              kernel_regularizer=kr.l2(self.l2),
+                              input_shape=(np.prod(self.patch_size) + 1,)))
         for n in range(1, len(self.dense_size)):
-            pipeD.add(kl.Dropout(self.dropout))
-            pipeD.add(kl.Dense(self.dense_size[n],
-                               activation='relu',
-                               kernel_regularizer=kr.l2(self.l2)))
-        pipeD.add(kl.Dense(2))
+            main_net.add(kl.Dropout(self.dropout))
+            main_net.add(kl.Dense(self.dense_size[n], activation='relu',
+                                  kernel_regularizer=kr.l2(self.l2)))
+        main_net.add(kl.Dense(2))
 
         # Distance in embedding space
         distance = kl.Lambda(self.l1_norm, output_shape=(1,))(
-                          [pipeD(kl.concatenate([pipeC(A), sIDA])),
-                           pipeD(kl.concatenate([pipeC(B), sIDB]))])
+                          [main_net(kl.concatenate([prep_net(A), sIDA])),
+                           main_net(kl.concatenate([prep_net(B), sIDB]))])
 
         # Set model
         model = km.Model(inputs=[A, B, sIDA, sIDB], outputs=distance)
@@ -163,7 +138,7 @@ class MRAIConvolutionalNeuralNetwork(object):
         ----------
         label : int
             Similarity label, 1=similar and 0=dissimilar
-        distance: float
+        distance : float
             Lp-norm between pairs of patches mapped through the network.
 
         Returns
@@ -194,7 +169,7 @@ class MRAIConvolutionalNeuralNetwork(object):
         Parameters
         ----------
         X : array
-            Matrix that should be mapped to sparse array format, 
+            Matrix that should be mapped to sparse array format,
             may contain NaN's.
 
         Returns
@@ -664,7 +639,7 @@ class MRAIConvolutionalNeuralNetwork(object):
     def save_model(self, model_fn, weights_fn):
         """
         Save model to filename.
-        
+
         Parameters
         ----------
         model_fn : str

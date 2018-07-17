@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MRAI Convolutional Neural Network &mdash; mrai 0.1.0a documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MRAI Dense Neural Network" href="mraidnn.html" />
+    <link rel="prev" title="Classifiers" href="../classifiers.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mrai
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../classifiers.html">Classifiers</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MRAI Convolutional Neural Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mraidnn.html">MRAI Dense Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mrai</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../classifiers.html">Classifiers</a> &raquo;</li>
+        
+      <li>MRAI Convolutional Neural Network</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/classifiers/mraicnn.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mrai.mraicnn">
+<span id="mrai-convolutional-neural-network"></span><h1>MRAI Convolutional Neural Network<a class="headerlink" href="#module-mrai.mraicnn" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork">
+<em class="property">class </em><code class="descclassname">mrai.mraicnn.</code><code class="descname">MRAIConvolutionalNeuralNetwork</code><span class="sig-paren">(</span><em>patch_size=(31, 31), classes=[1, 2, 3], num_draw=10, num_kernels=[8], kernel_size=[(3, 3)], dense_size=[16, 8], strides=(1, 1), dropout=0.1, l2=0.001, margin=1, optimizer='rmsprop', batch_size=32, num_epochs=2</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Network for MRI-scanner acquisition-invariant representation learning.</p>
+<p>Class of convolutional neural networks that aim to map patches of two
+datasets from different MRI-scanners Methods include image processing
+operations, pair sampling and Siamese loss minimization.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.compile_net">
+<code class="descname">compile_net</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.compile_net" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compile network architecture.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.contrastive_loss">
+<code class="descname">contrastive_loss</code><span class="sig-paren">(</span><em>label</em>, <em>distance</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.contrastive_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contrastive Siamese loss.</p>
+<p>For similar pairs, it consists of the squared Lp-distance.
+For dissimilar pairs, it consists of a hinge loss with respect to a
+margin parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>label</strong> : int</p>
+<blockquote>
+<div><p>Similarity label, 1=similar and 0=dissimilar</p>
+</div></blockquote>
+<p><strong>distance: float</strong></p>
+<blockquote>
+<div><p>Lp-norm between pairs of patches mapped through the network.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">float</p>
+<blockquote class="last">
+<div><p>Loss value for current pair of patches.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.extract_all_patches">
+<code class="descname">extract_all_patches</code><span class="sig-paren">(</span><em>X</em>, <em>scan_ID=0</em>, <em>edge=(0</em>, <em>0)</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.extract_all_patches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract all patches from image, and append a scanner identification.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array</p>
+<blockquote>
+<div><p>Image to extract all patches from.</p>
+</div></blockquote>
+<p><strong>scan_ID</strong> : int</p>
+<blockquote>
+<div><p>MRI-scanner identification variable.</p>
+</div></blockquote>
+<p><strong>edge: tuple(int, int)</strong></p>
+<blockquote>
+<div><p>Pixels past this edge should not be sampled from.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array</p>
+<blockquote class="last">
+<div><p>Patches including scanner ID’s, num_patches by patch size + 1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.extract_random_patches">
+<code class="descname">extract_random_patches</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.extract_random_patches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract a random set of patches from image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array</p>
+<blockquote>
+<div><p>Input image to sample patches from.</p>
+</div></blockquote>
+<p><strong>Y</strong> : array</p>
+<blockquote>
+<div><p>Label image corresponding to X.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>patches</strong> : array</p>
+<blockquote>
+<div><p>Patches array, num patches by patch height by patch width by 1.</p>
+</div></blockquote>
+<p><strong>labels</strong> : array</p>
+<blockquote class="last">
+<div><p>Tissue label array corresponding to patches array.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.feedforward">
+<code class="descname">feedforward</code><span class="sig-paren">(</span><em>patches</em>, <em>scan_ID</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.feedforward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feed a set of patches forward through the network.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>patches</strong> : array</p>
+<blockquote>
+<div><p>Contains patches in form of number of patches by patch height
+by patch width by 1.</p>
+</div></blockquote>
+<p><strong>scan_ID</strong> : int</p>
+<blockquote>
+<div><p>Scanner identification variable, indicating from which MRI-scanner
+these patches came from.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array</p>
+<blockquote class="last">
+<div><p>Final layer representation of patches fed forward through the
+network.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.gen_index_combs">
+<code class="descname">gen_index_combs</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.gen_index_combs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate combinations of two index arrays.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.index2patch">
+<code class="descname">index2patch</code><span class="sig-paren">(</span><em>X</em>, <em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.index2patch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slice patches from an image at given indices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array</p>
+<blockquote>
+<div><p>input image</p>
+</div></blockquote>
+<p><strong>index</strong> : array</p>
+<blockquote>
+<div><p>Row and column indices for the provided image.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>patches</strong> : array</p>
+<blockquote class="last">
+<div><p>Number of patches by patch height by patch width by 1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.l1_norm">
+<code class="descname">l1_norm</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.l1_norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>l1-norm for loss layer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.l2_norm">
+<code class="descname">l2_norm</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.l2_norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>l2-norm for loss layer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.load_model">
+<code class="descname">load_model</code><span class="sig-paren">(</span><em>model_fn</em>, <em>weights_fn</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.load_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load model from filename.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>model_fn</strong> : str</p>
+<blockquote>
+<div><p>Filename of saved model.</p>
+</div></blockquote>
+<p><strong>weights_fn</strong> : str</p>
+<blockquote>
+<div><p>Filename of saved weight matrix.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.matrix2sparse">
+<code class="descname">matrix2sparse</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.matrix2sparse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map matrix to a sparse array format.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array</p>
+<blockquote>
+<div><p>Matrix that should be mapped to sparse array format, 
+may contain NaN’s.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sX</strong> : array</p>
+<blockquote class="last">
+<div><p>Original matrix mapped to (i,j,v) format where i corresponds to the
+i-th row of X, j to the j-column of X and v of the value at
+position (i,j) of X.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.sample_pairs">
+<code class="descname">sample_pairs</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>Z</em>, <em>u</em>, <em>num_draw=(10</em>, <em>1)</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.sample_pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample a set of pairs of patches from two images.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array</p>
+<blockquote>
+<div><p>slice from source MRI-scanner</p>
+</div></blockquote>
+<p><strong>y</strong> : array</p>
+<blockquote>
+<div><p>source tissue index sparse array; where each row i,j,k consists of
+the pixel’s row index i, the pixel’s column index j and the pixel’s
+tissue k.</p>
+</div></blockquote>
+<p><strong>Z</strong> : array</p>
+<blockquote>
+<div><p>slice from target MRI-scanner</p>
+</div></blockquote>
+<p><strong>u</strong> : array</p>
+<blockquote>
+<div><p>target tissue index sparse array; where each row i,j,k consists of
+the pixel’s row index i, the pixel’s column index j and the pixel’s
+tissue k.</p>
+</div></blockquote>
+<p><strong>num_draw</strong> : tuple(int, int)</p>
+<blockquote>
+<div><p>maximum number of patches to draw from (source, target)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>P</strong> : list[A, B, a, b]</p>
+<blockquote>
+<div><p>contains pairs of patches and scanner identifications</p>
+</div></blockquote>
+<p><strong>S</strong> : array</p>
+<blockquote class="last">
+<div><p>contains similarity labels between pairs</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.save_model">
+<code class="descname">save_model</code><span class="sig-paren">(</span><em>model_fn</em>, <em>weights_fn</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.save_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save model to filename.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>model_fn</strong> : str</p>
+<blockquote>
+<div><p>Filename to save model to.</p>
+</div></blockquote>
+<p><strong>weights_fn</strong> : str</p>
+<blockquote>
+<div><p>Filename to save weight matrix to.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.segment_image">
+<code class="descname">segment_image</code><span class="sig-paren">(</span><em>X</em>, <em>model</em>, <em>feed=True</em>, <em>mapost=False</em>, <em>scan_ID=1</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.segment_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Segment a new image using the trained network.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array</p>
+<blockquote>
+<div><p>new image that needs to be segmented.</p>
+</div></blockquote>
+<p><strong>model</strong> : sklearn-model</p>
+<blockquote>
+<div><p>Trained classifier from scikit-learn,
+needs to have a predict method.</p>
+</div></blockquote>
+<p><strong>feed</strong> : bool</p>
+<blockquote>
+<div><p>whether the extracted patches should be fed through the network,
+a value of False is for experimental purposes (def: True)</p>
+</div></blockquote>
+<p><strong>mapost</strong> : bool</p>
+<blockquote>
+<div><p>whether to map the predictions to a maximum a posteriori form.
+(def: False)</p>
+</div></blockquote>
+<p><strong>scan_ID</strong> : int</p>
+<blockquote>
+<div><p>scanner identification of new image.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>preds</strong> : array</p>
+<blockquote class="last">
+<div><p>Label image of same size as input image, containing predictions
+made by the provided trained classifier.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mrai.mraicnn.MRAIConvolutionalNeuralNetwork.train">
+<code class="descname">train</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em>, <em>Z</em>, <em>U</em><span class="sig-paren">)</span><a class="headerlink" href="#mrai.mraicnn.MRAIConvolutionalNeuralNetwork.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train the network using pairs of patches from the images.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array</p>
+<blockquote>
+<div><p>source scans, slices by height by width</p>
+</div></blockquote>
+<p><strong>Y</strong> : array</p>
+<blockquote>
+<div><p>source labels, slices by height by width</p>
+</div></blockquote>
+<p><strong>Z</strong> : array</p>
+<blockquote>
+<div><p>target scans, slices by height by width</p>
+</div></blockquote>
+<p><strong>U</strong> : array</p>
+<blockquote>
+<div><p>target labels, slices by height by width,
+contains NaN’s at unknown labels</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mraidnn.html" class="btn btn-neutral float-right" title="MRAI Dense Neural Network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../classifiers.html" class="btn btn-neutral" title="Classifiers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Wouter M. Kouw.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0a',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
