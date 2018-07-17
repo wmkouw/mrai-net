@@ -25,7 +25,7 @@ source activate mrai
 
 ## Usage
 
-Demos are available at the online [documentation]().
+Demos are available at the online [documentation](https://mrai-net.readthedocs.io/en/latest/).
 
 A simple example of calling the module is:
 ```python
@@ -37,7 +37,7 @@ M.train(X,Y,Z,U)
 H = M.feedforward(X)
 ```
 
-For more information on individual classes, methods and functions, visit the [docs]().
+For more information on individual classes, methods and functions, visit the [docs](https://mrai-net.readthedocs.io/en/latest/).
 
 ## Data
 
