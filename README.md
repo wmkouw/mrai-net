@@ -11,15 +11,15 @@ which is currently under review. The preprint is on [ArXiv](https://arxiv.org/ab
 
 ## Installation
 
-mrai-net can be installed through:
+mrainet can be installed through:
 ```shell
-pip install mrai
+pip install mrainet
 ```
 
 PyPI takes care of all dependencies. However, to ensure that these don't mess up your current python environment, you should set up a virtual one. If you're familiar with [conda](https://conda.io/docs/), you can do this through:
 ```
 conda env create -f environment.yml
-source activate mrai
+source activate mrainet
 ```
 
 ## Usage
@@ -28,7 +28,7 @@ Please visit the [examples](https://mrai-net.readthedocs.io/en/latest/examples.h
 
 To give you an impression of how the module is used, here's an example call:
 ```python
-from mrai.mraicnn import MRAIConvolutionalNeuralNetwork
+from mrainet.mraicnn import MRAIConvolutionalNeuralNetwork
 
 M = MRAIConvolutionalNeuralNetwork()
 M.train(X,Y,Z,U)
