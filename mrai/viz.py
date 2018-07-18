@@ -36,63 +36,58 @@ def viz_segmentation(X, savefn='', cmap='viridis'):
     cax = divider.append_axes("right", size="5%", pad=0.05)
     plt.colorbar(image, cax=cax)
 
-    # Check whether to save or show
+    # Check whether to save figure
     if savefn:
-        # Save figure
         fig.savefig(savefn, bbox_inches='tight')
 
     else:
         plt.show()
 
 
-def viz_embedding(net, X, Y, Z, U, savefn='', alpha=.3):
+def viz_embedding(X, Y, classes=[1, 2, 3], marker='o', alpha=.3, ax=[],
+                  savefn=''):
     """
     Visualise embedded patches.
 
     X : array
-        Source patches mapped to MRAI-net's representation.
+        Patches mapped to MRAI-net's representation; num_patches by 2.
     Y : array
-        Tissue labels corresponding to X.
-    Z : array
-        Target patches mapped to MRAI-net's representation.
-    U : array
-        Tissue labels corresponding to Z.
-    savefn : str
-        Filename to save figure to.
+        Tissue labels corresponding to X; num_patches by 1.
+    classes : list(int)
+        Numerical values of tissue labels (def = [1, 2, 3])
+    marker : str
+        Point marker in scatter plot (def = 'o').
     alpha : float
-        Parameter indicating how transparent each marker should be.
+        Parameter indicating how transparent each marker should be (def = 0.3).
+    ax : int
+        Axis handle to plot in (def = []).
+    savefn : str
+        Filename to save figure to (def = '')
 
     Returns
     -------
     None
 
     """
-    # Figure options
-    fig = plt.figure()
+    if not ax:
+        # Figure options
+        fig, ax = plt.subplots()
 
     # Colors for tissues
     color = ['r', 'b', 'c']
 
     # Loop over classes
-    for k, classk in enumerate(net.classes):
+    for k, classk in enumerate(classes):
 
         # Plot labeled source samples in their embedded representation
-        plt.plot(X[Y == classk, 0],
-                 X[Y == classk, 1],
-                 marker='s',
-                 color=color[k],
-                 alpha=alpha)
+        ax.scatter(X[Y == classk, 0],
+                   X[Y == classk, 1],
+                   c=color[k],
+                   marker=marker,
+                   alpha=alpha)
 
-        # Plot labeled target samples in their embedded representation
-        plt.plot(Z[U == classk, 0],
-                 Z[U == classk, 1],
-                 marker='x',
-                 color=color[k],
-                 alpha=alpha)
-
-    # Check whether to save or show
+    # Check whether to save figure
     if savefn:
-        # Save figure
         fig.savefig(savefn, bbox_inches='tight')
 
     else:

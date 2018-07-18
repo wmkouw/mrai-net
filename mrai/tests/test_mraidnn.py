@@ -3,30 +3,24 @@ import numpy as np
 import numpy.random as rn
 import tensorflow as tf
 
-from mrai.mraicnn import MRAIConvolutionalNeuralNetwork
+from mrai.mraidnn import MRAIDenseNeuralNetwork
 
 
 def test_init_patch_size():
     """Valid patch size."""
     with pytest.raises(ValueError):
-        N = MRAIConvolutionalNeuralNetwork(patch_size=(-1, 1))
+        N = MRAIDenseNeuralNetwork(patch_size=(-1, 1))
 
 
 def test_init_dense_size():
     """Valid dense size."""
     with pytest.raises(ValueError):
-        N = MRAIConvolutionalNeuralNetwork(dense_size=[])
-
-
-def test_init_num_kernels():
-    """Valid number kernels."""
-    with pytest.raises(ValueError):
-        N = MRAIConvolutionalNeuralNetwork(num_kernels=[])
+        N = MRAIDenseNeuralNetwork(dense_size=[])
 
 
 def test_contrastive_loss():
     """Test non-negative contrastive loss."""
-    N = MRAIConvolutionalNeuralNetwork()
+    N = MRAIDenseNeuralNetwork()
     with tf.Session().as_default():
         assert N.contrastive_loss(label=1, distance=rn.randn(1)).eval() >= 0
         assert N.contrastive_loss(label=0, distance=rn.randn(1)).eval() >= 0
@@ -34,7 +28,7 @@ def test_contrastive_loss():
 
 def test_l1_norm():
     """Test non-negative norm."""
-    N = MRAIConvolutionalNeuralNetwork()
+    N = MRAIDenseNeuralNetwork()
     with tf.Session().as_default():
         norms = N.l1_norm([rn.randn(100, 1), rn.randn(100, 1)]).eval()
         assert np.all(np.array(norms) >= 0)
@@ -42,7 +36,7 @@ def test_l1_norm():
 
 def test_l2_norm():
     """Test non-negative norm."""
-    N = MRAIConvolutionalNeuralNetwork()
+    N = MRAIDenseNeuralNetwork()
     with tf.Session().as_default():
         norms = N.l2_norm([rn.randn(100, 1), rn.randn(100, 1)]).eval()
         assert np.all(np.array(norms) >= 0)
@@ -50,7 +44,7 @@ def test_l2_norm():
 
 def test_gen_index_combs():
     """Check whether correct number of combinations are generated."""
-    N = MRAIConvolutionalNeuralNetwork()
+    N = MRAIDenseNeuralNetwork()
     x = np.arange(10)
     y = np.arange(10)
     combs = N.gen_index_combs([x, y])
@@ -62,7 +56,7 @@ def test_matrix2sparse():
     """Test all pixels are mapped to sparse."""
     A = np.arange(24).reshape((6, 4))
     print(A)
-    N = MRAIConvolutionalNeuralNetwork()
+    N = MRAIDenseNeuralNetwork()
     sA = N.matrix2sparse(A)
     print(sA)
     assert sA.shape[0] == 24

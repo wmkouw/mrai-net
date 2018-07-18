@@ -40,7 +40,7 @@ def strip_skull(X, M):
         # Check for same number of subjects in mask and data.
         if not (X.shape[0] == M.shape[0]):
             raise ValueError('Shape mismatch.')
-        
+
         # Strip skull, for each subject
         for i in range(X.shape[0]):
             X[i][M[i]] = 0
@@ -76,11 +76,21 @@ def subject2image(fn, imsize=(256, 256), segmentation=False,
         Loaded images, number of subjects by image height by image width
 
     """
+    # Check whether filename is supplied in list form
+    if not isinstance(fn, list):
+        fn = [fn]
+
     # Find number of subjects
     num_subjects = len(fn)
 
     # Preallocate images
-    X = np.empty((num_subjects, imsize[0], imsize[1]))
+    if segmentation:
+        # Initialize array of floats
+        X = np.zeros((num_subjects, *imsize), dtype='uint8')
+
+    else:
+        # Initialize array of floats
+        X = np.zeros((num_subjects, *imsize), dtype='float32')
 
     # Loop over subjects
     for s, fn_s in enumerate(fn):
@@ -99,11 +109,12 @@ def subject2image(fn, imsize=(256, 256), segmentation=False,
                 X_s[X_s == classk] = 0
 
         else:
+
             # Normalize pixels
             if normalization:
-                im[im < 0] = 0
-                im[im > 255] = 255
-                im = im / 255.
+                X_s[X_s < 0] = 0
+                X_s[X_s > 255] = 255
+                X_s = X_s / 255.
 
         # Add image to image array
         X[s, :, :] = X_s
@@ -111,7 +122,7 @@ def subject2image(fn, imsize=(256, 256), segmentation=False,
     return X
 
 
-def extract_all_patches(X, patch_size=(3, 3), edge=(0, 0)):
+def extract_all_patches(X, patch_size=(3, 3), edge=(0, 0), add_4d=False):
     """
     Extract all patches from image.
 
@@ -130,18 +141,31 @@ def extract_all_patches(X, patch_size=(3, 3), edge=(0, 0)):
         Patches array with number of samples by patch height by patch width.
 
     """
+    # Check whether X is an image
+    if len(X.shape) > 2:
+        raise ValueError('X is not an image.')
+
+    # Shape
+    h, w = X.shape
+
     # Remove edges
-    X = X[edge[0]:-edge[0], edge[1]:-edge[1]]
+    X = X[edge[0]:h-edge[0], edge[1]:w-edge[1]]
 
     # Step length from center in patch
-    vstep = (patch_size[0] - 1) / 2
-    hstep = (patch_size[1] - 1) / 2
+    vstep = int((patch_size[0] - 1) / 2)
+    hstep = int((patch_size[1] - 1) / 2)
 
     # Pad image before patch extraction
     X = np.pad(X, pad_width=((vstep, vstep), (hstep, hstep)), mode='constant')
 
     # Sample patches at grid
-    return sf.extract_patches_2d(X, patch_size=patch_size)
+    patches = sf.extract_patches_2d(X, patch_size=patch_size)
+
+    # Check whether to add a fourth dimension
+    if add_4d:
+        patches = patches.reshape((*patches.shape, 1))
+
+    return patches
 
 
 def set_classifier(X, y, classifier='lr', c_range=np.logspace(-5, 4, 10),

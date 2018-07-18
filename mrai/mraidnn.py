@@ -68,11 +68,12 @@ class MRAIDenseNeuralNetwork(object):
         # Classes
         self.classes = classes
 
+        # Check valid architecture sizes
+        if len(dense_size) < 1:
+                raise ValueError('Too few layers specified.')
+
         # Network hyperparameters
-        self.num_kernels = num_kernels
-        self.kernel_size = kernel_size
         self.dense_size = dense_size
-        self.strides = strides
         self.dropout = dropout
         self.margin = margin
         self.l2 = l2
@@ -95,7 +96,7 @@ class MRAIDenseNeuralNetwork(object):
 
         # Set up sequential pipeline
         prep_net = km.Sequential()
-        prep_net.add(kl.Flatten())
+        prep_net.add(kl.Flatten(input_shape=(*self.patch_size, 1)))
 
         # Full sequential net
         main_net = km.Sequential()
