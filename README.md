@@ -1,6 +1,5 @@
 [![Coverage](https://scrutinizer-ci.com/g/wmkouw/mrai-net/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wmkouw/mrai-net/statistics/)
-[![BuildStatus](https://travis-ci.org/wmkouw/mrai-net.svg?branch=master)](https://travis-ci.org/wmkouw/mrai-net)
-![Python version](https://img.shields.io/badge/python-3.5%2C%203.6-blue.svg)
+[![BuildStatus](https://travis-ci.org/wmkouw/mrai-net.svg?branch=master)](https://travis-ci.org/wmkouw/mrai-net) [![Docs](https://media.readthedocs.org/static/projects/badges/passing-flat.svg)](https://mrai-net.readthedocs.io/en/latest/index.html) ![Python version](https://img.shields.io/badge/python-3.5%2C%203.6-blue.svg) [![DOI](https://zenodo.org/badge/95411302.svg)](https://zenodo.org/badge/latestdoi/95411302)
 
 # MR Acquisition-Invariant Neural Network
 
@@ -25,9 +24,9 @@ source activate mrai
 
 ## Usage
 
-Demos are available at the online [documentation](https://mrai-net.readthedocs.io/en/latest/).
+Please visit the [examples](https://mrai-net.readthedocs.io/en/latest/examples.html) section in the documentation to get started.
 
-A simple example of calling the module is:
+To give you an impression of how the module is used, here's an example call:
 ```python
 from mrai.mraicnn import MRAIConvolutionalNeuralNetwork
 
@@ -36,6 +35,7 @@ M.train(X,Y,Z,U)
 
 H = M.feedforward(X)
 ```
+where X are MRI-scans from the source scanner, Y are their corresponding segmentations, Z are MRI-scans from the target scanner, and U is its corresponding incomplete segmentations (nearly all are NaN). H represents the patches fed through the network and embedded in MRAI-net's penultimate layer (MRAI representation).
 
 For more information on individual classes, methods and functions, visit the [docs](https://mrai-net.readthedocs.io/en/latest/).
 
