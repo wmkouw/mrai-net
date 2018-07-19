@@ -1,5 +1,5 @@
 MRAI Dense Neural Network
 -------------------------
 
-.. automodule:: mrai.mraidnn
+.. automodule:: mrainet.mraidnn
     :members:

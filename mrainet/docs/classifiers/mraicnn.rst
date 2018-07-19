@@ -1,5 +1,5 @@
 MRAI Convolutional Neural Network
 ---------------------------------
 
-.. automodule:: mrai.mraicnn
+.. automodule:: mrainet.mraicnn
     :members:
