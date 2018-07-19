@@ -139,7 +139,7 @@ class MRAIDenseNeuralNetwork(object):
         ----------
         label : int
             Similarity label, 1=similar and 0=dissimilar
-        distance : float
+        distance: float
             Lp-norm between pairs of patches mapped through the network.
 
         Returns
@@ -163,7 +163,7 @@ class MRAIDenseNeuralNetwork(object):
         """Generate combinations of two index arrays."""
         return np.array(np.meshgrid(x[0], x[1])).T.reshape(-1, 2)
 
-    def matrix2sparse(self, X):
+    def matrix2sparse(self, X, edge=(0, 0), remove_nans=False):
         """
         Map matrix to a sparse array format.
 
@@ -172,6 +172,10 @@ class MRAIDenseNeuralNetwork(object):
         X : array
             Matrix that should be mapped to sparse array format,
             may contain NaN's.
+        edge : tuple(int, int)
+            Dimensions of edge to ignore.
+        remove_nans : bool
+            Whether to remove NaN's as tissue labels.
 
         Returns
         -------
@@ -184,16 +188,56 @@ class MRAIDenseNeuralNetwork(object):
         # Shape
         h, w = X.shape
 
+        # Remove edges from array
+        X = X[edge[0]:h-edge[0], edge[1]:w-edge[1]]
+
         # Generate meshgrid of coordinates
-        tx, ty = np.meshgrid(np.arange(h), np.arange(w))
+        tx, ty = np.meshgrid(np.arange(edge[0], h-edge[0]),
+                             np.arange(edge[1], w-edge[1]))
 
         # Reshape and stack index and value arrays
         sX = np.vstack((tx.T.ravel(), ty.T.ravel(), X.ravel())).T
 
         # Remove rows containing NaN's
-        sX = sX[~np.isnan(sX[:, 2]), :]
+        if remove_nans:
+            sX = sX[~np.isnan(sX[:, 2]), :]
 
         return sX
+
+    def subsample_rows(self, X, num_draw=1):
+        """
+        Take a random subsample of rows from X.
+
+        Parameters
+        ----------
+        X : array
+            Array to subsample from.
+        num_draw : int
+            Number of rows to subsample.
+        replace : bool
+            Whether to replace sampled rows.
+
+        Returns
+        -------
+        array
+            Smaller array.
+
+        """
+        # Number of rows in array
+        N = X.shape[0]
+
+        # Check if number of samples exceeds size of array
+        if (num_draw > N):
+            raise ValueError('Number of samples to draw larger than array.')
+
+        # Generate row range
+        range_rows = np.arange(N)
+
+        # Subsample from range
+        index = rn.choice(range_rows, size=num_draw, replace=False)
+
+        # Return selected rows
+        return X[index, :]
 
     def index2patch(self, X, index):
         """
@@ -223,7 +267,17 @@ class MRAIDenseNeuralNetwork(object):
         vstep = int((self.patch_size[0] - 1)/2)
         hstep = int((self.patch_size[1] - 1)/2)
 
-        if len(index.shape) == 2:
+        if len(index.shape) == 1:
+
+            # Width and height indices
+            w = np.zeros((num_samples,), dtype='uint8')
+            h = np.zeros((num_samples,), dtype='uint8')
+
+            # For every index, find its multilinear index
+            for n in range(num_samples):
+                w[n], h[n] = np.unravel_index(index[n], X.shape)
+
+        elif len(index.shape) == 2:
 
             # First colum is row index, second column is is
             h = index[:, 0]
@@ -262,7 +316,7 @@ class MRAIDenseNeuralNetwork(object):
 
         """
         # Shapes
-        imsize = X.shape[1:3]
+        h, w = X.shape[1:3]
         num_images = X.shape[0]
 
         # Number of patches
@@ -286,13 +340,13 @@ class MRAIDenseNeuralNetwork(object):
             for k, classk in enumerate(self.classes):
 
                 # Cut patch edges from image
-                Yi = Y[i][vstep:-vstep-1, hstep:-hstep-1]
+                Yi = Y[i][vstep:h-vstep, hstep:w-hstep]
 
                 # Find tissue in image
                 Yi_k = np.argwhere(Yi == classk) + (vstep, hstep)
 
                 # Subsample indices
-                Yi_k = rn.choice(np.ravel_multi_index(Yi_k.T, imsize),
+                Yi_k = rn.choice(np.ravel_multi_index(Yi_k.T, (h, w)),
                                  size=self.num_draw, replace=False)
 
                 # Current patch index
@@ -308,45 +362,6 @@ class MRAIDenseNeuralNetwork(object):
                 cnt += 1
 
         return patches, labels
-
-    def extract_all_patches(self, X, scan_ID=0, edge=(0, 0)):
-        """
-        Extract all patches from image, and append a scanner identification.
-
-        Parameters
-        ----------
-        X : array
-            Image to extract all patches from.
-        scan_ID : int
-            MRI-scanner identification variable.
-        edge: tuple(int, int)
-            Pixels past this edge should not be sampled from.
-
-        Returns
-        -------
-        array
-            Patches including scanner ID's, num_patches by patch size + 1.
-
-        """
-        # Remove edges from image
-        X = X[edge[0]:-edge[0], edge[1]:-edge[1]]
-
-        # Compute step length from patch center
-        vstep = int((self.patch_size[0] - 1)/2)
-        hstep = int((self.patch_size[1] - 1)/2)
-
-        # Pad image before patch extraction
-        X = np.pad(X, pad_width=((vstep, vstep), (hstep, hstep)),
-                   mode='constant')
-
-        # Sample patches at grid
-        patches = sf.extract_patches_2d(X, patch_size=self.patch_size)
-
-        # Number of patches extracted
-        num_patches = patches.shape[0]
-
-        # Augment patches with scanner ID and store
-        return np.append(patches, scan_ID*np.ones((num_patches, 1)), axis=1)
 
     def sample_pairs(self, X, y, Z, u, num_draw=(10, 1)):
         """
@@ -385,11 +400,15 @@ class MRAIDenseNeuralNetwork(object):
         classes = np.intersect1d(np.unique(y[:, 2]), np.unique(u[:, 2]))
         num_classes = len(classes)
 
-        # Number of combinations of patches per class
-        num_combs_k = np.prod(num_draw)
+        # Number of combinations per set of labels
+        num_combs_yy = num_draw[0]**2
+        num_combs_yu = num_draw[0]*num_draw[1]
+        num_combs_uu = num_draw[1]**2
 
         # Total number of patches to draw
-        total_num_draw = 2 * num_combs_k * num_classes**2
+        total_num_draw = (num_combs_yy * num_classes*(num_classes - 1) +
+                          num_combs_yu * num_classes*(num_classes - 1) +
+                          num_combs_uu * num_classes*(num_classes - 1))
 
         # Preallocate patch arrays
         A = np.zeros((total_num_draw, *self.patch_size, 1))
@@ -409,12 +428,16 @@ class MRAIDenseNeuralNetwork(object):
         for k, classk in enumerate(classes):
 
             # Take indices of current tissue
-            index_yk = y[y[:, 2] == classk, :1]
-            index_uk = u[u[:, 2] == classk, :1]
+            index_yk = y[y[:, 2] == classk, :2].astype('uint8')
+            index_uk = u[u[:, 2] == classk, :2].astype('uint8')
 
-            # Subsample indices
-            index_yk = rn.choice(index_yk, size=num_draw[0], replace=False)
-            index_uk = rn.choice(index_yk, size=num_draw[1], replace=False)
+            # Subsample from index range
+            index_yk = self.subsample_rows(index_yk, num_draw=num_draw[0])
+            index_uk = self.subsample_rows(index_uk, num_draw=num_draw[1])
+
+            # Map multilinear index to linear index
+            index_yk = np.ravel_multi_index(index_yk.T, X.shape)
+            index_uk = np.ravel_multi_index(index_uk.T, Z.shape)
 
             ''' Similar pairs from same source image '''
 
@@ -422,18 +445,18 @@ class MRAIDenseNeuralNetwork(object):
             combs = self.gen_index_combs((index_yk, index_yk))
 
             # Create current patch index pointer
-            ix = slice(cnt*num_combs_k, (cnt+1)*num_combs_k)
+            ix = slice(cnt*num_combs_yy, (cnt+1)*num_combs_yy)
 
             # Extract patches and store in arrays
             A[ix, :, :, :] = self.index2patch(X, combs[:, 0])
             B[ix, :, :, :] = self.index2patch(X, combs[:, 1])
 
             # Store scanner identifications of patches (X=0, Z=1)
-            a[ix, :] = np.zeros((num_combs_k, 1))
-            b[ix, :] = np.zeros((num_combs_k, 1))
+            a[ix, :] = np.zeros((num_combs_yy, 1))
+            b[ix, :] = np.zeros((num_combs_yy, 1))
 
             # Mark these combinations as similar(=1)
-            S[ix, :] = np.ones((num_combs_k, 1))
+            S[ix, :] = np.ones((num_combs_yy, 1))
 
             # Increment counter
             cnt += 1
@@ -444,18 +467,18 @@ class MRAIDenseNeuralNetwork(object):
             combs = self.gen_index_combs((index_yk, index_uk))
 
             # Create current patch index pointer
-            ix = slice(cnt*num_combs_k, (cnt+1)*num_combs_k)
+            ix = slice(cnt*num_combs_yu, (cnt+1)*num_combs_yu)
 
             # Extract patches and store in arrays
             A[ix, :, :, :] = self.index2patch(X, combs[:, 0])
             B[ix, :, :, :] = self.index2patch(Z, combs[:, 1])
 
             # Store scanner identifications of patches (X=0, Z=1)
-            a[ix, :] = np.zeros((num_combs_k, 1))
-            b[ix, :] = np.ones((num_combs_k, 1))
+            a[ix, :] = np.zeros((num_combs_yu, 1))
+            b[ix, :] = np.ones((num_combs_yu, 1))
 
             # Mark these combinations as similar(=1)
-            S[ix, :] = np.ones((num_combs_k, 1))
+            S[ix, :] = np.ones((num_combs_yu, 1))
 
             # Increment counter
             cnt += 1
@@ -466,18 +489,18 @@ class MRAIDenseNeuralNetwork(object):
             combs = self.gen_index_combs((index_uk, index_uk))
 
             # Create current patch index pointer
-            ix = slice(cnt*num_combs_k, (cnt+1)*num_combs_k)
+            ix = slice(cnt*num_combs_uu, (cnt+1)*num_combs_uu)
 
             # Extract patches and store in arrays
             A[ix, :, :, :] = self.index2patch(Z, combs[:, 0])
             B[ix, :, :, :] = self.index2patch(Z, combs[:, 1])
 
             # Store scanner identifications of patches (X=0, Z=1)
-            a[ix, :] = np.ones((num_combs_k, 1))
-            b[ix, :] = np.ones((num_combs_k, 1))
+            a[ix, :] = np.ones((num_combs_uu, 1))
+            b[ix, :] = np.ones((num_combs_uu, 1))
 
             # Mark these combinations as similar(=1)
-            S[ix, :] = np.ones((num_combs_k, 1))
+            S[ix, :] = np.ones((num_combs_uu, 1))
 
             # Increment counter
             cnt += 1
@@ -486,12 +509,16 @@ class MRAIDenseNeuralNetwork(object):
             for l, classl in enumerate(np.setdiff1d(classk, classes)):
 
                 # Take indices of current tissue
-                index_yl = y[y[:, 2] == classl, :1]
-                index_ul = u[u[:, 2] == classl, :1]
+                index_yl = y[y[:, 2] == classl, :1].astype('uint8')
+                index_ul = u[u[:, 2] == classl, :1].astype('uint8')
 
                 # Subsample indices
-                index_yl = rn.choice(index_yl, size=num_draw[0], replace=False)
-                index_ul = rn.choice(index_ul, size=num_draw[1], replace=False)
+                index_yl = self.subsample_rows(index_yl, num_draw=num_draw[0])
+                index_ul = self.subsample_rows(index_ul, num_draw=num_draw[1])
+
+                # Map multilinear index to linear index
+                index_yk = np.ravel_multi_index(index_yl.T, X.shape)
+                index_uk = np.ravel_multi_index(index_ul.T, Z.shape)
 
                 ''' Dissimilar pairs from same source image '''
 
@@ -499,18 +526,18 @@ class MRAIDenseNeuralNetwork(object):
                 combs = self.gen_index_combs((index_yk, index_yl))
 
                 # Create current patch index pointer
-                ix = slice(cnt*num_combs_k, (cnt+1)*num_combs_k)
+                ix = slice(cnt*num_combs_yy, (cnt+1)*num_combs_yy)
 
                 # Extract patches and store in arrays
                 A[ix, :, :, :] = self.index2patch(X, combs[:, 0])
                 B[ix, :, :, :] = self.index2patch(X, combs[:, 1])
 
                 # Store scanner identifications of patches (X=0, Z=1)
-                a[ix, :] = np.zeros((num_combs_k, 1))
-                b[ix, :] = np.zeros((num_combs_k, 1))
+                a[ix, :] = np.zeros((num_combs_yy, 1))
+                b[ix, :] = np.zeros((num_combs_yy, 1))
 
                 # Mark these combinations as dissimilar(=0)
-                S[ix, :] = np.zeros((num_combs_k, 1))
+                S[ix, :] = np.zeros((num_combs_yy, 1))
 
                 # Increment counter
                 cnt += 1
@@ -521,18 +548,18 @@ class MRAIDenseNeuralNetwork(object):
                 combs = self.gen_index_combs((index_yk, index_ul))
 
                 # Create current patch index pointer
-                ix = slice(cnt*num_combs_k, (cnt+1)*num_combs_k)
+                ix = slice(cnt*num_combs_yu, (cnt+1)*num_combs_yu)
 
                 # Extract patches and store in arrays
                 A[ix, :, :, :] = self.index2patch(X, combs[:, 0])
                 B[ix, :, :, :] = self.index2patch(Z, combs[:, 1])
 
                 # Store scanner identifications of patches (X=0, Z=1)
-                a[ix, :] = np.zeros((num_combs_k, 1))
-                b[ix, :] = np.ones((num_combs_k, 1))
+                a[ix, :] = np.zeros((num_combs_yu, 1))
+                b[ix, :] = np.ones((num_combs_yu, 1))
 
                 # Mark these combinations as dissimilar(=0)
-                S[ix, :] = np.zeros((num_combs_k, 1))
+                S[ix, :] = np.zeros((num_combs_yu, 1))
 
                 # Increment counter
                 cnt += 1
@@ -543,18 +570,18 @@ class MRAIDenseNeuralNetwork(object):
                 combs = self.gen_index_combs((index_uk, index_ul))
 
                 # Create current patch index pointer
-                ix = slice(cnt*num_combs_k, (cnt+1)*num_combs_k)
+                ix = slice(cnt*num_combs_uu, (cnt+1)*num_combs_uu)
 
                 # Extract patches and store in arrays
                 A[ix, :, :, :] = self.index2patch(Z, combs[:, 0])
                 B[ix, :, :, :] = self.index2patch(Z, combs[:, 1])
 
                 # Store scanner identifications of patches (X=0, Z=1)
-                a[ix, :] = np.ones((num_combs_k, 1))
-                b[ix, :] = np.ones((num_combs_k, 1))
+                a[ix, :] = np.ones((num_combs_uu, 1))
+                b[ix, :] = np.ones((num_combs_uu, 1))
 
                 # Mark these combinations as dissimilar(=0)
-                S[ix, :] = np.zeros((num_combs_k, 1))
+                S[ix, :] = np.zeros((num_combs_uu, 1))
 
                 # Increment counter
                 cnt += 1
@@ -562,7 +589,7 @@ class MRAIDenseNeuralNetwork(object):
         # Return collected patches
         return [A, B, a, b], S
 
-    def train(self, X, Y, Z, U):
+    def train(self, X, Y, Z, U, num_targets=1):
         """
         Train the network using pairs of patches from the images.
 
@@ -577,6 +604,8 @@ class MRAIDenseNeuralNetwork(object):
         U : array
             target labels, slices by height by width,
             contains NaN's at unknown labels
+        num_targets : int
+            How many target labels to use.
 
         Returns
         -------
@@ -584,18 +613,18 @@ class MRAIDenseNeuralNetwork(object):
 
         """
         # Number of subjects from each scanner
-        num_source = X.shape[0]
-        num_target = Z.shape[0]
+        num_src_sub = X.shape[0]
+        num_tgt_sub = Z.shape[0]
 
         # Loop over source images
-        for i in range(num_source):
-            print('At source subject '+str(i+1)+'/'+str(num_source))
+        for i in range(num_src_sub):
+            print('At source subject '+str(i+1)+'/'+str(num_src_sub))
 
             # Map source label image to sparse array
             Yi = self.matrix2sparse(Y[i])
 
             # Loop over target images
-            for j in range(num_target):
+            for j in range(num_tgt_sub):
 
                 # Map target label image to sparse array
                 Uj = self.matrix2sparse(U[j])
@@ -603,9 +632,13 @@ class MRAIDenseNeuralNetwork(object):
                 # Number of target labels of current image
                 num_labels = Uj.shape[0]
 
+                # Check number of targets does not exceed number of labels
+                if num_targets > num_labels:
+                    raise ValueError('More targets than labels asked.')
+
                 # Draw pairs of patches from two images
                 P, S = self.sample_pairs(X[i], Yi, Z[j], Uj,
-                                         num_draw=(self.num_draw, num_labels))
+                                         num_draw=(self.num_draw, num_targets))
 
                 # Train on current set
                 self.net.fit(x=P, y=S,
@@ -615,24 +648,28 @@ class MRAIDenseNeuralNetwork(object):
                              shuffle=True,
                              verbose=1)
 
-            # Take random other source image
-            o = np.random.choice(np.setdiff1d(np.arange(num_source), i),
-                                 size=1, replace=False)[0]
+            # Check for multiple source subjects
+            if num_src_sub > 1:
 
-            # Map target label image to sparse array
-            Yo = self.matrix2sparse(Y[o])
+                # Take random other source image
+                o = np.random.choice(np.setdiff1d(np.arange(num_src_sub), i),
+                                     size=1, replace=False)[0]
 
-            # Draw pairs of patches from two images
-            P, S = self.sample_pairs(X[i], Yi, X[o], Yo,
-                                     num_draw=(self.num_draw, self.num_draw))
+                # Map target label image to sparse array
+                Yo = self.matrix2sparse(Y[o])
 
-            # Train on current set
-            self.net.fit(x=P, y=S,
-                         epochs=self.num_epochs,
-                         batch_size=self.batch_size,
-                         validation_split=0.1,
-                         shuffle=True,
-                         verbose=1)
+                # Draw pairs of patches from two images
+                P, S = self.sample_pairs(X[i], Yi, X[o], Yo,
+                                         num_draw=(self.num_draw, 
+                                                   self.num_draw))
+
+                # Train on current set
+                self.net.fit(x=P, y=S,
+                             epochs=self.num_epochs,
+                             batch_size=self.batch_size,
+                             validation_split=0.1,
+                             shuffle=True,
+                             verbose=1)
 
         # Report
         print('Training complete.')
@@ -721,6 +758,10 @@ class MRAIDenseNeuralNetwork(object):
             network.
 
         """
+        # Check whether patches have number of channels
+        if len(patches.shape) < 4:
+            raise ValueError('Patches array has less than 4 dimensions.')
+
         # Number of patches
         num_patches = patches.shape[0]
 
@@ -764,8 +805,16 @@ class MRAIDenseNeuralNetwork(object):
         # Shape of image
         imsize = X.shape
 
-        # Take out patches
-        patches = self.extract_all_patches(X, scan_ID=scan_ID)
+        # Step length from center in patch
+        vstep = int((self.patch_size[0] - 1) / 2)
+        hstep = int((self.patch_size[1] - 1) / 2)
+
+        # Pad image before patch extraction
+        X = np.pad(X, pad_width=((vstep, vstep), (hstep, hstep)),
+                   mode='constant')
+
+        # Sample patches at grid
+        patches = sf.extract_patches_2d(X, patch_size=self.patch_size)
 
         # Feed through network
         if feed:

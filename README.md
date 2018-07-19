@@ -1,5 +1,5 @@
 [![Coverage](https://scrutinizer-ci.com/g/wmkouw/mrai-net/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wmkouw/mrai-net/statistics/)
-[![BuildStatus](https://travis-ci.org/wmkouw/mrai-net.svg?branch=master)](https://travis-ci.org/wmkouw/mrai-net) [![Docs](https://media.readthedocs.org/static/projects/badges/passing-flat.svg)](https://mrai-net.readthedocs.io/en/latest/index.html) ![Python version](https://img.shields.io/badge/python-3.5%2C%203.6-blue.svg) [![DOI](https://zenodo.org/badge/95411302.svg)](https://zenodo.org/badge/latestdoi/95411302)
+[![BuildStatus](https://travis-ci.org/wmkouw/mrai-net.svg?branch=master)](https://travis-ci.org/wmkouw/mrai-net) [![Docs](https://media.readthedocs.org/static/projects/badges/passing-flat.svg)](https://mrai-net.readthedocs.io/en/latest/index.html) ![Python version](https://img.shields.io/badge/python-3.5%2C%203.6-blue.svg) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1314773.svg)](https://doi.org/10.5281/zenodo.1314773)
 
 # MR Acquisition-Invariant Neural Network
 

@@ -219,11 +219,9 @@ class MRAIConvolutionalNeuralNetwork(object):
         # Remove edges from array
         X = X[edge[0]:h-edge[0], edge[1]:w-edge[1]]
 
-        # Update shape
-        h, w = X.shape
-
         # Generate meshgrid of coordinates
-        tx, ty = np.meshgrid(np.arange(h), np.arange(w))
+        tx, ty = np.meshgrid(np.arange(edge[0], h-edge[0]),
+                             np.arange(edge[1], w-edge[1]))
 
         # Reshape and stack index and value arrays
         sX = np.vstack((tx.T.ravel(), ty.T.ravel(), X.ravel())).T
@@ -234,7 +232,7 @@ class MRAIConvolutionalNeuralNetwork(object):
 
         return sX
 
-    def subsample_rows(self, X, num_draw=1, replace=False):
+    def subsample_rows(self, X, num_draw=1):
         """
         Take a random subsample of rows from X.
 
@@ -257,14 +255,14 @@ class MRAIConvolutionalNeuralNetwork(object):
         N = X.shape[0]
 
         # Check if number of samples exceeds size of array
-        if (not replace) and (num_draw > N):
-            raise ValueError('Number of samples larger than size array.')
+        if (num_draw > N):
+            raise ValueError('Number of samples to draw larger than array.')
 
         # Generate row range
         range_rows = np.arange(N)
 
         # Subsample from range
-        index = rn.choice(range_rows, size=num_draw, replace=replace)
+        index = rn.choice(range_rows, size=num_draw, replace=False)
 
         # Return selected rows
         return X[index, :]
@@ -393,48 +391,6 @@ class MRAIConvolutionalNeuralNetwork(object):
 
         return patches, labels
 
-    def extract_all_patches(self, X, scan_ID=0, edge=(0, 0)):
-        """
-        Extract all patches from image, and append a scanner identification.
-
-        Parameters
-        ----------
-        X : array
-            Image to extract all patches from.
-        scan_ID : int
-            MRI-scanner identification variable.
-        edge: tuple(int, int)
-            Pixels past this edge should not be sampled from.
-
-        Returns
-        -------
-        array
-            Patches including scanner ID's, num_patches by patch size + 1.
-
-        """
-        # Shape
-        h, w = X.shape
-
-        # Remove edges from array
-        X = X[edge[0]:h-edge[0], edge[1]:w-edge[1]]
-
-        # Compute step length from patch center
-        vstep = int((self.patch_size[0] - 1)/2)
-        hstep = int((self.patch_size[1] - 1)/2)
-
-        # Pad image before patch extraction
-        X = np.pad(X, pad_width=((vstep, vstep), (hstep, hstep)),
-                   mode='constant')
-
-        # Sample patches at grid
-        patches = sf.extract_patches_2d(X, patch_size=self.patch_size)
-
-        # Number of patches extracted
-        num_patches = patches.shape[0]
-
-        # Augment patches with scanner ID and store
-        return np.append(patches, scan_ID*np.ones((num_patches, 1)), axis=1)
-
     def sample_pairs(self, X, y, Z, u, num_draw=(10, 1)):
         """
         Sample a set of pairs of patches from two images.
@@ -478,8 +434,8 @@ class MRAIConvolutionalNeuralNetwork(object):
         num_combs_uu = num_draw[1]**2
 
         # Total number of patches to draw
-        total_num_draw = (num_combs_yy * num_classes*(num_classes - 1) *
-                          num_combs_yu * num_classes*(num_classes - 1) *
+        total_num_draw = (num_combs_yy * num_classes*(num_classes - 1) +
+                          num_combs_yu * num_classes*(num_classes - 1) +
                           num_combs_uu * num_classes*(num_classes - 1))
 
         # Preallocate patch arrays
@@ -877,8 +833,16 @@ class MRAIConvolutionalNeuralNetwork(object):
         # Shape of image
         imsize = X.shape
 
-        # Take out patches
-        patches = self.extract_all_patches(X, scan_ID=scan_ID)
+        # Step length from center in patch
+        vstep = int((self.patch_size[0] - 1) / 2)
+        hstep = int((self.patch_size[1] - 1) / 2)
+
+        # Pad image before patch extraction
+        X = np.pad(X, pad_width=((vstep, vstep), (hstep, hstep)),
+                   mode='constant')
+
+        # Sample patches at grid
+        patches = sf.extract_patches_2d(X, patch_size=self.patch_size)
 
         # Feed through network
         if feed:

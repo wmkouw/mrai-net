@@ -55,14 +55,61 @@ def test_gen_index_combs():
 def test_matrix2sparse():
     """Test all pixels are mapped to sparse."""
     A = np.arange(24).reshape((6, 4))
-    print(A)
     N = MRAIDenseNeuralNetwork()
     sA = N.matrix2sparse(A)
-    print(sA)
     assert sA.shape[0] == 24
     assert sA.shape[1] == 3
     assert len(np.setdiff1d(sA[:, 0], np.arange(6))) == 0
     assert len(np.setdiff1d(sA[:, 1], np.arange(4))) == 0
     assert len(np.setdiff1d(sA[:, 2], np.arange(24))) == 0
 
-# def test_subsample_rows():
+
+def test_subsample_rows():
+    """Correct shape and contents."""
+    A = np.arange(24).reshape((12, 2))
+    N = MRAIDenseNeuralNetwork()
+    a = N.subsample_rows(A, num_draw=5)
+    assert a.shape[0] == 5
+    assert a.shape[1] == 2
+    assert len(np.unique(a) == 5)
+
+
+def test_sample_pairs():
+    """Produces correct output shape."""
+    # Network
+    N = MRAIDenseNeuralNetwork(patch_size=(9, 9),
+                               dense_size=[2],
+                               num_draw=2)
+
+    # Source array
+    X = rn.randn(32, 32)
+    Y = np.round(np.linspace(0, 3, 32**2)).reshape((32, 32))
+    y = N.matrix2sparse(Y, edge=(4, 4))
+
+    # Target array
+    Z = rn.randn(32, 32)
+    U = np.round(np.linspace(0, 3, 32**2)).reshape((32, 32))
+    u = N.matrix2sparse(U, edge=(4, 4))
+
+    # Sample pairs
+    P, S = N.sample_pairs(X, y, Z, u, num_draw=(2, 1))
+
+    # Extract pairs
+    A, B, a, b = P
+
+    # Check for correct shapes
+    assert len(A.shape) == 4
+    assert A.shape[1] == A.shape[2]
+    assert A.shape[3] == 1
+    assert A.shape[0] == a.shape[0]
+
+    assert len(B.shape) == 4
+    assert B.shape[1] == B.shape[2]
+    assert B.shape[3] == 1
+    assert B.shape[0] == b.shape[0]
+
+    # Check for correct contents
+    assert len(np.setdiff1d(np.unique(a), [0, 1])) == 0
+    assert len(np.setdiff1d(np.unique(b), [0, 1])) == 0
+    assert len(np.setdiff1d(np.unique(S), [0, 1])) == 0
+
