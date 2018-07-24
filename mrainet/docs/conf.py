@@ -19,7 +19,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('./../..'))
 
 
 # -- General configuration ------------------------------------------------
@@ -32,9 +32,9 @@ sys.path.insert(0, os.path.abspath('../..'))
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'numpydoc']
+              'sphinx.ext.todo',
+              'sphinx.ext.coverage',
+              'numpydoc']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -165,7 +165,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'mrainet', 'mrainet Documentation',
-     author, 'mrainet', 'One line description of project.',
+     author, 'mrainet', 'MR acquisition-invariant representation learning.',
      'Miscellaneous'),
 ]
 

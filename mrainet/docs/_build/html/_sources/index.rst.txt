@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to libTLDA's documentation!
-===================================
+Welcome to mrai-net's documentation!
+====================================
 
 MRAI-net is a set of neural networks designed to learn MRI-scanner acquisition-invariant representations. In other words, it extracts lower-dimensional feature vectors from two sets of images, such that there is minimal variance between them outside of tissue variation.
 
