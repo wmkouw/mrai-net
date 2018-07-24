@@ -11,5 +11,5 @@ dependencies:
 - Sphinx>=1.6.6
 - nibabel>=2.2.1
 - scikit-learn>=0.15.0
-- tensorflow>=0.12.1
+- tensorflow==1.15
 - Keras>=2.0.0

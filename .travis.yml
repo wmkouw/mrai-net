@@ -21,6 +21,7 @@ before_install:
   - source activate test-environment
   - "pip install -q pytest"
   - "pip install -q coverage"
+  - "pip install scrutinizer-ocular"
   - "pip install -r requirements.txt"
   - "conda list" # for debugging
 
@@ -28,9 +29,8 @@ install:
   - "pip install ."
 
 script:
-  - "coverage run --source=mrai -m pytest"
+  - "coverage run --source=mrainet -m pytest"
 
 after_script:
-  - "pip install scrutinizer-ocular"
   - "ocular"
   
