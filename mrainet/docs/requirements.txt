@@ -1,0 +1,10 @@
+numpy>=1.12.1
+numpydoc>=0.7.0
+scipy>=0.11
+matplotlib>=2.0.2
+ipython>=5.5.0
+Sphinx>=1.6.6
+nibabel>=2.2.1
+scikit-learn>=0.15.0
+Keras>=2.0.0
+tensorflow==1.6.0
