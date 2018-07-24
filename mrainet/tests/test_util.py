@@ -21,8 +21,8 @@ def test_extract_all_patches():
 
 
 def test_classify_lr():
-    X, y = make_classification(n_samples=100, n_features=3)
-    Z, u = make_classification(n_samples=50, n_features=3)
+    X, y = make_classification(n_samples=100)
+    Z, u = make_classification(n_samples=50)
     err = classify(X, y, val=[Z, u], classifier='lr')
     assert not np.isnan(err)
     assert (0 <= err <= 1)
