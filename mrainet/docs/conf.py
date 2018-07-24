@@ -168,6 +168,3 @@ texinfo_documents = [
      author, 'mrainet', 'MR acquisition-invariant representation learning.',
      'Miscellaneous'),
 ]
-
-
-

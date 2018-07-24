@@ -4,6 +4,7 @@ import numpy.random as rn
 import tensorflow as tf
 
 from mrainet.mraicnn import MRAIConvolutionalNeuralNetwork
+from mrainet.util import extract_all_patches
 
 
 def test_init_patch_size():
@@ -120,3 +121,12 @@ def test_sample_pairs():
     assert len(np.setdiff1d(np.unique(a), [0, 1])) == 0
     assert len(np.setdiff1d(np.unique(b), [0, 1])) == 0
     assert len(np.setdiff1d(np.unique(S), [0, 1])) == 0
+
+
+def test_feedforward():
+    N = MRAIConvolutionalNeuralNetwork(patch_size=(31, 31))
+    X = rn.randn(64, 64)
+    P = extract_all_patches(X, patch_size=(31, 31), edge=(0, 0), add_4d=True)
+    H = N.feedforward(P, scan_ID=0)
+    assert H.shape[0] == P.shape[0]
+    assert H.shape[1] == 2

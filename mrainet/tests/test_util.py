@@ -26,10 +26,3 @@ def test_classify_lr():
     err = classify(X, y, val=[Z, u], classifier='lr')
     assert not np.isnan(err)
     assert (0 <= err <= 1)
-
-# def test_classify_cnn():
-#     X, y = make_classification(n_samples=100, n_features=3)
-#     Z, u = make_classification(n_samples=50, n_features=3)
-#     err = classify(X, y, val=[Z, u], classifier='lr')
-#     assert not np.isnan(err)
-#     assert (0 <= err <= 1)
