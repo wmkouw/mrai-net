@@ -1,0 +1,11 @@
+*.asv
+*.pyc
+*.sh
+*__pycache__*
+/build/
+/dist/
+/*.egg-info
+.vscode/
+.cache/
+.coverage
+archive/

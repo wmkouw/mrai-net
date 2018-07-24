@@ -11,7 +11,7 @@ which is currently under review. The preprint is on [ArXiv](https://arxiv.org/ab
 
 ## Installation
 
-Mrainet requires Python version>=3.5. Installed can be done through:
+`mrainet` requires Python version>=3.5. Installation can be done through:
 ```shell
 pip install mrainet
 ```
@@ -35,7 +35,7 @@ M.train(X,Y,Z,U)
 
 H = M.feedforward(X)
 ```
-where X are MRI-scans from the source scanner, Y are their corresponding segmentations, Z are MRI-scans from the target scanner, and U is its corresponding incomplete segmentations (nearly all are NaN). H represents the patches fed through the network and embedded in MRAI-net's penultimate layer (MRAI representation).
+where X are MRI-scans from the source scanner, Y are their corresponding segmentations, Z are MRI-scans from the target scanner, and U is its corresponding incomplete segmentations (nearly all are NaN). H represents the patches fed through the network and embedded in `mrainet`'s penultimate layer.
 
 For more information on individual classes, methods and functions, visit the [docs](https://mrai-net.readthedocs.io/en/latest/).
 

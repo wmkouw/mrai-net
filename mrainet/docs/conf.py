@@ -19,7 +19,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('./../..'))
+sys.path.insert(0, os.path.abspath('../../'))
 
 
 # -- General configuration ------------------------------------------------
@@ -32,7 +32,6 @@ sys.path.insert(0, os.path.abspath('./../..'))
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc',
-              'sphinx.ext.todo',
               'sphinx.ext.coverage',
               'numpydoc']
 
@@ -154,7 +153,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     (master_doc, 'mrainet', 'mrainet Documentation',
-     [author], 1)
+     ['Wouter M. Kouw'], 1)
 ]
 
 
@@ -165,6 +164,6 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'mrainet', 'mrainet Documentation',
-     author, 'mrainet', 'MR acquisition-invariant representation learning.',
+     'Wouter M. Kouw', 'mrainet', 'MR acquisition-invariant representation learning.',
      'Miscellaneous'),
 ]
