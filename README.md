@@ -5,9 +5,16 @@
 
 This repository contains experiments and code accompanying the paper:
 
-"MR Acquisition-Invariant Representation Learning"
+"MR Acquisition-Invariant Feature Extraction using Siamese Neural Networks"
 
 which is currently under review. The preprint is on [ArXiv](https://arxiv.org/abs/1709.07944).
+
+MRAI-net takes patches from MRI-scans of two different scanners and maps them to feature vectors such that pairs of patches from the same tissue but from different scanners become similar, while pairs of patches from different tissues - regardless of scanner - remain dissimilar. It performs this mapping by propagating a patch through a convolutional neural network and comparing distances between pairs of patches in the final representation layer.
+
+The patches, represented in this final layer, are visualized in the figure below. Colors (blue, green, yellow) represent tissues, and markers (crosses, squares) represent scanners. The lines in the left figure indicate whether a pair of patches should be pulled closer together (green) or pushed further apart (purple). At the start of training (left), patches are somewhat randomly distributed throughout the space. When training is complete, patches from the same tissue lie close together, regardless of scanner. Note that a patch, represented in this final layer, has become a two-dimensional feature vector.
+
+![MRAI-net representation of patches before training](https://github.com/wmkouw/mrai-net/blob/master/images/training_before.png "Representation of patches before training")
+![MRAI-net representation of patches after training](https://github.com/wmkouw/mrai-net/blob/master/images/training_after.png "Representation of patches after training")
 
 ## Installation
 
