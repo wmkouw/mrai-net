@@ -7,8 +7,7 @@ This repository contains experiments and code accompanying the paper:
 
 "Learning an MR acquisition-invariant representation using Siamese neural networks"
 
-which is published in the proceedings of the IEEE International Symposium on Biomedical Imaging 2019.
-The preprint is on [ArXiv](https://arxiv.org/abs/1709.07944).
+which is published in the proceedings of the IEEE International Symposium on Biomedical Imaging 2019 (pdf/[preprint](https://arxiv.org/abs/1709.07944)).
 
 MRAI-net takes patches from MRI-scans of two different scanners and maps them to feature vectors such that pairs of patches from the same tissue but from different scanners become similar, while pairs of patches from different tissues - regardless of scanner - remain dissimilar. It performs this mapping by propagating a patch through a convolutional neural network and comparing distances between pairs of patches in the final representation layer.
 
